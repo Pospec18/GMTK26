@@ -1,0 +1,16 @@
+{
+    "name": "Pospec.Audio",
+    "rootNamespace": "Pospec.Audio",
+    "references": [
+        "GUID:4b74bccc2c0fb5f4a98332cfa3d6e80f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

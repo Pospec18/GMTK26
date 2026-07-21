@@ -1,0 +1,16 @@
+{
+    "name": "Pospec.VolumeSettings",
+    "rootNamespace": "Pospec.VolumeSettings",
+    "references": [
+        "GUID:bc48d32e66ab1bd4d9eb651709c12051"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
