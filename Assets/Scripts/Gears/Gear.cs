@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 namespace Pospec
@@ -9,6 +8,7 @@ namespace Pospec
         public float angularSpeed;
 
         public float surfaceSpeed() => radius * angularSpeed;
+        public float rotationNormalized() => transform.localEulerAngles.z / 360.0f;
 
         public void LateUpdate()
         {
