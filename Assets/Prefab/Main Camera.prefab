@@ -47,6 +47,7 @@ MonoBehaviour:
   timeSpeed: 1
   timeStep: 1
   DeltaTime: 0
+  ease: 8
 --- !u!1 &3982576195741834717
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6390a0cc00f940299d4c5923bfb1c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columnsCount: 0
   winColumns: 0
 --- !u!1 &8017549668479324988
 GameObject:

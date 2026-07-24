@@ -31,7 +31,7 @@ namespace Pospec
         {
             if (winColumns == columnsCount)
             {
-                Debug.Log("WIN");
+                DiscreteTime.instance.Stop();
             }
             winColumns = 0;
         }
