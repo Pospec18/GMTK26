@@ -9,9 +9,6 @@ namespace Pospec
         [HideInInspector] public float angularSpeed;
         [HideInInspector] public float distFromPrev;
 
-        private const int Spots = 16;
-        private const float SpotAngle = 360f / Spots;
-        private float continuousAngle;
         public List<Gear> gears;
         public CircleCollider2D pointer;
         public Column column;
@@ -21,8 +18,6 @@ namespace Pospec
         private Vector3 grabOffset;
 
         public float rotationNormalized() => transform.localEulerAngles.z / 360.0f;
-
-        private float SnappedAngle() => Mathf.Round(continuousAngle / SpotAngle) * SpotAngle;
 
         private List<Color> colors = new List<Color>()
         {
@@ -52,8 +47,7 @@ namespace Pospec
 
         public void UpdateStick(Vector3 layoutLocalPos)
         {
-            continuousAngle += angularSpeed * Time.deltaTime;
-            transform.localEulerAngles = new Vector3(0, 0, SnappedAngle());
+            transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
             if (isDragging)
                 FollowPointer();
             else
