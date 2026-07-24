@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using TMPro; // Make sure to include this for TextMeshPro
+using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
@@ -26,8 +26,14 @@ namespace Pospec
         [Header("Controls")]
         public float doubleTapThreshold = 0.5f;
 
+        [Header("Audio Effects")]
+        public AudioLowPassFilter lowPassFilter;
+        public float startFrequency = 22000f;
+        public float targetFrequency = 1000f;
+
         private float m_LastSpaceTime = -100f;
         private Coroutine m_StoryCoroutine;
+        private Tween m_LowPassTween;
 
         void Start()
         {
@@ -35,6 +41,21 @@ namespace Pospec
             Color startColor = storyTextDisplay.color;
             startColor.a = 0f;
             storyTextDisplay.color = startColor;
+
+            // Setup and start the low pass filter tween
+            if (lowPassFilter != null)
+            {
+                lowPassFilter.cutoffFrequency = startFrequency;
+
+                // Calculate the total time the story will take
+                float totalDuration = storyLines.Length * (fadeInDuration + displayDuration + fadeOutDuration);
+
+                // Tween the frequency linearly over the total duration
+                m_LowPassTween = DOVirtual.Float(startFrequency, targetFrequency, totalDuration, (value) =>
+                {
+                    lowPassFilter.cutoffFrequency = value;
+                }).SetEase(Ease.Linear);
+            }
 
             // Start the story sequence
             m_StoryCoroutine = StartCoroutine(PlayStorySequence());
@@ -84,6 +105,9 @@ namespace Pospec
             }
 
             storyTextDisplay.DOKill();
+
+            // Kill the audio filter tween if it is running
+            m_LowPassTween?.Kill();
 
             GoToNextScene();
         }
