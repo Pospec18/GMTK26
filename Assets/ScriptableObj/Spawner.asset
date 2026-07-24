@@ -15,6 +15,7 @@ MonoBehaviour:
   gearPrefab: {fileID: 7189809905894097167, guid: 63b9938e1dd758142b121bd3ff509598, type: 3}
   stickPrefab: {fileID: 7905022094451679780, guid: 3345c3ece93ef2f4e8f29c186872afe5, type: 3}
   dragAreaPrefab: {fileID: 9111385885632203388, guid: 16d42a8404718134d9c157536bb788cc, type: 3}
+  timerPrefab: {fileID: 2528849056700378740, guid: 49741034e61b1424598e654e13ebdbb3, type: 3}
   bottomGearSprites:
   - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
   - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}

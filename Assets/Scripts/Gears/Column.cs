@@ -33,6 +33,9 @@ namespace Pospec
                 s.Setup(this, i + 1);
                 spaces.Add(s);
             }
+
+            var timer = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
+            timer.link = link;
         }
 
         private void Update()
