@@ -10,7 +10,19 @@ namespace Pospec
 
         public Image image;
 
-        private const float winOffset = 0.05f;
+        public const float winOffset = 0.05f;
+
+        public static WinChecker instance;
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            instance = null;
+        }
 
         private void Start()
         {

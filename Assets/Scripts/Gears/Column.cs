@@ -7,6 +7,7 @@ namespace Pospec
     {
         public List<GearPiece> initialPieces;
         public float statingAngularSpeed;
+        [Range(0, 1)] public float startingClockValue = 1;
         public Link link;
         public GearSpawner spawner;
         private List<Stick> sticks = new List<Stick>();
@@ -34,8 +35,13 @@ namespace Pospec
                 spaces.Add(s);
             }
 
+            if (link == null)
+                return;
             var timer = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
             timer.link = link;
+            //var winTime = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
+            //winTime.SetValue(WinChecker.winOffset);
+            sticks[sticks.Count - 1].SetInitRotation(startingClockValue);
         }
 
         private void Update()
@@ -119,7 +125,8 @@ namespace Pospec
             foreach (Gear gear in crashedGears)
                 gear.GetComponent<SpriteRenderer>().color = Color.red;
 
-            link.value = sticks[sticks.Count - 1].rotationNormalized();
+            if (link != null)
+                link.value = sticks[sticks.Count - 1].rotationNormalized();
         }
 
         public void RemoveAt(int id)

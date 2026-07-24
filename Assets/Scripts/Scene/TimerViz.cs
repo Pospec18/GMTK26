@@ -17,7 +17,12 @@ namespace Pospec
 
         private void Update()
         {
-            timerMat.SetFloat("_FillAmount", link.value);
+            SetValue(link.value);
+        }
+
+        public void SetValue(float value)
+        {
+            timerMat.SetFloat("_FillAmount", value);
         }
     }
 }

@@ -105,5 +105,10 @@ namespace Pospec
             isDragging = false;
             DragManager.instance.DeselectStick();
         }
+
+        public void SetInitRotation(float valueNormalized)
+        {
+            transform.localRotation = Quaternion.AngleAxis(valueNormalized * 360.0f, Vector3.forward);
+        }
     }
 }
