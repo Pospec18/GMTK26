@@ -14,5 +14,13 @@ namespace Pospec
         {
             transform.position = DOVirtual.EasedValue(from, to, link.value, ease);
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(from, 0.1f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(to, 0.1f);
+        }
     }
 }
