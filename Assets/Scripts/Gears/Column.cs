@@ -87,26 +87,26 @@ namespace Pospec
                     }
                 }
 
-                if (numSameOverlaps > 1)
-                {
-                    sticks[i - 1].angularSpeed = 0;
-                    sticks[i].angularSpeed = 0;
+                //if (numSameOverlaps > 1)
+                //{
+                //    sticks[i - 1].angularSpeed = 0;
+                //    sticks[i].angularSpeed = 0;
 
-                    for (int j = 0; j < Mathf.Min(sticks[i].gears.Count, sticks[i - 1].gears.Count); j++)
-                    {
-                        var g1 = sticks[i].gears[j];
-                        var g2 = sticks[i - 1].gears[j];
-                        if (g1 == null || g2 == null)
-                            continue;
+                //    for (int j = 0; j < Mathf.Min(sticks[i].gears.Count, sticks[i - 1].gears.Count); j++)
+                //    {
+                //        var g1 = sticks[i].gears[j];
+                //        var g2 = sticks[i - 1].gears[j];
+                //        if (g1 == null || g2 == null)
+                //            continue;
 
-                        float overlap = g2.radius + g1.radius;
-                        if (overlap == longestOverlap)
-                        {
-                            crashedGears.Add(g1);
-                            crashedGears.Add(g2);
-                        }
-                    }
-                }
+                //        float overlap = g2.radius + g1.radius;
+                //        if (overlap == longestOverlap)
+                //        {
+                //            crashedGears.Add(g1);
+                //            crashedGears.Add(g2);
+                //        }
+                //    }
+                //}
             }
 
             Vector3 prevLayoutPos = sticks[0].transform.localPosition;
