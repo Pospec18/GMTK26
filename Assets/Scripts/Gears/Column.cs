@@ -37,12 +37,14 @@ namespace Pospec
 
             if (link == null)
                 return;
-            var timer = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
+            var last = sticks[sticks.Count - 1];
+            var timer = Instantiate(spawner.timerPrefab);
+            timer.follower.target = last.transform;
             timer.link = link;
             var winSegment = Instantiate(spawner.endSegmentPrefab);
             winSegment.link = link;
-            winSegment.follower.target = sticks[sticks.Count - 1].transform;
-            sticks[sticks.Count - 1].SetInitRotation(startingClockValue);
+            winSegment.follower.target = last.transform;
+            last.SetInitRotation(startingClockValue);
         }
 
         private void Update()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 namespace Pospec
 {
@@ -17,7 +18,9 @@ namespace Pospec
         private Camera dragCamera;
         private Vector3 grabOffset;
 
-        public float rotationNormalized() => transform.localEulerAngles.z / 360.0f;
+        private float rotationEuler;
+
+        public float rotationNormalized() => rotationEuler / 360.0f;
 
         private List<Color> colors = new List<Color>()
         {
@@ -47,9 +50,7 @@ namespace Pospec
 
         public void UpdateStick(Vector3 layoutLocalPos)
         {
-            if (id == column.LastStickId)
-                angularSpeed = -Mathf.Abs(angularSpeed);
-
+            rotationEuler += (id == column.LastStickId ? -Mathf.Abs(angularSpeed) : angularSpeed) * DiscreteTime.instance.DeltaTime;
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
             if (isDragging)
                 FollowPointer();
@@ -113,6 +114,7 @@ namespace Pospec
         public void SetInitRotation(float valueNormalized)
         {
             transform.localRotation = Quaternion.AngleAxis(valueNormalized * 360.0f, Vector3.forward);
+            rotationEuler = valueNormalized * 360.0f;
         }
     }
 }

@@ -151,7 +151,6 @@ MonoBehaviour:
   initialPieces:
   - {fileID: 11400000, guid: 79d1af447ffa791469de02653ffa480b, type: 2}
   - {fileID: 11400000, guid: ae6ee71e3c99e9040a071042316afb56, type: 2}
-  - {fileID: 11400000, guid: 0d32b6ee07791be4c93f7b3395a53bd1, type: 2}
   statingAngularSpeed: 10
   startingClockValue: 0.99
   link: {fileID: 11400000, guid: e66d5acf8f3cd411990d8fafca1f7ec4, type: 2}
