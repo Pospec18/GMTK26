@@ -6,5 +6,6 @@ namespace Pospec
     public class Gear : MonoBehaviour
     {
         public float radius;
+        public SpriteRenderer sr;
     }
 }

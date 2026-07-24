@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402a27a9073d23a4eb3841b37c424bf6, type: 3}
+  m_Name: Spawner
+  m_EditorClassIdentifier: 
+  gearPrefab: {fileID: 7189809905894097167, guid: 63b9938e1dd758142b121bd3ff509598, type: 3}
+  stickPrefab: {fileID: 7905022094451679780, guid: 3345c3ece93ef2f4e8f29c186872afe5, type: 3}
+  bottomGearSprites:
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  topGearSprites:
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  - {fileID: 175244416665799553, guid: d03be7ef352e459479df834b0e1ab5da, type: 3}
+  gearSizeToRadius:
+  - 0
+  - 0.25
+  - 0.5
+  - 1
+  - 2

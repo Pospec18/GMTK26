@@ -5,17 +5,40 @@ namespace Pospec
 {
     public class Column : MonoBehaviour
     {
-        public List<Stick> sticks;
+        public List<GearPiece> initialPieces;
         public float statingAngularSpeed;
         public Link link;
+        public GearSpawner spawner;
+        private List<Stick> sticks = new List<Stick>();
 
-        public void Update()
+        private void Start()
+        {
+            foreach (var piece in initialPieces)
+            {
+                Stick stick = spawner.SpawnStick(piece.gears);
+                stick.transform.parent = transform;
+                sticks.Add(stick);
+            }
+        }
+
+        private void Update()
         {
             sticks[0].angularSpeed = statingAngularSpeed;
             sticks[0].UpdateStick(null);
             for (int i = 1; i < sticks.Count; i++)
             {
                 sticks[i].angularSpeed = 0;
+                float maxR1 = 0;
+                float maxR2 = 0;
+                foreach (Gear gear in sticks[i].gears)
+                    if (gear != null)
+                        maxR1 = Mathf.Max(gear.radius, maxR1);
+                foreach (Gear gear in sticks[i - 1].gears)
+                    if (gear != null)
+                        maxR2 = Mathf.Max(gear.radius, maxR2);
+
+                sticks[i].distFromPrev = maxR1 + maxR2 + 0.1f;
+
                 float longestOverlap = 0;
                 for (int j = 0; j < Mathf.Min(sticks[i].gears.Count, sticks[i - 1].gears.Count); j++)
                 {
