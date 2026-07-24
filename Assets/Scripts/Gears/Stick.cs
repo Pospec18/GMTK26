@@ -13,6 +13,8 @@ namespace Pospec
         public Column column;
         public int id;
         private bool isDragging;
+        private Camera dragCamera;
+        private Vector3 grabOffset;
 
         public float rotationNormalized() => transform.localEulerAngles.z / 360.0f;
 
@@ -37,17 +39,32 @@ namespace Pospec
             this.id = id;
         }
 
-        public void UpdateStick(Stick prev)
+        public void UpdateStick(Vector3 layoutLocalPos)
         {
             transform.Rotate(Vector3.forward * angularSpeed * Time.deltaTime);
-            if (prev != null)
-                transform.localPosition = prev.transform.localPosition + Vector3.down * distFromPrev;
+            if (isDragging)
+                FollowPointer();
+            else
+                transform.localPosition = layoutLocalPos;
 
             float draggingModif = isDragging ? 0.5f : 1.0f;
 
             for (int i = 0; i < gears.Count; i++)
                 if (gears[i] != null)
                     gears[i].GetComponent<SpriteRenderer>().color = colors[i] * draggingModif;
+        }
+
+        private void FollowPointer()
+        {
+            Camera cam = dragCamera != null ? dragCamera : Camera.main;
+            if (cam == null)
+                return;
+
+            Vector3 screen = Input.mousePosition;
+            screen.z = cam.WorldToScreenPoint(transform.position).z;
+            Vector3 world = cam.ScreenToWorldPoint(screen) + grabOffset;
+            world.z = transform.position.z;
+            transform.position = world;
         }
 
         public void MoveToColumn(Column newColumn, int newId)
@@ -68,6 +85,15 @@ namespace Pospec
 
             isDragging = true;
             DragManager.instance.SelectStick(this);
+
+            dragCamera = eventData.pressEventCamera != null ? eventData.pressEventCamera : Camera.main;
+            if (dragCamera != null)
+            {
+                Vector3 screen = eventData.position;
+                screen.z = dragCamera.WorldToScreenPoint(transform.position).z;
+                grabOffset = transform.position - dragCamera.ScreenToWorldPoint(screen);
+            }
+
             Debug.Log("DOWN " + gameObject.name);
         }
 

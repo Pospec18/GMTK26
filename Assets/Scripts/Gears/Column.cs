@@ -38,7 +38,8 @@ namespace Pospec
         private void Update()
         {
             sticks[0].angularSpeed = statingAngularSpeed;
-            sticks[0].UpdateStick(null);
+            Vector3 prevLayoutPos = sticks[0].transform.localPosition;
+            sticks[0].UpdateStick(prevLayoutPos);
             for (int i = 1; i < sticks.Count; i++)
             {
                 sticks[i].angularSpeed = 0;
@@ -70,8 +71,11 @@ namespace Pospec
                     }
                 }
                 spaces[i].Active(DragManager.instance.SelectedStick() != null && (DragManager.instance.FromColumn() == this ? i != DragManager.instance.SelectedStick().id && i != DragManager.instance.SelectedStick().id + 1 : true) /* && DragManager.instance.FromColumn() != this */);
-                spaces[i].Reposition(sticks[i - 1].transform.localPosition, sticks[i].distFromPrev);
-                sticks[i].UpdateStick(sticks[i - 1]);
+
+                Vector3 layoutPos = prevLayoutPos + Vector3.down * sticks[i].distFromPrev;
+                spaces[i].Reposition(prevLayoutPos, sticks[i].distFromPrev);
+                sticks[i].UpdateStick(layoutPos);
+                prevLayoutPos = layoutPos;
             }
             link.value = sticks[sticks.Count - 1].rotationNormalized();
         }
