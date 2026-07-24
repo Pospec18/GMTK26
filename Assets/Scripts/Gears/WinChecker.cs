@@ -1,16 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace Pospec
 {
     public class WinChecker : MonoBehaviour
     {
-        public List<Column> columns;
-
-        public Image image;
-
-        public const float winOffset = 0.05f;
+        private int columnsCount;
+        [HideInInspector] public int winColumns;
 
         public static WinChecker instance;
 
@@ -26,33 +21,19 @@ namespace Pospec
 
         private void Start()
         {
-            image.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+            columnsCount = 0;
+            foreach (Column col in FindObjectsByType<Column>(FindObjectsSortMode.None))
+                if (col.link != null)
+                    columnsCount++;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            int numColumns = columns.Count;
-            int columnWins = 0;
-
-            foreach (var column in columns)
+            if (winColumns == columnsCount)
             {
-                if (column == null || column.link == null)
-                {
-                    continue;
-                }
-
-                float value = column.link.value;
-
-                if (value > 1.0f - winOffset || value < winOffset)
-                {
-                    columnWins++;
-                }
+                Debug.Log("WIN");
             }
-
-            if (columnWins == numColumns)
-            {
-                image.color = Color.green;
-            }
+            winColumns = 0;
         }
     }
 }

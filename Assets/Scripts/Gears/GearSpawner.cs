@@ -10,6 +10,7 @@ namespace Pospec
         public Stick stickPrefab;
         public DragArea dragAreaPrefab;
         public TimerViz timerPrefab;
+        public WinSegment endSegmentPrefab;
         public List<Sprite> bottomGearSprites;
         public List<Sprite> topGearSprites;
         public List<float> gearSizeToRadius;

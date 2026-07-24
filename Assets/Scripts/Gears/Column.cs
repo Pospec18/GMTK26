@@ -11,7 +11,7 @@ namespace Pospec
         public Link link;
         public GearSpawner spawner;
         private List<Stick> sticks = new List<Stick>();
-        private List<DragArea> spaces = new List<DragArea>();
+        private List<DragArea> spaces = new List<DragArea>(); 
 
         public int LastStickId => sticks.Count - 1;
 
@@ -39,8 +39,9 @@ namespace Pospec
                 return;
             var timer = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
             timer.link = link;
-            //var winTime = Instantiate(spawner.timerPrefab, sticks[sticks.Count - 1].transform);
-            //winTime.SetValue(WinChecker.winOffset);
+            var winSegment = Instantiate(spawner.endSegmentPrefab);
+            winSegment.link = link;
+            winSegment.follower.target = sticks[sticks.Count - 1].transform;
             sticks[sticks.Count - 1].SetInitRotation(startingClockValue);
         }
 

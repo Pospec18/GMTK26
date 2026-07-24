@@ -152,9 +152,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79d1af447ffa791469de02653ffa480b, type: 2}
   - {fileID: 11400000, guid: ae6ee71e3c99e9040a071042316afb56, type: 2}
   - {fileID: 11400000, guid: 0d32b6ee07791be4c93f7b3395a53bd1, type: 2}
-  statingAngularSpeed: 0
-  startingClockValue: 0.046
-  link: {fileID: 0}
+  statingAngularSpeed: 10
+  startingClockValue: 0.99
+  link: {fileID: 11400000, guid: e66d5acf8f3cd411990d8fafca1f7ec4, type: 2}
   spawner: {fileID: 11400000, guid: 8d60a8dcf3ae8b8468a5f96d3fea7110, type: 2}
 --- !u!4 &668006207
 Transform:
@@ -205,7 +205,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 494699d56efe5304f9d727b1b9fab108, type: 2}
   - {fileID: 11400000, guid: 0d32b6ee07791be4c93f7b3395a53bd1, type: 2}
   statingAngularSpeed: 10
-  startingClockValue: 0.9
+  startingClockValue: 0.99
   link: {fileID: 11400000, guid: 9576de653ba1e004b8a19b078a86176b, type: 2}
   spawner: {fileID: 11400000, guid: 8d60a8dcf3ae8b8468a5f96d3fea7110, type: 2}
 --- !u!4 &1292909465

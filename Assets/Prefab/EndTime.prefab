@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6184997112490514855}
   - component: {fileID: 2890082777729138397}
-  - component: {fileID: 2528849056700378740}
+  - component: {fileID: 2344551060702517618}
+  - component: {fileID: 8981645940889720777}
   m_Layer: 0
-  m_Name: Clock
+  m_Name: EndTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,9 +77,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.95008373, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2528849056700378740
+--- !u!114 &2344551060702517618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,9 +98,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2103458346635476099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d648b6463ae86e94191f7d87799c5dcd, type: 3}
+  m_Script: {fileID: 11500000, guid: a6cfc9d64d27f634a82a764b7be14c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerMat: {fileID: 2100000, guid: e717670e150f77a44a2781092c7f12d4, type: 2}
+  target: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+--- !u!114 &8981645940889720777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103458346635476099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426585ae8fdaa5e43a64953608be3f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winRange: 0.15
+  follower: {fileID: 2344551060702517618}
   sr: {fileID: 2890082777729138397}
   link: {fileID: 0}
