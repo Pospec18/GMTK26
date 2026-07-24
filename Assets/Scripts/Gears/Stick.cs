@@ -47,6 +47,9 @@ namespace Pospec
 
         public void UpdateStick(Vector3 layoutLocalPos)
         {
+            if (id == column.LastStickId)
+                angularSpeed = -Mathf.Abs(angularSpeed);
+
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
             if (isDragging)
                 FollowPointer();
