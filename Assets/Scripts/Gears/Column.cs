@@ -17,6 +17,8 @@ namespace Pospec
             {
                 Stick stick = spawner.SpawnStick(piece.gears);
                 stick.transform.parent = transform;
+                stick.gameObject.name = piece.name;
+                stick.transform.localPosition = Vector3.zero;
                 sticks.Add(stick);
             }
         }

@@ -15,6 +15,7 @@ namespace Pospec
         public Stick SpawnStick(List<GearSize> pieces)
         {
             Stick stick = Instantiate(stickPrefab);
+            stick.pointer.radius = 0;
             for (int i = 0; i < pieces.Count; i++)
             {
                 GearSize size = pieces[i];
@@ -26,9 +27,11 @@ namespace Pospec
                 }
                 Gear g = Instantiate(gearPrefab, stick.transform);
                 g.radius = gearSizeToRadius[iSize];
-                g.transform.localScale = 2 * gearSizeToRadius[iSize] * Vector3.one;
+                g.transform.localScale = 2 * g.radius * Vector3.one;
                 g.sr.sprite = i == 0 ? bottomGearSprites[iSize] : topGearSprites[iSize];
                 stick.gears.Add(g);
+                if (g.radius > stick.pointer.radius)
+                    stick.pointer.radius = g.radius;
             }
             return stick;
         }
