@@ -25,6 +25,11 @@ namespace Pospec
 
         private void Start()
         {
+            if (id == 0 || id == column.LastStickId)
+            {
+                pointer.enabled = false;
+            }
+
             for (int i = 0; i < colors.Count; i++)
             {
                 Color c = colors[i];
@@ -93,15 +98,12 @@ namespace Pospec
                 screen.z = dragCamera.WorldToScreenPoint(transform.position).z;
                 grabOffset = transform.position - dragCamera.ScreenToWorldPoint(screen);
             }
-
-            Debug.Log("DOWN " + gameObject.name);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             isDragging = false;
             DragManager.instance.DeselectStick();
-            Debug.Log("UP " + gameObject.name);
         }
     }
 }

@@ -37,9 +37,9 @@ namespace Pospec
 
         private void Update()
         {
+            List<Gear> crashedGears = new List<Gear>();
             sticks[0].angularSpeed = statingAngularSpeed;
-            Vector3 prevLayoutPos = sticks[0].transform.localPosition;
-            sticks[0].UpdateStick(prevLayoutPos);
+
             for (int i = 1; i < sticks.Count; i++)
             {
                 sticks[i].angularSpeed = 0;
@@ -54,6 +54,7 @@ namespace Pospec
 
                 sticks[i].distFromPrev = maxR1 + maxR2 + 0.1f;
 
+                int numSameOverlaps = 0;
                 float longestOverlap = 0;
                 for (int j = 0; j < Mathf.Min(sticks[i].gears.Count, sticks[i - 1].gears.Count); j++)
                 {
@@ -65,11 +66,45 @@ namespace Pospec
                     float overlap = g2.radius + g1.radius;
                     if (overlap > longestOverlap)
                     {
+                        numSameOverlaps = 1;
                         longestOverlap = overlap;
-                        sticks[i].angularSpeed = (-g2.radius * sticks[i - 1].angularSpeed / g1.radius);
+                        sticks[i].angularSpeed = -g2.radius * sticks[i - 1].angularSpeed / g1.radius;
                         sticks[i].distFromPrev = overlap;
                     }
+                    // SYSTEM CRASH
+                    else if (overlap == longestOverlap)
+                    {
+                        numSameOverlaps++;
+                    }
                 }
+
+                if (numSameOverlaps > 1)
+                {
+                    sticks[i - 1].angularSpeed = 0;
+                    sticks[i].angularSpeed = 0;
+
+                    for (int j = 0; j < Mathf.Min(sticks[i].gears.Count, sticks[i - 1].gears.Count); j++)
+                    {
+                        var g1 = sticks[i].gears[j];
+                        var g2 = sticks[i - 1].gears[j];
+                        if (g1 == null || g2 == null)
+                            continue;
+
+                        float overlap = g2.radius + g1.radius;
+                        if (overlap == longestOverlap)
+                        {
+                            crashedGears.Add(g1);
+                            crashedGears.Add(g2);
+                        }
+                    }
+                }
+            }
+
+            Vector3 prevLayoutPos = sticks[0].transform.localPosition;
+            sticks[0].UpdateStick(prevLayoutPos);
+
+            for (int i = 1; i < sticks.Count; i++)
+            {
                 spaces[i].Active(DragManager.instance.SelectedStick() != null && (DragManager.instance.FromColumn() == this ? i != DragManager.instance.SelectedStick().id && i != DragManager.instance.SelectedStick().id + 1 : true) /* && DragManager.instance.FromColumn() != this */);
 
                 Vector3 layoutPos = prevLayoutPos + Vector3.down * sticks[i].distFromPrev;
@@ -77,6 +112,10 @@ namespace Pospec
                 sticks[i].UpdateStick(layoutPos);
                 prevLayoutPos = layoutPos;
             }
+
+            foreach (Gear gear in crashedGears)
+                gear.GetComponent<SpriteRenderer>().color = Color.red;
+
             link.value = sticks[sticks.Count - 1].rotationNormalized();
         }
 
