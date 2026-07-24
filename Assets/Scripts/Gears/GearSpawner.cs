@@ -8,6 +8,7 @@ namespace Pospec
     {
         public Gear gearPrefab;
         public Stick stickPrefab;
+        public DragArea dragAreaPrefab;
         public List<Sprite> bottomGearSprites;
         public List<Sprite> topGearSprites;
         public List<float> gearSizeToRadius;

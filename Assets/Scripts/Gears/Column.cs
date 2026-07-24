@@ -10,16 +10,28 @@ namespace Pospec
         public Link link;
         public GearSpawner spawner;
         private List<Stick> sticks = new List<Stick>();
+        private List<DragArea> spaces = new List<DragArea>();
+
+        public int LastStickId => sticks.Count - 1;
 
         private void Start()
         {
-            foreach (var piece in initialPieces)
+            spaces.Add(null);
+            for (int i = 0; i < initialPieces.Count; i++)
             {
-                Stick stick = spawner.SpawnStick(piece.gears);
+                Stick stick = spawner.SpawnStick(initialPieces[i].gears);
                 stick.transform.parent = transform;
-                stick.gameObject.name = piece.name;
+                stick.gameObject.name = initialPieces[i].name;
                 stick.transform.localPosition = Vector3.zero;
+                stick.Setup(this, i);
                 sticks.Add(stick);
+
+                if (i == initialPieces.Count - 1)
+                    break;
+
+                var s = Instantiate(spawner.dragAreaPrefab, transform);
+                s.Setup(this, i + 1);
+                spaces.Add(s);
             }
         }
 
@@ -57,9 +69,42 @@ namespace Pospec
                         sticks[i].distFromPrev = overlap;
                     }
                 }
+                spaces[i].Active(DragManager.instance.SelectedStick() != null && DragManager.instance.FromColumn() != this);
+                spaces[i].Reposition(sticks[i - 1].transform.localPosition, sticks[i].distFromPrev);
                 sticks[i].UpdateStick(sticks[i - 1]);
             }
             link.value = sticks[sticks.Count - 1].rotationNormalized();
+        }
+
+        public void RemoveAt(int id)
+        {
+            sticks.RemoveAt(id);
+            var lastSpace = spaces[spaces.Count - 1];
+            spaces.RemoveAt(spaces.Count - 1);
+            Destroy(lastSpace.gameObject);
+            for (int i = 0; i < sticks.Count; i++)
+                sticks[i].Setup(this, i);
+
+            for (int i = 1; i < spaces.Count; i++)
+                spaces[i].Setup(this, i);
+        }
+
+        public void AddAt(Stick s, int id)
+        {
+            sticks.Insert(id, s);
+            spaces.Add(Instantiate(spawner.dragAreaPrefab, transform));
+            for (int i = 0; i < sticks.Count; i++)
+                sticks[i].Setup(this, i);
+
+            for (int i = 1; i < spaces.Count; i++)
+                spaces[i].Setup(this, i);
+        }
+
+        public void Swap(int id)
+        {
+            Stick s = DragManager.instance.SelectedStick();
+            if (s != null)
+                s.MoveToColumn(this, id);
         }
     }
 }
