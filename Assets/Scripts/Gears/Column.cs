@@ -69,7 +69,7 @@ namespace Pospec
                         sticks[i].distFromPrev = overlap;
                     }
                 }
-                spaces[i].Active(DragManager.instance.SelectedStick() != null && DragManager.instance.FromColumn() != this);
+                spaces[i].Active(DragManager.instance.SelectedStick() != null && (DragManager.instance.FromColumn() == this ? i != DragManager.instance.SelectedStick().id && i != DragManager.instance.SelectedStick().id + 1 : true) /* && DragManager.instance.FromColumn() != this */);
                 spaces[i].Reposition(sticks[i - 1].transform.localPosition, sticks[i].distFromPrev);
                 sticks[i].UpdateStick(sticks[i - 1]);
             }
@@ -103,8 +103,16 @@ namespace Pospec
         public void Swap(int id)
         {
             Stick s = DragManager.instance.SelectedStick();
-            if (s != null)
+            if (s == null) return;
+
+            if (sticks.Contains(s) && s.id < id)
+            {
+                s.MoveToColumn(this, id - 1);
+            }
+            else
+            {
                 s.MoveToColumn(this, id);
+            }
         }
     }
 }
