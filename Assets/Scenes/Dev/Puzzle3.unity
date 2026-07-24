@@ -415,17 +415,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02872a5d7cd24df09e55021b785b36f, type: 3}
---- !u!114 &209326798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5144738966145501862, guid: 8cdcf62980841471b898c414167f0931, type: 3}
-  m_PrefabInstance: {fileID: 1532606252}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86fa9482e0f9c4b009ad2bbe8b6ef353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &257733837
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +914,7 @@ MonoBehaviour:
     requiredSpin: 0
     useTarget: 0
     targetSpeed: 0
-  - peg: {fileID: 209326798}
+  - peg: {fileID: 1840103922}
     requiredSpin: 0
     useTarget: 0
     targetSpeed: 0
@@ -1331,11 +1320,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
       propertyPath: m_Color.r
@@ -1669,6 +1658,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6572965110088487346, guid: c02872a5d7cd24df09e55021b785b36f, type: 3}
   m_PrefabInstance: {fileID: 2063734105}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1840103922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5144738966145501862, guid: 8cdcf62980841471b898c414167f0931, type: 3}
+  m_PrefabInstance: {fileID: 1842443013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fa9482e0f9c4b009ad2bbe8b6ef353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1842443013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1677,6 +1677,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088424958489490433, guid: 8cdcf62980841471b898c414167f0931, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2741062773026715391, guid: 8cdcf62980841471b898c414167f0931, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
