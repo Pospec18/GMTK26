@@ -180,10 +180,10 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   soundPairs:
   - name: Small
-    pickupSound: {fileID: 8300000, guid: ac027c91bafd9d742be33e3c1ac8c729, type: 3}
+    pickupSound: {fileID: 8300000, guid: 09b451e012576b049a3b342a07aee32d, type: 3}
     dropSound: {fileID: 8300000, guid: b6ae5944ea983cc429a0b3522b089ae2, type: 3}
   - name: Medium
-    pickupSound: {fileID: 8300000, guid: e9920a51070c731448050954dbc987ab, type: 3}
+    pickupSound: {fileID: 8300000, guid: ac027c91bafd9d742be33e3c1ac8c729, type: 3}
     dropSound: {fileID: 8300000, guid: 4f31acb8a84913a4daeb45ed06da89ba, type: 3}
   - name: Large
     pickupSound: {fileID: 8300000, guid: e9920a51070c731448050954dbc987ab, type: 3}
