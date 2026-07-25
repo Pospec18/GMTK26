@@ -11,7 +11,7 @@ namespace Pospec
         public Transform hourArm;
 
         [Header("Animation Settings")]
-        public float animationDuration = 2f;
+        public float animationDuration = 4f;
         public float degreesPerLevel = 30f;
         public float startOffset = 185f;
         public int finalLevelNumber = 5;
@@ -71,7 +71,7 @@ namespace Pospec
 
                 if (isGameCompleted && hourArm != null)
                 {
-                    float hourAngle = Mathf.Lerp(0f, 15f, t);
+                    float hourAngle = Mathf.Lerp(0f, 20f, t);
                     hourArm.eulerAngles = new Vector3(0, 0, initialHourEuler.z - hourAngle);
                 }
 
