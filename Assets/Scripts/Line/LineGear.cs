@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Pospec
 {
-    public class LineGear : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class LineGear : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public float angularSpeed;
         public float radius;
@@ -59,6 +59,11 @@ namespace Pospec
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
+
             if (!canMove)
                 return;
 
@@ -84,6 +89,11 @@ namespace Pospec
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
+
             if (!canMove)
                 return;
 
@@ -308,6 +318,23 @@ namespace Pospec
         public bool IsIdle()
         {
             return connectionToParent == ConnectionType.Teeth && angularSpeed == 0.0f;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (Grid.Instance.lineDrawing)
+            {
+                Grid.Instance.AddToLine(this);
+                return;
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
         }
     }
 
