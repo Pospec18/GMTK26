@@ -224,7 +224,7 @@ namespace Pospec
             if (puzzle == null || Grid.Instance == null)
                 return;
 
-            if (puzzle.GetStartingGears().Contains(this))
+            if (puzzle.GetStartingGears().Contains(this) || puzzle.endGear == this)
             {
                 col.enabled = false;
             }
