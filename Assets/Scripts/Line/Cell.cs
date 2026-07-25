@@ -18,10 +18,40 @@ namespace Pospec
             this.pos = pos;
             this.grid = grid;
             gameObject.name = $"Cell {pos.x} {pos.y}";
+
+            var col = GetComponent<BoxCollider2D>();
+            if (col)
+            {
+                float pad = (1.0f + grid.hoverPadding) / transform.localScale.x;
+                col.size = new Vector2(pad, pad);
+            }
         }
 
         public bool TryPlaceGearOnTop(LineGear gear)
         {
+            if (!CanPlaceGear(gear, true))
+                return false;
+
+            // okay lets place it then bro
+            gear.SetLevel(gears.Count);
+            gears.Add(gear);
+            gear.SetCell(this);
+
+            return true;
+        }
+
+        // read only, does not touch the gear in any way, so it is safe to call for
+        // things like highlighting cells while dragging
+        public bool CanPlaceGear(LineGear gear)
+        {
+            return CanPlaceGear(gear, false);
+        }
+
+        private bool CanPlaceGear(LineGear gear, bool log)
+        {
+            if (!gear)
+                return false;
+
             // dropping a gear back where it already is would add it to this cell twice
             if (gear.cell == this)
             {
@@ -31,11 +61,13 @@ namespace Pospec
             // this cell can only have maxLayers gears
             if (gears.Count >= grid.maxLayers)
             {
-                Debug.Log("Cell " + pos + " is full, cannot place gear on top");
+                if (log)
+                    Debug.Log("Cell " + pos + " is full, cannot place gear on top");
                 return false;
             }
 
-            gear.SetLevel(gears.Count);
+            // the level the gear would end up on if we placed it here
+            int level = gears.Count;
 
             // we need to check with every already placed gear in the grid if it is not colliding
             foreach (var cell in grid.cells)
@@ -45,37 +77,28 @@ namespace Pospec
 
                 foreach (var g in cell.gears)
                 {
-                    if (AreGearsColliding(gear, g, this))
+                    if (AreGearsColliding(gear, level, g, this))
                     {
-                        Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
-                        gear.SetLevel(-1);
+                        if (log)
+                            Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
                         return false;
                     }
                 }
             }
 
-            if (WouldFormLoop(GetGearsRotatingTogetherWith(gear), gear))
+            if (WouldFormLoop(GetGearsRotatingTogetherWith(gear, level), gear))
             {
-                Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
-                gear.SetLevel(-1);
+                if (log)
+                    Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
                 return false;
             }
-
-            // okay lets place it then bro
-            gears.Add(gear);
-            gear.SetCell(this);
 
             return true;
         }
 
-        public void RemoveTopGear()
+        public void RemoveGear(LineGear gear)
         {
-            if (gears.Count == 0)
-            {
-                return;
-            }
-
-            gears.RemoveAt(gears.Count - 1);
+            gears.Remove(gear);
         }
 
         public void ClearGears()
@@ -98,7 +121,9 @@ namespace Pospec
             gears.Clear();
         }
 
-        private bool AreGearsColliding(LineGear thisGear, LineGear otherGear, Cell thisCell)
+        // thisLevel is the level thisGear sits on (or would sit on, when we are still
+        // deciding whether it can be placed)
+        private bool AreGearsColliding(LineGear thisGear, int thisLevel, LineGear otherGear, Cell thisCell)
         {
             if (!thisGear || !otherGear)
                 return false;
@@ -106,8 +131,7 @@ namespace Pospec
             if (thisGear == otherGear)
                 return false;
 
-            Debug.Log(thisGear.GetLevel() + " vs " + otherGear.GetLevel());
-            if (thisGear.GetLevel() != otherGear.GetLevel())
+            if (thisLevel != otherGear.GetLevel())
                 return false;
 
             float distance = Vector3.Distance(thisCell.transform.position, otherGear.cell.transform.position);
@@ -119,9 +143,9 @@ namespace Pospec
             return false;
         }
 
-        // otherCell is where otherGear sits (or is about to sit, when we are still
-        // deciding whether it can be placed there)
-        private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear, Cell otherCell)
+        // otherCell / otherLevel is where otherGear sits (or is about to sit, when we are
+        // still deciding whether it can be placed there)
+        private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear, Cell otherCell, int otherLevel)
         {
             if (!thisGear || !otherGear)
                 return false;
@@ -137,7 +161,7 @@ namespace Pospec
             if (thisGear.cell == otherCell)
                 return true;
 
-            if (thisGear.GetLevel() != otherGear.GetLevel())
+            if (thisGear.GetLevel() != otherLevel)
                 return false;
 
             float distance = Vector3.Distance(thisGear.cell.transform.position, otherCell.transform.position);
@@ -151,13 +175,18 @@ namespace Pospec
 
         private List<LineGear> GetGearsRotatingTogetherWith(LineGear addedGear)
         {
+            return GetGearsRotatingTogetherWith(addedGear, addedGear.GetLevel());
+        }
+
+        private List<LineGear> GetGearsRotatingTogetherWith(LineGear addedGear, int addedLevel)
+        {
             List<LineGear> result = new List<LineGear>();
 
             foreach (var cell in grid.cells)
             {
                 foreach (var gear in cell.gears)
                 {
-                    if (AreGearsRotatingTogether(gear, addedGear, this))
+                    if (AreGearsRotatingTogether(gear, addedGear, this, addedLevel))
                     {
                         result.Add(gear);
                     }
@@ -219,12 +248,8 @@ namespace Pospec
                 }
             }
 
-            Debug.Log("Cell " + pos + " has " + touchingGears.Count + " touching gears, of which " + spinningGears.Count + " are spinning");
-
             if (spinningGears.Count > 1)
             {
-                // TODO: JAMMING, maybe if same speed this could work
-                Debug.LogError("HOLY FUCKING SHIT WERE ALL GONNA DIE");
                 return;
             }
 
@@ -266,21 +291,28 @@ namespace Pospec
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
                 isHovering = false;
-                Cell oldCell = grid.SelectedGear.cell;
+                // the gear already left its old cell and its connections when it was
+                // picked up, so we only have to add it here
                 if (TryPlaceGearOnTop(grid.SelectedGear))
                 {
-                    if (oldCell)
-                    {
-                        oldCell.RemoveTopGear();
-                    }
-                    // it is not touching what it used to touch anymore
-                    grid.SelectedGear.ClearConnections();
                     LinkGears(grid.SelectedGear);
 
                     grid.SelectedGear.PlaceToCell(this);
                 }
             }
-            sr.color = Color.white * (isHovering ? 0.8f : 0.4f);
+
+            // the gear is dropped but SelectedGear is only cleared in Grid.LateUpdate, so
+            // stop previewing as soon as it has landed somewhere
+            if (grid.SelectedGear.cell)
+            {
+                sr.color = Color.white;
+                return;
+            }
+
+            if (CanPlaceGear(grid.SelectedGear))
+                sr.color = Color.white * (isHovering ? 1.0f : 0.8f);
+            else
+                sr.color = Color.red * (isHovering ? 0.8f : 0.4f);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

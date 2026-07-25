@@ -23,10 +23,12 @@ namespace Pospec
         public int normalSortingLayer;
         public int holdingSortingLayer;
 
-        private bool isDragging;
+        public bool isDragging;
         private bool placedThisFrame;
         private Vector3 grabOffset;
         private Camera dragCamera;
+        private Cell originCell;
+        private Grid dragGrid;
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -34,14 +36,13 @@ namespace Pospec
                 return;
 
             isDragging = true;
-            if (cell)
-            {
-                cell.grid.SelectGear(this);
-            }
-            else
-            {
-                FindAnyObjectByType<Grid>().SelectGear(this);
-            }
+            dragGrid = cell ? cell.grid : FindAnyObjectByType<Grid>();
+            dragGrid.SelectGear(this);
+
+            // the gear leaves the grid as soon as we grab it, so it is not driven by
+            // anything while it is in our hand
+            originCell = cell;
+            DetachFromGrid();
 
             dragCamera = eventData.pressEventCamera != null ? eventData.pressEventCamera : Camera.main;
             if (dragCamera != null)
@@ -50,6 +51,10 @@ namespace Pospec
                 screen.z = dragCamera.WorldToScreenPoint(transform.position).z;
                 grabOffset = transform.position - dragCamera.ScreenToWorldPoint(screen);
             }
+
+            Color c = sr.color;
+            c.a = 0.35f;
+            sr.color = c;
         }
 
         public void OnPointerUp(PointerEventData eventData)
@@ -59,14 +64,59 @@ namespace Pospec
 
             isDragging = false;
             placedThisFrame = true;
+            Grid grid = dragGrid ? dragGrid : (cell ? cell.grid : FindAnyObjectByType<Grid>());
+            grid.DeselectGear();
+
+            Color c = sr.color;
+            c.a = 1.0f;
+            sr.color = c;
+        }
+
+        private void DetachFromGrid()
+        {
+            List<LineGear> wasConnectedTo = new List<LineGear>(connectedTo);
+
             if (cell)
+                cell.RemoveGear(this);
+
+            ClearConnections();
+            SetLevel(-1);
+            cell = null;
+
+            // gears that were driven stop, gears spinning on their own keep their speed
+            if (parent != null)
             {
-                cell.grid.DeselectGear();
+                parent = null;
+                angularSpeed = 0.0f;
             }
-            else
+
+            foreach (var other in wasConnectedTo)
             {
-                FindAnyObjectByType<Grid>().DeselectGear();
+                if (other)
+                    other.StopDrivenBy(this);
             }
+        }
+
+        // whatever this gear used to drive has lost its source of rotation
+        private void StopDrivenBy(LineGear removedGear)
+        {
+            if (parent != removedGear)
+                return;
+
+            parent = null;
+            angularSpeed = 0.0f;
+
+            foreach (var connection in new List<LineGear>(connectedTo))
+            {
+                if (connection)
+                    connection.StopDrivenBy(this);
+            }
+        }
+
+        private void ReturnToOriginCell()
+        {
+            if (originCell.TryPlaceGearOnTop(this))
+                originCell.LinkGears(this);
         }
 
         private void FollowPointer()
@@ -146,6 +196,12 @@ namespace Pospec
             if (placedThisFrame)
             {
                 placedThisFrame = false;
+
+                // the drop did not land on a cell, so the gear goes back where it came from
+                if (cell == null && originCell != null)
+                    ReturnToOriginCell();
+
+                originCell = null;
                 if (cell != null)
                     PlaceToCell(cell);
             }

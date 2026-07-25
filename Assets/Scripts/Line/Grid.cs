@@ -13,6 +13,8 @@ namespace Pospec
         public LineGear SelectedGear { get; private set; }
         private bool stickIsDeselected;
 
+        public float hoverPadding = 0.05f;
+
         public static Grid Instance { get; private set; }
 
         private void Awake()
