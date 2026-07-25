@@ -32,19 +32,33 @@ namespace Pospec
                 var g1P = g1.transform.position;
                 var g2P = g2.transform.position;
                 Vector3 dir = g2P - g1P;
-                Vector3 forward = Vector3.forward;
+                Vector3 forwardStart = Vector3.forward;
+                Vector3 forwardEnd = Vector3.forward;
                 if (gears.Count >= 3)
                 {
-                    var pg2 = gears[(i - 1 + gears.Count) % gears.Count].transform.position;
-                    var pg3 = gears[(i - 2 + gears.Count) % gears.Count].transform.position;
-                    float d = (pg2.x - g1P.x) * (pg3.x - g1P.x) - (pg2.y - g1P.y) * (pg3.x - g1P.x);
+                    var p1 = gears[(i - 2 + gears.Count) % gears.Count].transform.position;
+                    var p2 = gears[(i - 1 + gears.Count) % gears.Count].transform.position;
+                    var p3 = gears[(i) % gears.Count].transform.position;
+                    float d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
                     if (d < 0)
-                        forward *= -1;
+                        forwardEnd *= -1;
                 }
-                Vector3 perp = Vector3.Cross(dir, forward).normalized;
 
-                lr.SetPosition(2 * i, g1P + perp * g1.radius);
-                lr.SetPosition(2 * i + 1, g2P + perp * g2.radius);
+                if (gears.Count >= 3)
+                {
+                    var p1 = gears[(i - 1 + gears.Count) % gears.Count].transform.position;
+                    var p2 = gears[(i) % gears.Count].transform.position;
+                    var p3 = gears[(i + 1) % gears.Count].transform.position;
+                    float d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+                    if (d < 0)
+                        forwardStart *= -1;
+                }
+
+                Vector3 perpStart = Vector3.Cross(dir, forwardStart).normalized;
+                Vector3 perpEnd = Vector3.Cross(dir, forwardEnd).normalized;
+
+                lr.SetPosition(2 * i, g1P + perpStart * g1.radius);
+                lr.SetPosition(2 * i + 1, g2P + perpEnd * g2.radius);
             }
 
             int lastId = gears.Count > 0 ? gears.Count * 2 - 1 : 1;
