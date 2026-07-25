@@ -14,9 +14,10 @@ namespace Pospec
         public List<LineGear> connectedTo = new List<LineGear>();
 
         public ConnectionType connectionToParent;
-<<<<<<< Updated upstream
         public Cell cell;
         public CircleCollider2D col;
+        private LineGear parent = null;
+
 
         private bool isDragging;
         private bool placedThisFrame;
@@ -69,9 +70,7 @@ namespace Pospec
         {
             this.cell = cell;
             transform.position = cell.transform.position;
-=======
-        private LineGear parent = null;
-        private Cell cell = null;
+        }
 
         public void SetCell(Cell cell)
         {
@@ -81,7 +80,6 @@ namespace Pospec
         public bool ShareSameCell(LineGear other)
         {
             return this.cell != null && this.cell == other.cell;
->>>>>>> Stashed changes
         }
 
         public void UpdateAngularSpeed(LineGear parent)
@@ -115,7 +113,6 @@ namespace Pospec
 
         private void LateUpdate()
         {
-<<<<<<< Updated upstream
             if (isDragging)
                 FollowPointer();
 
@@ -124,10 +121,6 @@ namespace Pospec
                 placedThisFrame = false;
                 PlaceToCell(cell);
             }
-=======
-            if (DiscreteTime.instance == null)
-                return;
->>>>>>> Stashed changes
 
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
         }
