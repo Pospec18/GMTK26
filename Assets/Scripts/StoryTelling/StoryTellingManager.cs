@@ -114,7 +114,17 @@ namespace Pospec
 
         private void GoToNextScene()
         {
-            SceneManager.LoadScene(nextSceneName);
+            // Use FadeManager for a smooth transition if it exists
+            if (FadeManager.instance != null)
+            {
+                FadeManager.instance.LoadScene(nextSceneName);
+            }
+            else
+            {
+                // Fallback in case FadeManager is not in the scene
+                Debug.LogWarning("FadeManager missing. Loading scene directly.");
+                SceneManager.LoadScene(nextSceneName);
+            }
         }
     }
 }
