@@ -1733,6 +1733,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingGears:
   - {fileID: 1347216619}
+  endGear: {fileID: 1887351791}
+  winAngularSpeed: 10
+  winMarginOfError: 1
   grid: {fileID: 711692786}
   gridSize: {x: 5, y: 8}
   cellPrefab: {fileID: 4056493946689596860, guid: 05d1e4a9808d9d641848d7a54ccb830c, type: 3}
@@ -1777,6 +1780,7 @@ MonoBehaviour:
   - {fileID: 2425725}
   - {fileID: 1991761987}
   - {fileID: 1097543467}
+  levelFinisher: {fileID: 0}
 --- !u!4 &789556876
 Transform:
   m_ObjectHideFlags: 0
@@ -2042,6 +2046,10 @@ PrefabInstance:
     - target: {fileID: 7410828580813733771, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: canMove
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7410828580813733771, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: angularSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7625548418112026711, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Enabled

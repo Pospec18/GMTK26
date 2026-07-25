@@ -6,12 +6,18 @@ namespace Pospec
     public class PuzzleGrid : MonoBehaviour
     {
         public List<LineGear> startingGears;
+        public LineGear endGear;
+        public float winAngularSpeed;
+        public float winMarginOfError = 1;
         public Grid grid;
         public Vector2Int gridSize;
         public TmpCell cellPrefab;
         [SerializeField, HideInInspector] private List<TmpCell> cells;
+        public LevelFinisher levelFinisher;
 
         public static PuzzleGrid instance;
+
+        private LineGear[] allGears;
 
         private void OnValidate()
         {
@@ -49,6 +55,8 @@ namespace Pospec
             instance = this;
 
             grid.Setup(cells);
+
+            allGears = FindObjectsByType<LineGear>(FindObjectsSortMode.None);
         }
 
         public void OnDestroy()
@@ -58,9 +66,22 @@ namespace Pospec
 
         private void Update()
         {
+            foreach (var gear in allGears)
+            {
+                if (startingGears.Contains(gear)) continue;
+
+                gear.angularSpeed = 0.0f;
+            }
+
             foreach (var gear in startingGears)
             {
                 gear.UpdateAngularSpeed(gear);
+            }
+
+            if ( Mathf.Abs(endGear.angularSpeed - winAngularSpeed) < winMarginOfError)
+            {
+                Debug.Log("WIN");
+                levelFinisher.FinishLevel();
             }
         }
 
