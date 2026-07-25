@@ -144,10 +144,13 @@ namespace Pospec
             GenerateLevel();
             foreach (var cell in cells)
             {
+                Cell target = this.cells[cell.pos.x, cell.pos.y];
+                target.cellType = cell.cellType;
+
                 foreach (var item in cell.gears)
                 {
-                    this.cells[cell.pos.x, cell.pos.y].TryPlaceGearOnTop(item);
-                    this.cells[cell.pos.x, cell.pos.y].LinkGears(item);
+                    target.TryPlaceGearOnTop(item);
+                    target.LinkGears(item);
                 }
             }
         }

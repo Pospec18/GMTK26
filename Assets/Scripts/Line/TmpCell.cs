@@ -8,6 +8,16 @@ namespace Pospec
         public List<LineGear> gears;
         [HideInInspector] public Vector2Int pos;
 
+
+        public enum CellType
+        {
+            Placeable,
+            Hole,
+            Obstacle
+        };
+
+        public CellType cellType = CellType.Placeable;
+
         private void OnValidate()
         {
             for (int i = 0; i < gears.Count; i++)

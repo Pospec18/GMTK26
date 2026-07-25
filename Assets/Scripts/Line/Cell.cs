@@ -13,6 +13,8 @@ namespace Pospec
         [HideInInspector] public Grid grid;
         private bool isHovering = false;
 
+        public TmpCell.CellType cellType;
+
         public void Setup(Vector2Int pos, Grid grid)
         {
             this.pos = pos;
@@ -282,12 +284,17 @@ namespace Pospec
 
         private void Update()
         {
+            if (cellType == TmpCell.CellType.Hole)
+            {
+                sr.color = Color.black;
+                return;
+            }
+
             if (!grid.SelectedGear)
             {
                 sr.color = Color.white;
                 return;
             }
-
 
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
