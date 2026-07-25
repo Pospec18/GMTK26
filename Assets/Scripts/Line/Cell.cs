@@ -21,14 +21,8 @@ namespace Pospec
 
         public bool TryPlaceGearOnTop(LineGear gear)
         {
-            if (gear.GetLevel() != -1)
-            {
-                Debug.Log("Something went wrong, the gear is already placed in the grid, cannot place it again (its level is already set).");
-                return false;
-            }
-
             // this cell can only have maxLayers gears
-            if (this.gears.Count >= grid.maxLayers)
+            if (gears.Count >= grid.maxLayers)
             {
                 Debug.Log("Cell " + pos + " is full, cannot place gear on top");
                 return false;
@@ -58,7 +52,6 @@ namespace Pospec
             // see if it is touching
             LinkGears(gear);
 
-            this.gears.Add(gear);
             return true;
         }
 
@@ -69,7 +62,6 @@ namespace Pospec
                 return;
             }
 
-            gears[gears.Count - 1].SetLevel(-1);
             gears.RemoveAt(gears.Count - 1);
         }
 
@@ -218,7 +210,9 @@ namespace Pospec
                 if (TryPlaceGearOnTop(grid.SelectedGear))
                 {
                     if (oldCell)
+                    {
                         oldCell.RemoveTopGear();
+                    }
                     grid.SelectedGear.PlaceToCell(this);
                 }
             }
