@@ -20,6 +20,19 @@ namespace Pospec
 
         private void OnValidate()
         {
+            // purely a level design aid - this object is destroyed on Start, so the
+            // tint never shows up in play mode
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr)
+            {
+                sr.color = cellType switch
+                {
+                    CellType.Hole => Color.black,
+                    CellType.Obstacle => Color.red,
+                    _ => Color.white,
+                };
+            }
+
             for (int i = 0; i < gears.Count; i++)
             {
                 if (gears[i] != null)
