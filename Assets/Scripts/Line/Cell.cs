@@ -214,19 +214,6 @@ namespace Pospec
             }
         }
 
-        private void RemoveAngularSpeedRecursive(LineGear gear)
-        {
-            if (!gear) return;
-
-            foreach (var child in gear.connectedTo)
-            {
-                if (child.connectionToParent == ConnectionType.Teeth)
-                {
-                    child.angularSpeed = 0.0f;
-                    RemoveAngularSpeedRecursive(child);
-                }
-            }
-        }
 
         private void Update()
         {
@@ -238,16 +225,6 @@ namespace Pospec
 
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
-                if (!PuzzleGrid.instance.GetStartingGears().Contains(grid.SelectedGear))
-                {
-                    grid.SelectedGear.angularSpeed = 0.0f;
-                }
-                else
-                {
-                    // remove speed from all its children
-                    RemoveAngularSpeedRecursive(grid.SelectedGear);
-                }
-
                 isHovering = false;
                 Cell oldCell = grid.SelectedGear.cell;
                 if (TryPlaceGearOnTop(grid.SelectedGear))

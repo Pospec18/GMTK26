@@ -13,6 +13,8 @@ namespace Pospec
 
         public static PuzzleGrid instance;
 
+        private LineGear[] allGears;
+
         private void OnValidate()
         {
             if (grid)
@@ -49,6 +51,8 @@ namespace Pospec
             instance = this;
 
             grid.Setup(cells);
+
+            allGears = FindObjectsByType<LineGear>(FindObjectsSortMode.None);
         }
 
         public void OnDestroy()
@@ -58,6 +62,13 @@ namespace Pospec
 
         private void Update()
         {
+            foreach (var gear in allGears)
+            {
+                if (startingGears.Contains(gear)) continue;
+
+                gear.angularSpeed = 0.0f;
+            }
+
             foreach (var gear in startingGears)
             {
                 gear.UpdateAngularSpeed(gear);
