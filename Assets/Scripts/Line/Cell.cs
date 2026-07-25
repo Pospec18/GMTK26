@@ -214,10 +214,11 @@ namespace Pospec
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
                 isHovering = false;
+                Cell oldCell = grid.SelectedGear.cell;
                 if (TryPlaceGearOnTop(grid.SelectedGear))
                 {
-                    if (grid.SelectedGear.cell)
-                        grid.SelectedGear.cell.RemoveTopGear();
+                    if (oldCell)
+                        oldCell.RemoveTopGear();
                     grid.SelectedGear.PlaceToCell(this);
                 }
             }
