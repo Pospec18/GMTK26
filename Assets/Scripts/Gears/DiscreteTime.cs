@@ -10,7 +10,7 @@ namespace Pospec
         public float timeSpeed = 1;
         public float timeStep = 1;
         private float time;
-        public Ease ease;
+        public Ease ease = Ease.InCubic;
         public float DeltaTime { get; private set; }
 
         private void Awake()
