@@ -36,7 +36,7 @@ namespace Pospec
 
                 foreach (var g in cell.gears)
                 {
-                    if (AreGearsColliding(gear, g))
+                    if (AreGearsColliding(gear, g, this))
                     {
                         Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
                         return false;
@@ -85,44 +85,47 @@ namespace Pospec
             gears.Clear();
         }
 
-        private bool AreGearsColliding(LineGear gear1, LineGear gear2)
+        private bool AreGearsColliding(LineGear thisGear, LineGear otherGear, Cell thisCell)
         {
-            if (!gear1 || !gear2)
+            if (!thisGear || !otherGear)
                 return false;
 
-            if (gear1 == gear2)
+            if (thisGear == otherGear)
                 return false;
 
-            if (gear1.GetLevel() != gear2.GetLevel())
+            if (thisGear.GetLevel() != otherGear.GetLevel())
                 return false;
 
-            float distance = Vector3.Distance(gear1.transform.position, gear2.transform.position);
+            float distance = Vector3.Distance(thisCell.transform.position, otherGear.cell.transform.position);
 
             // gears may overlap slightly before we call it a collision
-            if (distance < gear1.radius + gear2.radius - grid.graceCollisionOffset)
+            if (distance < thisGear.radius + otherGear.radius - grid.graceCollisionOffset)
                 return true;
 
             return false;
         }
 
-        private bool AreGearsRotatingTogether(LineGear gear1, LineGear gear2)
+        private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear)
         {
-            if (!gear1 || !gear2)
+            if (!thisGear || !otherGear)
                 return false;
 
-            if (gear1 == gear2)
+            if (thisGear == otherGear)
                 return false;
 
             // gears stacked in the same cell sit on a shared axle, so they always turn
             // together
-            if (gear1.ShareSameCell(gear2))
+            if (thisGear.ShareSameCell(otherGear))
                 return true;
 
-            if (gear1.GetLevel() != gear2.GetLevel())
+            if (thisGear.GetLevel() != otherGear.GetLevel())
                 return false;
 
-            float distance = Vector3.Distance(gear1.transform.position, gear2.transform.position);
-            float touchDistance = gear1.radius + gear2.radius;
+            if (!thisGear.cell || !otherGear.cell)
+                return false;
+
+            float distance = Vector3.Distance(thisGear.cell.transform.position, otherGear.cell.transform.position);
+            float touchDistance = thisGear.radius + otherGear.radius;
 
             // gears drive each other only when their teeth meet. too far apart and they
             // never touch, too close and they are overlapping
@@ -133,12 +136,13 @@ namespace Pospec
         private List<LineGear> GetGearsRotatingTogether()
         {
             List<LineGear> result = new List<LineGear>();
+            LineGear addedGear = gears[gears.Count - 1];
 
             foreach (var cell in grid.cells)
             {
                 foreach (var gear in cell.gears)
                 {
-                    if (AreGearsRotatingTogether(gear, this.gears[this.gears.Count - 1]))
+                    if (AreGearsRotatingTogether(gear, addedGear))
                     {
                         result.Add(gear);
                     }
@@ -150,11 +154,6 @@ namespace Pospec
 
         private void LinkGears(LineGear addedGear)
         {
-            if (this.gears.Count == 0)
-            {
-                return;
-            }
-
             // we need to check if the gear is touching any other gear in the grid and link them if they are
 
             // first we find if we can find a touching gear that is already spinning 
@@ -172,6 +171,8 @@ namespace Pospec
                     spinningGears.Add(touchingGear);
                 }
             }
+
+            Debug.Log("Cell " + pos + " has " + touchingGears.Count + " touching gears, of which " + spinningGears.Count + " are spinning");
 
             if (spinningGears.Count > 1)
             {
