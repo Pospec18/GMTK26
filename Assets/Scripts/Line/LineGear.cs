@@ -17,7 +17,10 @@ namespace Pospec
         public Cell cell;
         public CircleCollider2D col;
         private LineGear parent = null;
+        public SpriteRenderer sr;
 
+        public int normalSortingLayer;
+        public int holdingSortingLayer;
 
         private bool isDragging;
         private bool placedThisFrame;
@@ -27,7 +30,6 @@ namespace Pospec
         public void OnPointerDown(PointerEventData eventData)
         {
             isDragging = true;
-            col.enabled = false;
             if (cell)
                 cell.grid.SelectGear(this);
             else
@@ -45,7 +47,6 @@ namespace Pospec
         public void OnPointerUp(PointerEventData eventData)
         {
             isDragging = false;
-            col.enabled = true;
             placedThisFrame = true;
             if (cell)
                 cell.grid.DeselectGear();
@@ -69,7 +70,9 @@ namespace Pospec
         public void PlaceToCell(Cell cell)
         {
             this.cell = cell;
-            transform.position = cell.transform.position;
+            int idx = cell.gears.IndexOf(this);
+            sr.sortingOrder = idx;
+            transform.position = cell.transform.position + Vector3.forward * idx;
         }
 
         public void SetCell(Cell cell)
@@ -113,13 +116,23 @@ namespace Pospec
 
         private void LateUpdate()
         {
+            col.enabled = Grid.Instance.SelectedGear == null;
+            if (col.enabled && cell)
+                col.enabled = cell.gears[cell.gears.Count - 1] == this; // only top gear can be moved
+
             if (isDragging)
+            {
+                sr.sortingLayerID = SortingLayer.layers[holdingSortingLayer].id;
                 FollowPointer();
+            }
+            else
+                sr.sortingLayerID = SortingLayer.layers[normalSortingLayer].id;
 
             if (placedThisFrame)
             {
                 placedThisFrame = false;
-                PlaceToCell(cell);
+                if (cell != null)
+                    PlaceToCell(cell);
             }
 
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);

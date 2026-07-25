@@ -58,6 +58,7 @@ namespace Pospec
             // see if it is touching
             LinkGears(gear);
 
+            this.gears.Add(gear);
             return true;
         }
 
@@ -214,9 +215,11 @@ namespace Pospec
             {
                 isHovering = false;
                 if (TryPlaceGearOnTop(grid.SelectedGear))
+                {
+                    if (grid.SelectedGear.cell)
+                        grid.SelectedGear.cell.RemoveTopGear();
                     grid.SelectedGear.PlaceToCell(this);
-                else
-                    grid.SelectedGear.PlaceToCell(grid.SelectedGear.cell);
+                }
             }
             sr.color = Color.white * (isHovering ? 0.8f : 0.4f);
         }

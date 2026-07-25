@@ -5,11 +5,23 @@ namespace Pospec
     public class Grid : MonoBehaviour
     {
         public Cell[,] cells;
-        public int maxLayers;
+        public int maxLayers = 10;
         public Vector2Int size;
         public Cell cellPrefab;
         public LineGear SelectedGear { get; private set; }
         private bool stickIsDeselected;
+
+        public static Grid Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
 
         public void SelectGear(LineGear gear)
         {
