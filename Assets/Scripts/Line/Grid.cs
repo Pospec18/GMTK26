@@ -139,17 +139,30 @@ namespace Pospec
         public void Setup(List<TmpCell> cells)
         {
             GenerateLevel();
+
+            // everything has to sit in the grid before anything is linked, otherwise the
+            // connections depend on which cell happened to be set up first
+            var placed = new List<(Cell target, LineGear gear)>();
             foreach (var cell in cells)
             {
+                if (!cell)
+                    continue;
+
                 Cell target = this.cells[cell.pos.x, cell.pos.y];
                 target.cellType = cell.cellType;
 
                 foreach (var item in cell.gears)
                 {
-                    target.TryPlaceGearOnTop(item);
-                    target.LinkGears(item);
+                    if (!item)
+                        continue;
+
+                    target.PlaceGearOnTop(item);
+                    placed.Add((target, item));
                 }
             }
+
+            foreach (var (target, gear) in placed)
+                target.LinkGears(gear);
         }
 
         public void AddToLine(LineGear lineGear)

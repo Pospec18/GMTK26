@@ -40,9 +40,10 @@ namespace Pospec
             cells.Clear();
 
             Vector3 offset = transform.position - new Vector3(gridSize.x - 1, gridSize.y - 1) / 2.0f;
-            for (int x = 0; x < gridSize.x; x++)
+            // same order as Grid.GenerateLevel, so both hierarchies read the same way
+            for (int y = 0; y < gridSize.y; y++)
             {
-                for (int y = 0; y < gridSize.y; y++)
+                for (int x = 0; x < gridSize.x; x++)
                 {
                     TmpCell cell = Instantiate(cellPrefab, new Vector3(x, y) + offset, Quaternion.identity, transform);
                     cell.Setup(new Vector2Int(x, y));

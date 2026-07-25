@@ -35,11 +35,18 @@ namespace Pospec
                 return false;
 
             // okay lets place it then bro
+            PlaceGearOnTop(gear);
+
+            return true;
+        }
+
+        // no rule checking - the level author already decided this gear belongs here, and
+        // the drag-time checks would run against a half-built grid during setup
+        public void PlaceGearOnTop(LineGear gear)
+        {
             gear.SetLevel(gears.Count);
             gears.Add(gear);
             gear.SetCell(this);
-
-            return true;
         }
 
         // read only, does not touch the gear in any way, so it is safe to call for
