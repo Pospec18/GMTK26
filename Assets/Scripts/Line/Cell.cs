@@ -21,6 +21,12 @@ namespace Pospec
 
         public bool TryPlaceGearOnTop(LineGear gear)
         {
+            // dropping a gear back where it already is would add it to this cell twice
+            if (gear.cell == this)
+            {
+                return false;
+            }
+
             // this cell can only have maxLayers gears
             if (gears.Count >= grid.maxLayers)
             {
@@ -48,9 +54,6 @@ namespace Pospec
             gear.SetLevel(gears.Count);
             gears.Add(gear);
             gear.SetCell(this);
-
-            // see if it is touching
-            LinkGears(gear);
 
             return true;
         }
@@ -166,7 +169,7 @@ namespace Pospec
                 touchingGear.AddConnection(addedGear);
                 addedGear.AddConnection(touchingGear);
 
-                if (touchingGear.angularSpeed > 0.0f)
+                if (touchingGear.angularSpeed != 0.0f)
                 {
                     spinningGears.Add(touchingGear);
                 }
@@ -194,6 +197,17 @@ namespace Pospec
                 }
                 addedGear.UpdateParent(parent);
             }
+            else if (addedGear.angularSpeed != 0.0f)
+            {
+                // nothing drives the new gear, but it is spinning, so it drives what it touches
+                foreach (var touchingGear in touchingGears)
+                {
+                    touchingGear.connectionToParent = touchingGear.ShareSameCell(addedGear)
+                        ? ConnectionType.Stick
+                        : ConnectionType.Teeth;
+                    touchingGear.UpdateParent(addedGear);
+                }
+            }
         }
 
         private void Update()
@@ -214,6 +228,10 @@ namespace Pospec
                     {
                         oldCell.RemoveTopGear();
                     }
+                    // it is not touching what it used to touch anymore
+                    grid.SelectedGear.ClearConnections();
+                    LinkGears(grid.SelectedGear);
+
                     grid.SelectedGear.PlaceToCell(this);
                 }
             }
