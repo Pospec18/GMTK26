@@ -13,6 +13,10 @@ namespace Pospec
         public LineGear SelectedGear { get; private set; }
         private bool stickIsDeselected;
         private bool gearTintedThisFrame;
+        public float hoverPadding = 0.05f;
+        public bool lineDrawing;
+        public DrawLine lineDrawer;
+
 
         [Header("Drop preview")]
         public Color ghostColor = new Color(1.0f, 1.0f, 1.0f, 0.4f);
@@ -49,8 +53,6 @@ namespace Pospec
 
             ghostShownThisFrame = true;
         }
-
-        public float hoverPadding = 0.05f;
 
         public static Grid Instance { get; private set; }
 
@@ -110,11 +112,6 @@ namespace Pospec
             }
         }
 
-        public bool DidWin()
-        {
-            return false;
-        }
-
         private void LateUpdate()
         {
             // no cell claimed the gear this frame, so it is being dragged off the
@@ -153,6 +150,11 @@ namespace Pospec
                     target.LinkGears(item);
                 }
             }
+        }
+
+        public void AddToLine(LineGear lineGear)
+        {
+            lineDrawer.AddToLine(lineGear);
         }
     }
 }
