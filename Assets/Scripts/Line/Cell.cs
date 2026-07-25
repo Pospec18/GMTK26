@@ -54,6 +54,13 @@ namespace Pospec
                 }
             }
 
+            if (WouldFormLoop(GetGearsRotatingTogetherWith(gear), gear))
+            {
+                Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
+                gear.SetLevel(-1);
+                return false;
+            }
+
             // okay lets place it then bro
             gears.Add(gear);
             gear.SetCell(this);
@@ -112,7 +119,9 @@ namespace Pospec
             return false;
         }
 
-        private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear)
+        // otherCell is where otherGear sits (or is about to sit, when we are still
+        // deciding whether it can be placed there)
+        private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear, Cell otherCell)
         {
             if (!thisGear || !otherGear)
                 return false;
@@ -120,18 +129,18 @@ namespace Pospec
             if (thisGear == otherGear)
                 return false;
 
+            if (!thisGear.cell || !otherCell)
+                return false;
+
             // gears stacked in the same cell sit on a shared axle, so they always turn
             // together
-            if (thisGear.ShareSameCell(otherGear))
+            if (thisGear.cell == otherCell)
                 return true;
 
             if (thisGear.GetLevel() != otherGear.GetLevel())
                 return false;
 
-            if (!thisGear.cell || !otherGear.cell)
-                return false;
-
-            float distance = Vector3.Distance(thisGear.cell.transform.position, otherGear.cell.transform.position);
+            float distance = Vector3.Distance(thisGear.cell.transform.position, otherCell.transform.position);
             float touchDistance = thisGear.radius + otherGear.radius;
 
             // gears drive each other only when their teeth meet. too far apart and they
@@ -140,16 +149,15 @@ namespace Pospec
                 && distance >= touchDistance - grid.graceCollisionOffset;
         }
 
-        private List<LineGear> GetGearsRotatingTogether()
+        private List<LineGear> GetGearsRotatingTogetherWith(LineGear addedGear)
         {
             List<LineGear> result = new List<LineGear>();
-            LineGear addedGear = gears[gears.Count - 1];
 
             foreach (var cell in grid.cells)
             {
                 foreach (var gear in cell.gears)
                 {
-                    if (AreGearsRotatingTogether(gear, addedGear))
+                    if (AreGearsRotatingTogether(gear, addedGear, this))
                     {
                         result.Add(gear);
                     }
@@ -159,12 +167,44 @@ namespace Pospec
             return result;
         }
 
+        private bool WouldFormLoop(List<LineGear> touchingGears, LineGear addedGear)
+        {
+            if (touchingGears.Count < 2)
+                return false;
+
+            HashSet<LineGear> reached = new HashSet<LineGear>();
+            Stack<LineGear> toVisit = new Stack<LineGear>();
+            reached.Add(touchingGears[0]);
+            toVisit.Push(touchingGears[0]);
+
+            while (toVisit.Count > 0)
+            {
+                LineGear gear = toVisit.Pop();
+                foreach (var connection in gear.connectedTo)
+                {
+                    if (!connection || connection == addedGear)
+                        continue;
+
+                    if (reached.Add(connection))
+                        toVisit.Push(connection);
+                }
+            }
+
+            for (int i = 1; i < touchingGears.Count; i++)
+            {
+                if (reached.Contains(touchingGears[i]))
+                    return true;
+            }
+
+            return false;
+        }
+
         public void LinkGears(LineGear addedGear)
         {
             // we need to check if the gear is touching any other gear in the grid and link them if they are
 
-            // first we find if we can find a touching gear that is already spinning 
-            List<LineGear> touchingGears = GetGearsRotatingTogether();
+            // first we find if we can find a touching gear that is already spinning
+            List<LineGear> touchingGears = GetGearsRotatingTogetherWith(addedGear);
 
             // check which ones are already rotating
             List<LineGear> spinningGears = new List<LineGear>();
