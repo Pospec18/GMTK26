@@ -30,6 +30,9 @@ namespace Pospec
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (!canMove)
+                return;
+
             isDragging = true;
             if (cell)
             {
@@ -51,6 +54,9 @@ namespace Pospec
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (!canMove)
+                return;
+
             isDragging = false;
             placedThisFrame = true;
             if (cell)

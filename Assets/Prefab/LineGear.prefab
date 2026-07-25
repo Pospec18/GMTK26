@@ -117,9 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98f1b36d071afd4a848d33e28c8f284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angularSpeed: 10
+  angularSpeed: 0
   radius: 0.5
-  children: []
+  canMove: 1
+  connectedTo: []
   connectionToParent: 0
   cell: {fileID: 0}
   col: {fileID: 8414382599648086313}
