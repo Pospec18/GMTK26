@@ -198,6 +198,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &399581992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2587640531727103041, guid: 75e0d78bd08491347acad06d17a23638, type: 3}
+  m_PrefabInstance: {fileID: 623219082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &399581998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399581992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aefb3fb0023807045a743317c5c8fe66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSize: 0
+  audioSource: {fileID: 0}
+  soundPairs:
+  - name: 
+    pickupSound: {fileID: 0}
+    dropSound: {fileID: 0}
+  - name: 
+    pickupSound: {fileID: 0}
+    dropSound: {fileID: 0}
+  - name: 
+    pickupSound: {fileID: 0}
+    dropSound: {fileID: 0}
+  useSquashAndStretch: 1
+  squashAmount: 0.85
+  stretchAmount: 1.15
+  squashDuration: 0.15
 --- !u!1001 &405151706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -447,10 +480,17 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8520296058300854185, guid: 75e0d78bd08491347acad06d17a23638, type: 3}
+      propertyPath: objectSize
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2587640531727103041, guid: 75e0d78bd08491347acad06d17a23638, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 399581998}
   m_SourcePrefab: {fileID: 100100000, guid: 75e0d78bd08491347acad06d17a23638, type: 3}
 --- !u!1001 &1168034299
 PrefabInstance:
@@ -730,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2}
+  m_AnchoredPosition: {x: 0, y: 143}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3021841558666997474

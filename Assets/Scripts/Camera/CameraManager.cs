@@ -9,7 +9,7 @@ namespace Pospec
     {
         public static CameraManager Instance { get; private set; }
 
-        public enum ShakeType { Mini, Mid, Max }
+        public enum ShakeType { Small, Medium, Large }
 
         private CinemachineImpulseSource m_ImpulseSource;
 
@@ -32,14 +32,14 @@ namespace Pospec
 
             switch (type)
             {
-                case ShakeType.Mini:
-                    force = 0.2f;
+                case ShakeType.Small:
+                    force = 0.05f;
                     break;
-                case ShakeType.Mid:
-                    force = 0.6f;
+                case ShakeType.Medium:
+                    force = 0.1f;
                     break;
-                case ShakeType.Max:
-                    force = 1.2f;
+                case ShakeType.Large:
+                    force = 0.25f;
                     break;
             }
 

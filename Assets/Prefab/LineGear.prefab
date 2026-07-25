@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7730459326529627802}
   - component: {fileID: 7410828580813733771}
   - component: {fileID: 8414382599648086313}
+  - component: {fileID: 358215441941617962}
   m_Layer: 0
   m_Name: LineGear
   m_TagString: Untagged
@@ -163,3 +164,31 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &358215441941617962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788168304597479607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aefb3fb0023807045a743317c5c8fe66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSize: 0
+  audioSource: {fileID: 0}
+  soundPairs:
+  - name: Small
+    pickupSound: {fileID: 8300000, guid: ac027c91bafd9d742be33e3c1ac8c729, type: 3}
+    dropSound: {fileID: 8300000, guid: b6ae5944ea983cc429a0b3522b089ae2, type: 3}
+  - name: Medium
+    pickupSound: {fileID: 8300000, guid: e9920a51070c731448050954dbc987ab, type: 3}
+    dropSound: {fileID: 8300000, guid: 4f31acb8a84913a4daeb45ed06da89ba, type: 3}
+  - name: Large
+    pickupSound: {fileID: 8300000, guid: e9920a51070c731448050954dbc987ab, type: 3}
+    dropSound: {fileID: 8300000, guid: 004c26f215d54b243a6b976576e650c2, type: 3}
+  useSquashAndStretch: 1
+  squashAmount: 0.85
+  stretchAmount: 1.15
+  squashDuration: 0.15
