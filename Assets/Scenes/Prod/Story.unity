@@ -828,7 +828,7 @@ MonoBehaviour:
   fadeInDuration: 1.7
   displayDuration: 1
   fadeOutDuration: 2.2
-  nextSceneName: Credits
+  nextSceneName: Level1
   doubleTapThreshold: 0.5
   lowPassFilter: {fileID: 0}
   startFrequency: 1300

@@ -114,16 +114,29 @@ namespace Pospec
         /// </summary>
         public void SetCutsceneMode(bool isCutscene)
         {
+            if (mainMixer == null)
+            {
+                Debug.LogError("MainMixer is not assigned in the AmbientManager Inspector!");
+                return;
+            }
+
             float targetFreq = isCutscene ? cutsceneFrequency : normalFrequency;
 
-            // Current value of the exposed parameter
-            mainMixer.GetFloat(lowpassParamName, out float currentFreq);
+            // Safely get the current frequency, fallback if it fails
+            if (!mainMixer.GetFloat(lowpassParamName, out float currentFreq))
+            {
+                currentFreq = normalFrequency;
+                Debug.LogWarning($"Parameter '{lowpassParamName}' not found in AudioMixer! Check if it is exposed and spelled correctly.");
+            }
 
-            // Smoothly interpolate the float value on the mixer
+            // Kill any running transition to prevent overlapping tweens
+            DOTween.Kill(this);
+
+            // Smoothly interpolate the float value
             DOVirtual.Float(currentFreq, targetFreq, lowpassTransitionTime, (value) =>
             {
                 mainMixer.SetFloat(lowpassParamName, value);
-            });
+            }).SetId(this);
         }
     }
 }

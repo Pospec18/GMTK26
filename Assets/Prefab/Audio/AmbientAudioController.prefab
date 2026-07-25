@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1771898204490503598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1714869304547684660}
+  - component: {fileID: 6133600047028564438}
+  m_Layer: 0
+  m_Name: AmbientAudioController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1714869304547684660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771898204490503598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6133600047028564438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771898204490503598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9440f9adb916fc34b85692e9f5156dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: -9045465360976403679, guid: a5b0eea86de2d8f44a92abf349351e0d, type: 2}
+  ambientTracks:
+  - {fileID: 8300000, guid: efcbd2306ce30924589687cf5348f1c0, type: 3}
+  - {fileID: 8300000, guid: 1cf7d0d5acf1a744a8ada92b92ab040f, type: 3}
+  - {fileID: 8300000, guid: b5ee89705cd4b40418c04bc925bf2586, type: 3}
+  - {fileID: 8300000, guid: af58a04b08a3ff34982dc0e189b2d114, type: 3}
+  crossfadeDuration: 3
+  maxVolume: 1
+  mainMixer: {fileID: 24100000, guid: a5b0eea86de2d8f44a92abf349351e0d, type: 2}
+  lowpassParamName: AmbienceLowpass
+  normalFrequency: 16000
+  cutsceneFrequency: 800
+  lowpassTransitionTime: 1
