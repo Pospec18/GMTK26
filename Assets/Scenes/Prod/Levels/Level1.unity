@@ -267,7 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b2bda148a445441b79801715f594dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gears: []
+  gears:
+  - {fileID: 5763486663550932349}
   pos: {x: 0, y: 2}
   cellType: 0
 --- !u!212 &382658837
@@ -1433,8 +1434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b2bda148a445441b79801715f594dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gears:
-  - {fileID: 5763486663550932349}
+  gears: []
   pos: {x: 0, y: 1}
   cellType: 0
 --- !u!212 &1288694367
@@ -2640,7 +2640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_LocalPosition.z
