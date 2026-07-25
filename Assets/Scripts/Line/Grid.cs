@@ -62,6 +62,7 @@ namespace Pospec
                     Vector2Int pos = new Vector2Int(x, y);
                     var c = Instantiate(cellPrefab, new Vector3(x, y) + offset, Quaternion.identity, transform);
                     c.Setup(pos, this);
+                    c.gameObject.transform.localPosition = new Vector3(x, y) + offset;
                     cells[x, y] = c;
                 }
             }
