@@ -288,6 +288,7 @@ namespace Pospec
                 return;
             }
 
+
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
                 isHovering = false;
@@ -301,8 +302,6 @@ namespace Pospec
                 }
             }
 
-            // the gear is dropped but SelectedGear is only cleared in Grid.LateUpdate, so
-            // stop previewing as soon as it has landed somewhere
             if (grid.SelectedGear.cell)
             {
                 sr.color = Color.white;
@@ -310,9 +309,24 @@ namespace Pospec
             }
 
             if (CanPlaceGear(grid.SelectedGear))
+            {
                 sr.color = Color.white * (isHovering ? 1.0f : 0.8f);
+                if (isHovering)
+                {
+                    grid.SelectedGear.sr.color = Color.white * 0.8f;
+                    grid.NotifyGearTinted();
+                }
+            }
             else
+            {
                 sr.color = Color.red * (isHovering ? 0.8f : 0.4f);
+                if (isHovering)
+                {
+                    // red and smaller alpha for grid.SelectedGear.sr.color
+                    grid.SelectedGear.sr.color = Color.red * 0.65f;
+                    grid.NotifyGearTinted();
+                }
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)

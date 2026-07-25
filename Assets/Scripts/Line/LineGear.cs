@@ -181,9 +181,16 @@ namespace Pospec
 
         private void LateUpdate()
         {
-            col.enabled = Grid.Instance.SelectedGear == null;
-            if (col.enabled && cell)
-                col.enabled = cell.gears[cell.gears.Count - 1] == this; // only top gear can be moved
+            if (PuzzleGrid.instance.GetStartingGears().Contains(this))
+            {
+                col.enabled = false;
+            }
+            else
+            {
+                col.enabled = Grid.Instance.SelectedGear == null;
+                if (col.enabled && cell)
+                    col.enabled = cell.gears[cell.gears.Count - 1] == this; // only top gear can be moved
+            }
 
             if (isDragging)
             {
