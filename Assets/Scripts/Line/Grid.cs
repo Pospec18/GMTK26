@@ -8,10 +8,22 @@ namespace Pospec
         public int maxLayers;
         public Vector2Int size;
         public Cell cellPrefab;
+        public LineGear SelectedGear { get; private set; }
+        private bool stickIsDeselected;
+
+        public void SelectGear(LineGear gear)
+        {
+            SelectedGear = gear;
+        }
+
+        public void DeselectGear()
+        {
+            stickIsDeselected = true;
+        }
 
         public void Start()
         {
-            Vector3 offset = transform.position - new Vector3(size.x, size.y) / 2.0f;
+            Vector3 offset = transform.position - new Vector3(size.x - 1, size.y - 1) / 2.0f;
             cells = new Cell[size.x, size.y];
             for (int y = 0; y < size.y; y++)
             {
@@ -22,6 +34,15 @@ namespace Pospec
                     c.Setup(pos, this);
                     cells[x, y] = c;
                 }
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (stickIsDeselected)
+            {
+                stickIsDeselected = false;
+                SelectedGear = null;
             }
         }
     }
