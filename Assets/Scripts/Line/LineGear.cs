@@ -9,8 +9,12 @@ namespace Pospec
     {
         public float angularSpeed;
         public float radius;
-        public List<LineGear> children;
+        private int level = -1;
+
+        public List<LineGear> connectedTo = new List<LineGear>();
+
         public ConnectionType connectionToParent;
+<<<<<<< Updated upstream
         public Cell cell;
         public CircleCollider2D col;
 
@@ -65,6 +69,19 @@ namespace Pospec
         {
             this.cell = cell;
             transform.position = cell.transform.position;
+=======
+        private LineGear parent = null;
+        private Cell cell = null;
+
+        public void SetCell(Cell cell)
+        {
+            this.cell = cell;
+        }
+
+        public bool ShareSameCell(LineGear other)
+        {
+            return this.cell != null && this.cell == other.cell;
+>>>>>>> Stashed changes
         }
 
         public void UpdateAngularSpeed(LineGear parent)
@@ -87,12 +104,18 @@ namespace Pospec
                     break;
             }
 
-            foreach (var child in children)
-                child.UpdateAngularSpeed(this);
+            foreach (var connection in connectedTo)
+            {
+                if (connection != parent)
+                {
+                    connection.UpdateAngularSpeed(this);
+                }
+            }
         }
 
         private void LateUpdate()
         {
+<<<<<<< Updated upstream
             if (isDragging)
                 FollowPointer();
 
@@ -101,8 +124,58 @@ namespace Pospec
                 placedThisFrame = false;
                 PlaceToCell(cell);
             }
+=======
+            if (DiscreteTime.instance == null)
+                return;
+>>>>>>> Stashed changes
 
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
+        }
+
+        public int GetLevel()
+        {
+            return level;
+        }
+
+        public void SetLevel(int level)
+        {
+            this.level = level;
+        }
+
+        public void AddConnection(LineGear gear)
+        {
+            connectedTo.Add(gear);
+        }
+
+        public void UpdateParent(LineGear parent)
+        {
+            this.parent = parent;
+
+
+            UpdateAngularSpeed(parent);
+
+            // recursively update all siblings
+            foreach (var connection in connectedTo)
+            {
+                if (connection != parent)
+                {
+                    if (ShareSameCell(connection))
+                    {
+                        connection.connectionToParent = ConnectionType.Stick;
+                    }
+                    else
+                    {
+                        connection.connectionToParent = ConnectionType.Teeth;
+                    }
+                    connection.UpdateParent(this);
+
+                }
+            }
+        }
+
+        public bool IsIdle()
+        {
+            return connectionToParent == ConnectionType.Teeth && angularSpeed == 0.0f;
         }
     }
 
