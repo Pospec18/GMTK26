@@ -41,6 +41,8 @@ namespace Pospec
                 isHovering = false;
                 if (TryPlaceGearOnTop(grid.SelectedGear))
                     grid.SelectedGear.PlaceToCell(this);
+                else
+                    grid.SelectedGear.PlaceToCell(grid.SelectedGear.cell);
             }
             sr.color = Color.white * (isHovering ? 0.8f : 0.4f);
         }

@@ -106,6 +106,7 @@ MonoBehaviour:
   children: []
   connectionToParent: 0
   cell: {fileID: 0}
+  col: {fileID: 8414382599648086313}
 --- !u!58 &8414382599648086313
 CircleCollider2D:
   m_ObjectHideFlags: 0
