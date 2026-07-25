@@ -103,6 +103,7 @@ MonoBehaviour:
   gears:
   - {fileID: 1021599787477410313}
   pos: {x: 2, y: 6}
+  cellType: 0
 --- !u!1 &429279182170200731
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 4}
+  cellType: 0
 --- !u!1 &452454005564475153
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 4}
+  cellType: 0
 --- !u!1 &557433380612329883
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 5}
+  cellType: 0
 --- !u!1 &1024118886626748825
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 2}
+  cellType: 0
 --- !u!1 &1449800293319337023
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 0}
+  cellType: 0
 --- !u!1 &1481221832166055672
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 7}
+  cellType: 0
 --- !u!1 &1983058368171131296
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 0}
+  cellType: 0
 --- !u!1 &2024056121652725001
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 4}
+  cellType: 0
 --- !u!1 &2071509997059305832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 2}
+  cellType: 0
 --- !u!1 &2330054301742891062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 0}
+  cellType: 0
 --- !u!1 &2561411555415615584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 6}
+  cellType: 0
 --- !u!1 &2715063592305106276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 3}
+  cellType: 0
 --- !u!1 &3024472223318011983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1468,7 @@ MonoBehaviour:
   grid: {fileID: 4215258619915045452}
   gridSize: {x: 5, y: 8}
   cellPrefab: {fileID: 4056493946689596860, guid: 05d1e4a9808d9d641848d7a54ccb830c, type: 3}
+  winConViz: {fileID: 0}
   cells:
   - {fileID: 6636462863759949973}
   - {fileID: 9027475164199783152}
@@ -1599,6 +1613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 3}
+  cellType: 0
 --- !u!1 &3562476890454563186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 1}
+  cellType: 0
 --- !u!1 &3743223522950697596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 6}
+  cellType: 0
 --- !u!1 &4458776748390227918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,6 +1922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 1}
+  cellType: 0
 --- !u!1 &4463238950366263045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,6 +2025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 5}
+  cellType: 0
 --- !u!1 &4548776779808540878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 2}
+  cellType: 0
 --- !u!1 &4622126305280710636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,6 +2231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 4}
+  cellType: 0
 --- !u!1 &5209383500310472973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 7}
+  cellType: 0
 --- !u!1 &5233788577637140062
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,6 +2437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 2}
+  cellType: 0
 --- !u!1 &5302975095462789631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 3}
+  cellType: 0
 --- !u!1 &5452293646995265416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,6 +2644,7 @@ MonoBehaviour:
   gears:
   - {fileID: 2964645920214678397}
   pos: {x: 1, y: 5}
+  cellType: 0
 --- !u!1 &5594794111716536611
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 4}
+  cellType: 0
 --- !u!1 &5946567613411247855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,6 +2850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 3}
+  cellType: 0
 --- !u!1 &6096124191954648075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2926,6 +2953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 3}
+  cellType: 0
 --- !u!1 &6131720392155442397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3029,6 +3057,7 @@ MonoBehaviour:
   gears:
   - {fileID: 1449598608044543240}
   pos: {x: 4, y: 0}
+  cellType: 0
 --- !u!1 &6252833512678105924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,6 +3160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 7}
+  cellType: 0
 --- !u!1 &6892428174159217078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,6 +3263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 5}
+  cellType: 0
 --- !u!1 &6951070905114996709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,6 +3311,10 @@ MonoBehaviour:
   maxLayers: 10
   size: {x: 5, y: 8}
   cellPrefab: {fileID: 3548109361600989089, guid: 746c75c9b536a634f881d16cd054add7, type: 3}
+  hoverPadding: 0.05
+  lineDrawing: 0
+  lineDrawer: {fileID: 0}
+  ghostColor: {r: 1, g: 1, b: 1, a: 0.4}
   graceCollisionOffset: 0
 --- !u!1 &7250187974796277837
 GameObject:
@@ -3383,6 +3418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 7}
+  cellType: 0
 --- !u!1 &7383197146537601693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,6 +3521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 1}
+  cellType: 0
 --- !u!1 &7671529912111737188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 5}
+  cellType: 0
 --- !u!1 &7684638214066435184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3689,6 +3727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 2}
+  cellType: 0
 --- !u!1 &7862014173428100310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,6 +3830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 7}
+  cellType: 0
 --- !u!1 &8283478984927058165
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,6 +3933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 1}
+  cellType: 0
 --- !u!1 &8780560386415192533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +4036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 1}
+  cellType: 0
 --- !u!1 &8845106572773787403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4097,6 +4139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 6}
+  cellType: 0
 --- !u!1 &8881632223594876708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4199,6 +4242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 6}
+  cellType: 0
 --- !u!1 &8956714997432506310
 GameObject:
   m_ObjectHideFlags: 0
@@ -4301,6 +4345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 0}
+  cellType: 0
 --- !u!1001 &5763486664169227510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4364,6 +4409,10 @@ PrefabInstance:
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7788168304597479607, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Name
@@ -4466,6 +4515,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7788168304597479607, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Name
       value: LineGear
@@ -4554,6 +4607,10 @@ PrefabInstance:
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7788168304597479607, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Name

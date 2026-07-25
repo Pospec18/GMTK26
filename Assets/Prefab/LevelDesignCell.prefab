@@ -102,3 +102,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 0}
+  cellType: 0
