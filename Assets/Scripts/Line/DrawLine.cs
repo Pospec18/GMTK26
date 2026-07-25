@@ -29,29 +29,26 @@ namespace Pospec
                 var g1 = gears[i];
                 var g2 = gears[(i + 1) % gears.Count];
 
-                var g1P = g1.transform.position;
-                var g2P = g2.transform.position;
+                Vector3 g1P = g1.transform.position;
+                Vector3 g2P = g2.transform.position;
                 Vector3 dir = g2P - g1P;
+
                 Vector3 forwardStart = Vector3.forward;
                 Vector3 forwardEnd = Vector3.forward;
-                if (gears.Count >= 3)
-                {
-                    var p1 = gears[(i - 2 + gears.Count) % gears.Count].transform.position;
-                    var p2 = gears[(i - 1 + gears.Count) % gears.Count].transform.position;
-                    var p3 = gears[(i) % gears.Count].transform.position;
-                    float d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
-                    if (d < 0)
-                        forwardEnd *= -1;
-                }
 
                 if (gears.Count >= 3)
                 {
+                    // Turn direction around gear i (g1)
                     var p1 = gears[(i - 1 + gears.Count) % gears.Count].transform.position;
-                    var p2 = gears[(i) % gears.Count].transform.position;
-                    var p3 = gears[(i + 1) % gears.Count].transform.position;
-                    float d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
-                    if (d < 0)
-                        forwardStart *= -1;
+                    var p2 = g1P;
+                    var p3 = g2P;
+                    float dStart = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+                    if (dStart < 0) forwardStart *= -1;
+
+                    // Turn direction around gear i+1 (g2)
+                    var p4 = gears[(i + 2) % gears.Count].transform.position;
+                    float dEnd = (p3.x - p2.x) * (p4.y - p2.y) - (p3.y - p2.y) * (p4.x - p2.x);
+                    if (dEnd < 0) forwardEnd *= -1;
                 }
 
                 Vector3 perpStart = Vector3.Cross(dir, forwardStart).normalized;

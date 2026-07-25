@@ -88,7 +88,10 @@ namespace Pospec
             if (endGear && Mathf.Abs(endGear.angularSpeed - winAngularSpeed) < winMarginOfError)
             {
                 Debug.Log("WIN");
-                levelFinisher.FinishLevel();
+                if (levelFinisher)
+                {
+                    levelFinisher.FinishLevel();
+                }
             }
         }
 
