@@ -17,7 +17,7 @@ namespace Pospec
             }
             else if (AudioManager.instance == null)
             {
-                Debug.LogWarning("AudioManager not found in the scene! Start the game from the main scene.");
+                Debug.LogWarning("AudioManager not found in the scene! Start the game from the title scene.");
             }
         }
     }

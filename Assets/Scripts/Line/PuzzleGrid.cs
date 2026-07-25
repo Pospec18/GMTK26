@@ -84,7 +84,7 @@ namespace Pospec
                 gear.UpdateAngularSpeed(gear);
             }
 
-            if ( Mathf.Abs(endGear.angularSpeed - winAngularSpeed) < winMarginOfError)
+            if (endGear && Mathf.Abs(endGear.angularSpeed - winAngularSpeed) < winMarginOfError)
             {
                 Debug.Log("WIN");
                 levelFinisher.FinishLevel();
