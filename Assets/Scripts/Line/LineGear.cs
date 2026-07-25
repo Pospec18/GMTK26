@@ -157,6 +157,17 @@ namespace Pospec
             connectedTo.Add(gear);
         }
 
+        public void ClearConnections()
+        {
+            foreach (var other in connectedTo)
+            {
+                if (other)
+                    other.connectedTo.Remove(this);
+            }
+
+            connectedTo.Clear();
+        }
+
         public void UpdateParent(LineGear parent)
         {
             this.parent = parent;
