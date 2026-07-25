@@ -1,14 +1,39 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Pospec
 {
-    public class LineGear : MonoBehaviour
+    public class LineGear : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         public float angularSpeed;
         public float radius;
         public List<LineGear> children;
         public ConnectionType connectionToParent;
+        public Cell cell;
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (cell)
+                cell.grid.SelectGear(this);
+            else
+                FindAnyObjectByType<Grid>().SelectGear(this);
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            if (cell)
+                cell.grid.DeselectGear();
+            else
+                FindAnyObjectByType<Grid>().DeselectGear();
+        }
+
+        public void PlaceToCell(Cell cell)
+        {
+            this.cell = cell;
+            transform.position = cell.transform.position;
+        }
 
         public void UpdateAngularSpeed(LineGear parent)
         {

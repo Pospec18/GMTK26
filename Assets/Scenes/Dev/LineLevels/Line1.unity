@@ -647,6 +647,7 @@ MonoBehaviour:
   radius: 1
   children: []
   connectionToParent: 1
+  cell: {fileID: 0}
 --- !u!212 &685065666
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -752,6 +753,7 @@ MonoBehaviour:
   children:
   - {fileID: 1591035989}
   connectionToParent: 2
+  cell: {fileID: 0}
 --- !u!212 &724515773
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -857,6 +859,7 @@ MonoBehaviour:
   children:
   - {fileID: 1440479234}
   connectionToParent: 1
+  cell: {fileID: 0}
 --- !u!212 &811858704
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1007,6 +1010,7 @@ MonoBehaviour:
   radius: 0.5
   children: []
   connectionToParent: 2
+  cell: {fileID: 0}
 --- !u!212 &1440479235
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1112,6 +1116,7 @@ MonoBehaviour:
   children:
   - {fileID: 2087326708}
   connectionToParent: 1
+  cell: {fileID: 0}
 --- !u!212 &1591035990
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1287,6 +1292,7 @@ MonoBehaviour:
   children:
   - {fileID: 724515772}
   connectionToParent: 0
+  cell: {fileID: 0}
 --- !u!1 &2087326707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,6 +1329,7 @@ MonoBehaviour:
   - {fileID: 685065665}
   - {fileID: 811858703}
   connectionToParent: 0
+  cell: {fileID: 0}
 --- !u!212 &2087326709
 SpriteRenderer:
   m_ObjectHideFlags: 0
