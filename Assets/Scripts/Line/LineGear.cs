@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Pospec
 {
-    public class LineGear : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class LineGear : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public float angularSpeed;
         public float radius;
@@ -23,15 +23,47 @@ namespace Pospec
         public int normalSortingLayer;
         public int holdingSortingLayer;
 
+        // where the gear sits relative to the cursor while dragged, in world units. the gear
+        // is always the same size in our hand, so this does not scale with its radius.
+        // kept out of the inspector so the values here are the ones that actually apply
+        private static readonly Vector2 dragOffset = new Vector2(0.42f, -0.42f);
+
+        // the gear in our hand is always this big, in world units of radius, no matter how
+        // big the gear itself is - a small gear and a huge one look the same while dragged
+        private const float dragRadius = 0.25f;
+
         public bool isDragging;
         private bool placedThisFrame;
         private Vector3 grabOffset;
         private Camera dragCamera;
         private Cell originCell;
         private Grid dragGrid;
+        private Vector3 baseScale = Vector3.one;
+
+        /// <summary>The cell this gear was picked up from, so it can be dropped back there. Null while not dragging.</summary>
+        public Cell OriginCell => originCell;
+
+        /// <summary>World scale of the gear at full size, so a preview is not shrunk along with the dragged gear.</summary>
+        public Vector3 FullWorldScale =>
+            transform.parent ? Vector3.Scale(transform.parent.lossyScale, baseScale) : baseScale;
+
+        // radius is measured at the gear's normal scale, so this lands every gear on the same
+        // dragRadius regardless of how big it started
+        private Vector3 DragLocalScale =>
+            radius > 0.0f ? baseScale * (dragRadius / radius) : baseScale;
+
+        private void Awake()
+        {
+            baseScale = transform.localScale;
+        }
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
+
             if (!canMove)
                 return;
 
@@ -45,12 +77,10 @@ namespace Pospec
             DetachFromGrid();
 
             dragCamera = eventData.pressEventCamera != null ? eventData.pressEventCamera : Camera.main;
-            if (dragCamera != null)
-            {
-                Vector3 screen = eventData.position;
-                screen.z = dragCamera.WorldToScreenPoint(transform.position).z;
-                grabOffset = transform.position - dragCamera.ScreenToWorldPoint(screen);
-            }
+
+            // the gear hangs to the bottom right of the cursor, no matter where it was
+            // grabbed, so the cursor never sits under the gear and hides the cell below it
+            grabOffset = new Vector3(dragOffset.x, dragOffset.y, 0.0f);
 
             Color c = sr.color;
             c.a = 0.35f;
@@ -59,6 +89,11 @@ namespace Pospec
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
+
             if (!canMove)
                 return;
 
@@ -66,6 +101,8 @@ namespace Pospec
             placedThisFrame = true;
             Grid grid = dragGrid ? dragGrid : (cell ? cell.grid : FindAnyObjectByType<Grid>());
             grid.DeselectGear();
+
+            transform.localScale = baseScale;
 
             Color c = sr.color;
             c.a = 1.0f;
@@ -181,7 +218,13 @@ namespace Pospec
 
         private void LateUpdate()
         {
-            if (PuzzleGrid.instance.GetStartingGears().Contains(this))
+            // the puzzle is gone while the scene is being torn down, but gears keep ticking
+            // for the rest of the frame
+            PuzzleGrid puzzle = PuzzleGrid.instance;
+            if (puzzle == null || Grid.Instance == null)
+                return;
+
+            if (puzzle.GetStartingGears().Contains(this))
             {
                 col.enabled = false;
             }
@@ -196,6 +239,10 @@ namespace Pospec
             {
                 sr.sortingLayerID = SortingLayer.layers[holdingSortingLayer].id;
                 FollowPointer();
+
+                // HoverHighlight tweens the scale in Update while we are dragging, so we have
+                // to claim it back every frame to stay small
+                transform.localScale = DragLocalScale;
             }
             else
                 sr.sortingLayerID = SortingLayer.layers[normalSortingLayer].id;
@@ -271,6 +318,23 @@ namespace Pospec
         public bool IsIdle()
         {
             return connectionToParent == ConnectionType.Teeth && angularSpeed == 0.0f;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (Grid.Instance.lineDrawing)
+            {
+                Grid.Instance.AddToLine(this);
+                return;
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (Grid.Instance.lineDrawing)
+            {
+                return;
+            }
         }
     }
 
