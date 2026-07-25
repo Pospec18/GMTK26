@@ -12,6 +12,13 @@ namespace Pospec
         public Cell cellPrefab;
         public LineGear SelectedGear { get; private set; }
         private bool stickIsDeselected;
+        private bool gearTintedThisFrame;
+
+        /// <summary>Called by the hovered cell when it tints the selected gear this frame.</summary>
+        public void NotifyGearTinted()
+        {
+            gearTintedThisFrame = true;
+        }
 
         public float hoverPadding = 0.05f;
 
@@ -77,6 +84,12 @@ namespace Pospec
 
         private void LateUpdate()
         {
+            // no cell claimed the gear this frame, so it is being dragged off the
+            // grid - put it back to its untinted look
+            if (SelectedGear && !gearTintedThisFrame)
+                SelectedGear.sr.color = Color.white;
+            gearTintedThisFrame = false;
+
             if (stickIsDeselected)
             {
                 stickIsDeselected = false;
