@@ -279,6 +279,7 @@ MonoBehaviour:
   maxLayers: 2
   size: {x: 5, y: 5}
   cellPrefab: {fileID: 3548109361600989089, guid: 746c75c9b536a634f881d16cd054add7, type: 3}
+  hoverPadding: 0.05
   graceCollisionOffset: 0
 --- !u!1 &130819826
 GameObject:
@@ -1078,9 +1079,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingGears:
   - {fileID: 1112881535}
+  endGear: {fileID: 0}
+  winAngularSpeed: 0
+  winMarginOfError: 1
   grid: {fileID: 46538978}
   gridSize: {x: 5, y: 5}
   cellPrefab: {fileID: 4056493946689596860, guid: 05d1e4a9808d9d641848d7a54ccb830c, type: 3}
+  winConViz: {fileID: 0}
   cells:
   - {fileID: 779217674}
   - {fileID: 2139758769}
@@ -1107,6 +1112,7 @@ MonoBehaviour:
   - {fileID: 480208653}
   - {fileID: 856575417}
   - {fileID: 1701043373}
+  levelFinisher: {fileID: 0}
 --- !u!1 &658695130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,8 +2076,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: -9045465360976403679, guid: a5b0eea86de2d8f44a92abf349351e0d, type: 2}
   ambientTracks:
-  - {fileID: 8300000, guid: efcbd2306ce30924589687cf5348f1c0, type: 3}
-  - {fileID: 8300000, guid: 1cf7d0d5acf1a744a8ada92b92ab040f, type: 3}
   - {fileID: 8300000, guid: b5ee89705cd4b40418c04bc925bf2586, type: 3}
   - {fileID: 8300000, guid: af58a04b08a3ff34982dc0e189b2d114, type: 3}
   crossfadeDuration: 3
