@@ -68,20 +68,12 @@ public class LevelClock : MonoBehaviour
             // If it is the final level, slowly move the hour arm by 30 degrees
             if (isGameCompleted && hourArm != null)
             {
-                float hourAngle = Mathf.Lerp(0f, 30f, t);
+                float hourAngle = Mathf.Lerp(0f, 15f, t);
                 hourArm.eulerAngles = new Vector3(0, 0, initialHourEuler.z - hourAngle);
             }
 
             elapsedTime += Time.deltaTime;
             yield return null;
-        }
-
-        // Snap to final positions just to be perfectly precise
-        clockArm.eulerAngles = new Vector3(0, 0, -targetAngle);
-        
-        if (isGameCompleted && hourArm != null)
-        {
-            hourArm.eulerAngles = new Vector3(0, 0, initialHourEuler.z - 30f);
         }
 
         yield return new WaitForSeconds(0.5f);
