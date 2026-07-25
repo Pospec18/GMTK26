@@ -8,15 +8,16 @@ namespace Pospec
     public class Cell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public List<LineGear> gears = new List<LineGear>();
-        public Vector2Int pos { get; private set; }
+        [HideInInspector] public Vector2Int pos;
         public SpriteRenderer sr;
-        public Grid grid { get; private set; }
+        [HideInInspector] public Grid grid;
         private bool isHovering = false;
 
         public void Setup(Vector2Int pos, Grid grid)
         {
             this.pos = pos;
             this.grid = grid;
+            gameObject.name = $"Cell {pos.x} {pos.y}";
         }
 
         public bool TryPlaceGearOnTop(LineGear gear)
@@ -155,7 +156,7 @@ namespace Pospec
             return result;
         }
 
-        private void LinkGears(LineGear addedGear)
+        public void LinkGears(LineGear addedGear)
         {
             // we need to check if the gear is touching any other gear in the grid and link them if they are
 

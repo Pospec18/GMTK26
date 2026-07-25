@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +8,8 @@ namespace Pospec
     {
         public float angularSpeed;
         public float radius;
+        public bool canMove;
+
         private int level = -1;
 
         public List<LineGear> connectedTo = new List<LineGear>();

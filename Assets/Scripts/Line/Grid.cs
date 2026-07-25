@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pospec
@@ -6,7 +8,7 @@ namespace Pospec
     {
         public Cell[,] cells;
         public int maxLayers = 10;
-        public Vector2Int size;
+        [HideInInspector] public Vector2Int size;
         public Cell cellPrefab;
         public LineGear SelectedGear { get; private set; }
         private bool stickIsDeselected;
@@ -49,7 +51,7 @@ namespace Pospec
             }
         }
 
-        public void Start()
+        public void GenerateLevel()
         {
             Vector3 offset = transform.position - new Vector3(size.x - 1, size.y - 1) / 2.0f;
             cells = new Cell[size.x, size.y];
@@ -63,8 +65,10 @@ namespace Pospec
                     cells[x, y] = c;
                 }
             }
+        }
 
-
+        public void Start()
+        {
             /* // placing grids simulation
             // CASE 1: stacked in one cell, shared axle
             LineGear gear1 = SpawnTestGear("gear1", 1.0f, cells[0, 0]);
@@ -134,6 +138,19 @@ namespace Pospec
             {
                 stickIsDeselected = false;
                 SelectedGear = null;
+            }
+        }
+
+        public void Setup(List<TmpCell> cells)
+        {
+            GenerateLevel();
+            foreach (var cell in cells)
+            {
+                foreach (var item in cell.gears)
+                {
+                    this.cells[cell.pos.x, cell.pos.y].TryPlaceGearOnTop(item);
+                    this.cells[cell.pos.x, cell.pos.y].LinkGears(item);
+                }
             }
         }
     }
