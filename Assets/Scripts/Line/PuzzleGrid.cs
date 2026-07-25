@@ -12,6 +12,7 @@ namespace Pospec
         public Grid grid;
         public Vector2Int gridSize;
         public TmpCell cellPrefab;
+        public RotationViz winConViz;
         [SerializeField, HideInInspector] private List<TmpCell> cells;
         public LevelFinisher levelFinisher;
 
@@ -57,6 +58,11 @@ namespace Pospec
             grid.Setup(cells);
 
             allGears = FindObjectsByType<LineGear>(FindObjectsSortMode.None);
+            if (winConViz)
+            {
+                winConViz.angularSpeed = winAngularSpeed;
+                winConViz.GetComponent<Follower>().target = endGear.transform;
+            }
         }
 
         public void OnDestroy()
