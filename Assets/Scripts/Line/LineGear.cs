@@ -31,9 +31,13 @@ namespace Pospec
         {
             isDragging = true;
             if (cell)
+            {
                 cell.grid.SelectGear(this);
+            }
             else
+            {
                 FindAnyObjectByType<Grid>().SelectGear(this);
+            }
 
             dragCamera = eventData.pressEventCamera != null ? eventData.pressEventCamera : Camera.main;
             if (dragCamera != null)
