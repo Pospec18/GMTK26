@@ -315,6 +315,7 @@ namespace Pospec
                 {
                     grid.SelectedGear.sr.color = Color.white * 0.8f;
                     grid.NotifyGearTinted();
+                    grid.ShowGhost(this, grid.SelectedGear);
                 }
             }
             else

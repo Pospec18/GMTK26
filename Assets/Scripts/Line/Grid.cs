@@ -14,10 +14,40 @@ namespace Pospec
         private bool stickIsDeselected;
         private bool gearTintedThisFrame;
 
+        [Header("Drop preview")]
+        public Color ghostColor = new Color(1.0f, 1.0f, 1.0f, 0.4f);
+        private SpriteRenderer ghost;
+        private bool ghostShownThisFrame;
+
         /// <summary>Called by the hovered cell when it tints the selected gear this frame.</summary>
         public void NotifyGearTinted()
         {
             gearTintedThisFrame = true;
+        }
+
+        /// <summary>Shows a preview of the dragged gear where it would land if it was dropped on this cell.</summary>
+        public void ShowGhost(Cell cell, LineGear gear)
+        {
+            if (!cell || !gear || !gear.sr)
+                return;
+
+            if (!ghost)
+            {
+                var go = new GameObject("GearGhost");
+                ghost = go.AddComponent<SpriteRenderer>();
+            }
+
+            int idx = cell.gears.Count;
+            ghost.sprite = gear.sr.sprite;
+            ghost.color = ghostColor;
+            ghost.sortingLayerID = SortingLayer.layers[gear.normalSortingLayer].id;
+            ghost.sortingOrder = idx;
+            ghost.transform.position = cell.transform.position + Vector3.forward * idx;
+            ghost.transform.rotation = gear.transform.rotation;
+            ghost.transform.localScale = gear.FullWorldScale;
+            ghost.enabled = true;
+
+            ghostShownThisFrame = true;
         }
 
         public float hoverPadding = 0.05f;
@@ -32,6 +62,9 @@ namespace Pospec
         private void OnDestroy()
         {
             Instance = null;
+
+            if (ghost)
+                Destroy(ghost.gameObject);
         }
 
         public void SelectGear(LineGear gear)
@@ -89,6 +122,15 @@ namespace Pospec
             if (SelectedGear && !gearTintedThisFrame)
                 SelectedGear.sr.color = Color.white;
             gearTintedThisFrame = false;
+
+            // no cell offered a valid drop spot this frame, so the gear would go back
+            // where it came from - preview that instead
+            if (!ghostShownThisFrame && SelectedGear && !SelectedGear.cell && SelectedGear.OriginCell)
+                ShowGhost(SelectedGear.OriginCell, SelectedGear);
+
+            if (ghost && !ghostShownThisFrame)
+                ghost.enabled = false;
+            ghostShownThisFrame = false;
 
             if (stickIsDeselected)
             {
