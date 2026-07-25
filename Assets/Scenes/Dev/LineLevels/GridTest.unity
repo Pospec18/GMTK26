@@ -166,7 +166,6 @@ MonoBehaviour:
   maxLayers: 2
   size: {x: 5, y: 5}
   cellPrefab: {fileID: 3548109361600989089, guid: 746c75c9b536a634f881d16cd054add7, type: 3}
-<<<<<<< Updated upstream
 --- !u!1001 &863831453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,9 +404,6 @@ MonoBehaviour:
   timeSpeed: 1
   timeStep: 1
   ease: 8
-=======
-  graceCollisionOffset: 0.5
->>>>>>> Stashed changes
 --- !u!1 &1872034794
 GameObject:
   m_ObjectHideFlags: 0
