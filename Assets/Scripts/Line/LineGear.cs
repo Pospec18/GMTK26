@@ -60,9 +60,13 @@ namespace Pospec
             isDragging = false;
             placedThisFrame = true;
             if (cell)
+            {
                 cell.grid.DeselectGear();
+            }
             else
+            {
                 FindAnyObjectByType<Grid>().DeselectGear();
+            }
         }
 
         private void FollowPointer()

@@ -35,6 +35,8 @@ namespace Pospec
                 return false;
             }
 
+            gear.SetLevel(gears.Count);
+
             // we need to check with every already placed gear in the grid if it is not colliding
             foreach (var cell in grid.cells)
             {
@@ -46,13 +48,13 @@ namespace Pospec
                     if (AreGearsColliding(gear, g, this))
                     {
                         Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
+                        gear.SetLevel(-1);
                         return false;
                     }
                 }
             }
 
             // okay lets place it then bro
-            gear.SetLevel(gears.Count);
             gears.Add(gear);
             gear.SetCell(this);
 
@@ -97,6 +99,7 @@ namespace Pospec
             if (thisGear == otherGear)
                 return false;
 
+            Debug.Log(thisGear.GetLevel() + " vs " + otherGear.GetLevel());
             if (thisGear.GetLevel() != otherGear.GetLevel())
                 return false;
 
@@ -211,6 +214,20 @@ namespace Pospec
             }
         }
 
+        private void RemoveAngularSpeedRecursive(LineGear gear)
+        {
+            if (!gear) return;
+
+            foreach (var child in gear.connectedTo)
+            {
+                if (child.connectionToParent == ConnectionType.Teeth)
+                {
+                    child.angularSpeed = 0.0f;
+                    RemoveAngularSpeedRecursive(child);
+                }
+            }
+        }
+
         private void Update()
         {
             if (!grid.SelectedGear)
@@ -221,6 +238,16 @@ namespace Pospec
 
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
+                if (!PuzzleGrid.instance.GetStartingGears().Contains(grid.SelectedGear))
+                {
+                    grid.SelectedGear.angularSpeed = 0.0f;
+                }
+                else
+                {
+                    // remove speed from all its children
+                    RemoveAngularSpeedRecursive(grid.SelectedGear);
+                }
+
                 isHovering = false;
                 Cell oldCell = grid.SelectedGear.cell;
                 if (TryPlaceGearOnTop(grid.SelectedGear))

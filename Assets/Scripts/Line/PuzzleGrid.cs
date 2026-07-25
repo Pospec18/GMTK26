@@ -11,6 +11,8 @@ namespace Pospec
         public TmpCell cellPrefab;
         [SerializeField, HideInInspector] private List<TmpCell> cells;
 
+        public static PuzzleGrid instance;
+
         private void OnValidate()
         {
             if (grid)
@@ -44,7 +46,14 @@ namespace Pospec
 
         public void Awake()
         {
+            instance = this;
+
             grid.Setup(cells);
+        }
+
+        public void OnDestroy()
+        {
+            instance = null;
         }
 
         private void Update()
@@ -53,6 +62,11 @@ namespace Pospec
             {
                 gear.UpdateAngularSpeed(gear);
             }
+        }
+
+        public List<LineGear> GetStartingGears()
+        {
+            return startingGears;
         }
     }
 }
