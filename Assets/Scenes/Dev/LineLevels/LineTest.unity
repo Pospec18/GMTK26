@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 3}
+  cellType: 0
 --- !u!212 &27342812
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -316,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 0}
+  cellType: 0
 --- !u!212 &130819828
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -418,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 3}
+  cellType: 0
 --- !u!212 &228255716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -520,6 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 4}
+  cellType: 0
 --- !u!212 &266063416
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -622,6 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 3}
+  cellType: 0
 --- !u!212 &326608292
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -725,6 +730,7 @@ MonoBehaviour:
   gears:
   - {fileID: 1112881535}
   pos: {x: 0, y: 2}
+  cellType: 0
 --- !u!212 &429354696
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -827,6 +833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 2}
+  cellType: 0
 --- !u!212 &480208654
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -930,6 +937,7 @@ MonoBehaviour:
   gears:
   - {fileID: 332241}
   pos: {x: 3, y: 1}
+  cellType: 0
 --- !u!212 &536192478
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1148,6 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 0}
+  cellType: 0
 --- !u!212 &658695132
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1250,6 +1259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 0}
+  cellType: 0
 --- !u!212 &737718762
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1352,6 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 0}
+  cellType: 0
 --- !u!212 &779217675
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1454,6 +1465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 1}
+  cellType: 0
 --- !u!212 &834108347
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1556,6 +1568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 3}
+  cellType: 0
 --- !u!212 &856575418
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1727,6 +1740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 2}
+  cellType: 0
 --- !u!212 &866509479
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2053,6 +2067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 1}
+  cellType: 0
 --- !u!212 &1342542330
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2446,6 +2461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 2}
+  cellType: 0
 --- !u!212 &1598539691
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2548,6 +2564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 1, y: 4}
+  cellType: 0
 --- !u!212 &1622855405
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2650,6 +2667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 4, y: 4}
+  cellType: 0
 --- !u!212 &1701043374
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2916,6 +2934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 4}
+  cellType: 0
 --- !u!212 &1784302244
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3019,6 +3038,7 @@ MonoBehaviour:
   gears:
   - {fileID: 575061577}
   pos: {x: 2, y: 3}
+  cellType: 0
 --- !u!212 &1840141447
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3121,6 +3141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 1}
+  cellType: 0
 --- !u!212 &1865130922
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3223,6 +3244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 3, y: 2}
+  cellType: 0
 --- !u!212 &1911307770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3394,6 +3416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 4}
+  cellType: 0
 --- !u!212 &2101196073
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3496,6 +3519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 0, y: 1}
+  cellType: 0
 --- !u!212 &2139758770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3598,6 +3622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gears: []
   pos: {x: 2, y: 0}
+  cellType: 0
 --- !u!212 &2142222313
 SpriteRenderer:
   m_ObjectHideFlags: 0
