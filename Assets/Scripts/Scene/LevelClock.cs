@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; // Required for the UI Image components
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,11 @@ namespace Pospec
 {
     public class LevelClock : MonoBehaviour
     {
+        [Header("Progress Map")]
+        public Image[] levelIcons;
+        public Color lockedColor = Color.gray;
+        public Color unlockedColor = Color.white;
+
         [Header("Clock Arms")]
         public Transform clockArm;
         public Transform hourArm;
@@ -20,6 +26,7 @@ namespace Pospec
         public AudioSource audioSource;
         public AudioClip normalTickSound;
         public AudioClip finalLevelSound;
+        public AudioClip iconColoringSound;
 
         [Header("Scene Transition Settings")]
         public float delayBeforeTransition = 0.5f;
@@ -45,7 +52,24 @@ namespace Pospec
         IEnumerator AnimateClockArm(float startAngle, float targetAngle)
         {
             bool isGameCompleted = (levelToLoad > finalLevelNumber);
+            int newlyCompletedIndex = levelToLoad - 2;
 
+            // 1. SETUP ICONS (Before animation starts)
+            for (int i = 0; i < levelIcons.Length; i++)
+            {
+                if (i < newlyCompletedIndex)
+                {
+                    // Previously completed levels are fully colored
+                    levelIcons[i].color = unlockedColor;
+                }
+                else
+                {
+                    // Uncompleted levels (including the one about to be colored) are gray
+                    levelIcons[i].color = lockedColor;
+                }
+            }
+
+            // 2. TRIGGER AUDIO
             if (audioSource != null)
             {
                 if (isGameCompleted)
@@ -56,8 +80,14 @@ namespace Pospec
                 {
                     audioSource.PlayOneShot(normalTickSound);
                 }
+                // NEW: Play the coloring sound if an icon is about to change color
+                if (iconColoringSound != null && newlyCompletedIndex >= 0 && newlyCompletedIndex < levelIcons.Length)
+                {
+                    audioSource.PlayOneShot(iconColoringSound);
+                }
             }
 
+            // 3. ANIMATE CLOCK AND COLOR SIMULTANEOUSLY
             float elapsedTime = 0f;
             Vector3 initialHourEuler = hourArm != null ? hourArm.eulerAngles : Vector3.zero;
 
@@ -66,13 +96,21 @@ namespace Pospec
                 float t = elapsedTime / animationDuration;
                 t = t * t * (3f - 2f * t); // Smoothstep
 
+                // Spin the clock
                 float currentAngle = Mathf.Lerp(startAngle, targetAngle, t);
                 clockArm.eulerAngles = new Vector3(0, 0, -currentAngle);
 
+                // Spin the hour arm if it's the finale
                 if (isGameCompleted && hourArm != null)
                 {
-                    float hourAngle = Mathf.Lerp(0f, 20f, t);
+                    float hourAngle = Mathf.Lerp(0f, 15f, t);
                     hourArm.eulerAngles = new Vector3(0, 0, initialHourEuler.z - hourAngle);
+                }
+
+                // Fade the newly completed icon's color
+                if (newlyCompletedIndex >= 0 && newlyCompletedIndex < levelIcons.Length)
+                {
+                    levelIcons[newlyCompletedIndex].color = Color.Lerp(lockedColor, unlockedColor, t);
                 }
 
                 elapsedTime += Time.deltaTime;
@@ -81,6 +119,7 @@ namespace Pospec
 
             yield return new WaitForSeconds(delayBeforeTransition);
 
+            // 5. LOAD NEXT SCENE
             string nextSceneName = isGameCompleted ? "MainMenu" : "Level" + levelToLoad;
 
             if (FadeManager.instance != null)
