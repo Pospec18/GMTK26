@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: f62d6954a7b20a04398203ba3ff873b9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8480638695041611498
+    second: oponaTrans_0
+  - first:
+      213: 7919373974326936686
+    second: oponaTrans_1
+  - first:
+      213: 3871631890153096291
+    second: oponaTrans_2
+  - first:
+      213: 1887178889222599174
+    second: oponaTrans_3
+  - first:
+      213: -4371546707285465359
+    second: oponaTrans_4
+  - first:
+      213: 5334376411753653124
+    second: oponaTrans_5
+  - first:
+      213: -2702456642624047723
+    second: oponaTrans_6
+  - first:
+      213: -807478035741250460
+    second: oponaTrans_7
+  - first:
+      213: 7841061428284274751
+    second: oponaTrans_8
+  - first:
+      213: -3480018737960600953
+    second: oponaTrans_9
+  - first:
+      213: 106658197671218030
+    second: oponaTrans_10
+  - first:
+      213: 1234778881281527283
+    second: oponaTrans_11
+  - first:
+      213: 4505665308095848136
+    second: oponaTrans_12
+  - first:
+      213: 9029400248206087018
+    second: oponaTrans_13
+  - first:
+      213: -2623818413875284614
+    second: oponaTrans_14
+  - first:
+      213: -5663007552594252490
+    second: oponaTrans_15
+  - first:
+      213: -136652855551624395
+    second: oponaTrans_16
+  - first:
+      213: 3762043351329755869
+    second: oponaTrans_17
+  - first:
+      213: -2496638446844091676
+    second: oponaTrans_18
+  - first:
+      213: 1805555285655283634
+    second: oponaTrans_19
+  - first:
+      213: 4876120225681317330
+    second: oponaTrans_20
+  - first:
+      213: 8017996841017596835
+    second: oponaTrans_21
+  - first:
+      213: 1536297904450962257
+    second: oponaTrans_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: oponaTrans_0
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 216
+        width: 3710
+        height: 2899
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 619cc990a08be4a80800000000000000
+      internalID: -8480638695041611498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_1
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 304
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e640b37cba447ed60800000000000000
+      internalID: 7919373974326936686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_2
+      rect:
+        serializedVersion: 2
+        x: 1708
+        y: 301
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36446a9f0bccab530800000000000000
+      internalID: 3871631890153096291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_3
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 293
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 602bab7733b903a10800000000000000
+      internalID: 1887178889222599174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_4
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 235
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f6a8316e652553c0800000000000000
+      internalID: -4371546707285465359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_5
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 260
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 483acc07513870a40800000000000000
+      internalID: 5334376411753653124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_6
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 283
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 595bf737002fe7ad0800000000000000
+      internalID: -2702456642624047723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_7
+      rect:
+        serializedVersion: 2
+        x: 2218
+        y: 265
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46c66b331034bc4f0800000000000000
+      internalID: -807478035741250460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_8
+      rect:
+        serializedVersion: 2
+        x: 2229
+        y: 289
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38b6e643db01dc60800000000000000
+      internalID: 7841061428284274751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_9
+      rect:
+        serializedVersion: 2
+        x: 2244
+        y: 282
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ab720556d74bfc0800000000000000
+      internalID: -3480018737960600953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_10
+      rect:
+        serializedVersion: 2
+        x: 2370
+        y: 301
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6b8390d01dea7100800000000000000
+      internalID: 106658197671218030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_11
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 274
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd80f2b9d0d22110800000000000000
+      internalID: 1234778881281527283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_12
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 297
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ce9ad5c9b6578e30800000000000000
+      internalID: 4505665308095848136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_13
+      rect:
+        serializedVersion: 2
+        x: 3179
+        y: 301
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a63d5299fafde4d70800000000000000
+      internalID: 9029400248206087018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_14
+      rect:
+        serializedVersion: 2
+        x: 3182
+        y: 284
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a75b5dddd03569bd0800000000000000
+      internalID: -2623818413875284614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_15
+      rect:
+        serializedVersion: 2
+        x: 3190
+        y: 297
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63de34382a4f861b0800000000000000
+      internalID: -5663007552594252490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_16
+      rect:
+        serializedVersion: 2
+        x: 3199
+        y: 288
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53b7d4fa3f28a1ef0800000000000000
+      internalID: -136652855551624395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_17
+      rect:
+        serializedVersion: 2
+        x: 3222
+        y: 279
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd251a1fe76753430800000000000000
+      internalID: 3762043351329755869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_18
+      rect:
+        serializedVersion: 2
+        x: 3236
+        y: 301
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e266437f882a5dd0800000000000000
+      internalID: -2496638446844091676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_19
+      rect:
+        serializedVersion: 2
+        x: 3241
+        y: 276
+        width: 45
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7efcf47fe9e0910800000000000000
+      internalID: 1805555285655283634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_20
+      rect:
+        serializedVersion: 2
+        x: 3310
+        y: 297
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd15dda2857ba340800000000000000
+      internalID: 4876120225681317330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_21
+      rect:
+        serializedVersion: 2
+        x: 3323
+        y: 292
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3abde0f45a5a54f60800000000000000
+      internalID: 8017996841017596835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oponaTrans_22
+      rect:
+        serializedVersion: 2
+        x: 3468
+        y: 298
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1530affedc6025510800000000000000
+      internalID: 1536297904450962257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      oponaTrans_0: -8480638695041611498
+      oponaTrans_1: 7919373974326936686
+      oponaTrans_10: 106658197671218030
+      oponaTrans_11: 1234778881281527283
+      oponaTrans_12: 4505665308095848136
+      oponaTrans_13: 9029400248206087018
+      oponaTrans_14: -2623818413875284614
+      oponaTrans_15: -5663007552594252490
+      oponaTrans_16: -136652855551624395
+      oponaTrans_17: 3762043351329755869
+      oponaTrans_18: -2496638446844091676
+      oponaTrans_19: 1805555285655283634
+      oponaTrans_2: 3871631890153096291
+      oponaTrans_20: 4876120225681317330
+      oponaTrans_21: 8017996841017596835
+      oponaTrans_22: 1536297904450962257
+      oponaTrans_3: 1887178889222599174
+      oponaTrans_4: -4371546707285465359
+      oponaTrans_5: 5334376411753653124
+      oponaTrans_6: -2702456642624047723
+      oponaTrans_7: -807478035741250460
+      oponaTrans_8: 7841061428284274751
+      oponaTrans_9: -3480018737960600953
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
