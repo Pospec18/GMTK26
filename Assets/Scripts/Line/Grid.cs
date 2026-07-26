@@ -168,6 +168,9 @@ namespace Pospec
                         continue;
 
                     target.PlaceGearOnTop(item);
+                    // authored gears go through the same placement as dropped ones, so they are
+                    // snapped to their cell and get the look of the layer they sit on
+                    item.PlaceToCell(target);
                     placed.Add((target, item));
                 }
             }

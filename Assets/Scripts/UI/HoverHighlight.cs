@@ -50,6 +50,20 @@ namespace Pospec
             }
         }
 
+        /// <summary>Changes the size the gear returns to when it is not hovered, for gears that
+        /// are drawn bigger because of the layer they sit on.</summary>
+        public void SetBaseScale(Vector3 scale)
+        {
+            m_OriginalScale = scale;
+            m_TargetScale = m_OriginalScale * scaleMultiplier;
+
+            if (!m_IsCurrentlyLifted)
+            {
+                transform.DOKill();
+                transform.localScale = m_OriginalScale;
+            }
+        }
+
         void Update()
         {
             // Chceme být "zvednutí", pokud na nás myš hoveruje NEBO pokud kolečko právě dragujeme

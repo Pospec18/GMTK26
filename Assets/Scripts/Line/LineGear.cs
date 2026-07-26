@@ -43,6 +43,9 @@ namespace Pospec
         private Cell originCell;
         private Grid dragGrid;
         private Vector3 baseScale = Vector3.one;
+        private HoverHighlight hover;
+        private bool initialized;
+        private bool isHovered;
 
         // where the gear started the level. gears that are not listed in any TmpCell never get a
         // cell, so this is the only home they have to fall back to
@@ -62,8 +65,20 @@ namespace Pospec
 
         private void Awake()
         {
+            Init();
+        }
+
+        // the grid places the authored gears from its own Awake, which may run before ours, so
+        // anything it needs has to be ready on demand
+        private void Init()
+        {
+            if (initialized)
+                return;
+
+            initialized = true;
             baseScale = transform.localScale;
             homePosition = transform.position;
+            hover = GetComponent<HoverHighlight>();
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -228,12 +243,39 @@ namespace Pospec
             transform.position = world;
         }
 
+        // gears on the upper layer are nudged up-right, scaled up and lightened a touch, so the
+        // stack reads as two layers instead of one gear hiding another
+        private const float pixelsPerUnit = 300.0f; // the art's import setting
+        private const float upperLayerOffset = 0.0f / pixelsPerUnit; // 4 px
+        // grown by a fixed number of pixels of radius, not by a factor, so a small gear and a big
+        // one stick out by the same amount
+        private const float upperLayerGrowth = 28f / pixelsPerUnit;
+        private const float upperLayerTint = 1.35f;
+        private const float upperLayerAlpha = 0.65f;
+
+        private bool IsUpperLayer => level >= 1;
+
+        // radius is measured at the gear's normal scale, so this turns the fixed pixel growth
+        // into the factor that produces it for this particular gear
+        private float UpperLayerScale =>
+            radius > 0.0f ? (radius + upperLayerGrowth) / radius : 1.0f;
+
         public void PlaceToCell(Cell cell)
         {
+            Init();
+
             this.cell = cell;
             int idx = cell.gears.IndexOf(this);
             sr.sortingOrder = idx;
-            transform.position = cell.transform.position + Vector3.forward * idx;
+            transform.position = cell.transform.position + Vector3.forward * idx
+                + (IsUpperLayer ? new Vector3(upperLayerOffset, upperLayerOffset, 0.0f) : Vector3.zero);
+            Vector3 scale = IsUpperLayer ? baseScale * UpperLayerScale : baseScale;
+            transform.localScale = scale;
+
+            // the hover pop tweens from the scale it cached in Awake, so it has to learn the new
+            // one or it would tween the gear straight back to single-layer size
+            if (hover)
+                hover.SetBaseScale(scale);
         }
 
         public void SetCell(Cell cell)
@@ -302,6 +344,11 @@ namespace Pospec
                     col.enabled = cell.gears[cell.gears.Count - 1] == this; // only top gear can be moved
             }
 
+            // a gear whose collider went off under the cursor never gets its exit event, so it
+            // would stay lit forever
+            if (!col.enabled)
+                isHovered = false;
+
             if (isDragging)
             {
                 sr.sortingLayerID = SortingLayer.layers[holdingSortingLayer].id;
@@ -340,8 +387,14 @@ namespace Pospec
             {
                 bool idle = Mathf.Abs(angularSpeed) < 0.05f;
 
-                Color targetTint = idle ? new Color(0.45f, 0.45f, 0.45f) : Color.white;
-                targetTint.a = sr.color.a;
+                float shade = idle ? 0.45f : 1.0f;
+                if (IsUpperLayer)
+                    shade = Mathf.Min(shade * upperLayerTint, 1.0f);
+
+                Color targetTint = new Color(shade, shade, shade);
+                // the gear under the cursor is always solid, so hovering it pulls it out of the
+                // stack instead of leaving the one below showing through
+                targetTint.a = isHovered ? 1.0f : (IsUpperLayer ? upperLayerAlpha : sr.color.a);
 
                 sr.color = targetTint;
             }
@@ -408,6 +461,8 @@ namespace Pospec
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            isHovered = true;
+
             if (Grid.Instance.lineDrawing)
             {
                 Grid.Instance.AddToLine(this);
@@ -417,6 +472,8 @@ namespace Pospec
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            isHovered = false;
+
             if (Grid.Instance.lineDrawing)
             {
                 return;
