@@ -2657,7 +2657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5755571901624100856, guid: 33d19fdc44f1dd24ea0340339eac877c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5755571901624100856, guid: 33d19fdc44f1dd24ea0340339eac877c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3601,6 +3601,7 @@ MonoBehaviour:
   levelFinisher: {fileID: 8547694248560815025}
   lineCanvas: {fileID: 0}
   lines: []
+  wrongSpeedInfobox: {fileID: 0}
 --- !u!1 &2330054302365913532
 GameObject:
   m_ObjectHideFlags: 0
