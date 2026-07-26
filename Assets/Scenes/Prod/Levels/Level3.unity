@@ -1114,6 +1114,8 @@ MonoBehaviour:
   - {fileID: 856575417}
   - {fileID: 1701043373}
   levelFinisher: {fileID: 1356965936}
+  lineCanvas: {fileID: 0}
+  lines: []
 --- !u!1 &658695130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2226,10 @@ PrefabInstance:
     - target: {fileID: 1551770203696921521, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227609259599300349, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
+      propertyPath: nextLevelNumber
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8655187305060702619, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: m_Name
