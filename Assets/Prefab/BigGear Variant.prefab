@@ -88,6 +88,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigGear Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8414382599648086313, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414382599648086313, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
