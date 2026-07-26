@@ -124,7 +124,7 @@ namespace Pospec
             }
 
             List<LineGear> rotatingGears = GetGearsRotatingTogetherWith(gear, level);
-            if (WouldFormLoop(rotatingGears, gear) || CountNeighborsOnLevel(gear, level) > 1)
+            if (WouldFormLoop(rotatingGears, gear) || CountSpinningNeighborsOnLevel(gear, level) > 1)
             {
                 if (log) Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
                 return false;
@@ -134,10 +134,10 @@ namespace Pospec
         }
 
         /// <summary>
-        /// How many gears on the same level would the added gear touch?
+        /// How many spinning gears on the same level would the added gear touch?
         /// Gears stacked in this cell are on other levels, so they are skipped.
         /// </summary>
-        private int CountNeighborsOnLevel(LineGear addedGear, int addedLevel)
+        private int CountSpinningNeighborsOnLevel(LineGear addedGear, int addedLevel)
         {
             int count = 0;
 
@@ -147,6 +147,8 @@ namespace Pospec
 
                 foreach (var gear in cell.gears)
                 {
+                    if (gear.angularSpeed == 0.0f) continue;
+
                     if (AreGearsRotatingTogether(gear, addedGear, this, addedLevel))
                         count++;
                 }
