@@ -21,10 +21,12 @@ namespace Pospec
         [Header("Global Highlight (When Dragging)")]
         public Color highlightValidColor = new Color(1f, 1f, 1f, 0.1f); // Subtle highlight for all valid drop zones
         public Color highlightInvalidColor = new Color(1f, 0f, 0f, 0.05f); // Subtle red for all invalid drop zones
+        public Color highlightSpinColor = new Color(0f, 1f, 0f, 0.1f); // Subtle green where the gear would also start spinning
 
         [Header("Hover Highlight (Under Cursor)")]
         public Color hoverValidColor = new Color(1f, 1f, 1f, 0.3f);
         public Color hoverInvalidColor = new Color(1f, 0f, 0f, 0.5f);
+        public Color hoverSpinColor = new Color(0f, 1f, 0f, 0.5f);
 
         public float colorTransitionSpeed = 15f;
 
@@ -111,6 +113,24 @@ namespace Pospec
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Would the gear rotate after being placed on top of this cell?
+        /// </summary>
+        public bool WouldGearSpin(LineGear gear)
+        {
+            if (!gear) return false;
+
+            if (gear.angularSpeed != 0.0f) return true;
+
+            foreach (var touchingGear in GetGearsRotatingTogetherWith(gear, gears.Count))
+            {
+                if (touchingGear.angularSpeed != 0.0f)
+                    return true;
+            }
+
+            return false;
         }
 
         public void RemoveGear(LineGear gear)
@@ -308,7 +328,11 @@ namespace Pospec
             if (canPlace)
             {
                 // Globally show valid color. If hovered, show stronger valid color.
-                targetColor = isHovering ? hoverValidColor : highlightValidColor;
+                // Cells where the gear would also start spinning get their own color.
+                if (WouldGearSpin(grid.SelectedGear))
+                    targetColor = isHovering ? hoverSpinColor : highlightSpinColor;
+                else
+                    targetColor = isHovering ? hoverValidColor : highlightValidColor;
 
                 if (isHovering)
                 {
