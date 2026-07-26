@@ -253,7 +253,13 @@ namespace Pospec
         private const float upperLayerTint = 1.35f;
         private const float upperLayerAlpha = 0.65f;
 
+        private const float lowerLayerTint = 0.8f;
+
         private bool IsUpperLayer => level >= 1;
+
+        // only darkened while something is actually stacked on top - a lone gear is not the
+        // bottom of anything
+        private bool IsLowerLayer => level == 0 && cell && cell.gears.Count > 1;
 
         // radius is measured at the gear's normal scale, so this turns the fixed pixel growth
         // into the factor that produces it for this particular gear
@@ -390,6 +396,8 @@ namespace Pospec
                 float shade = idle ? 0.45f : 1.0f;
                 if (IsUpperLayer)
                     shade = Mathf.Min(shade * upperLayerTint, 1.0f);
+                else if (IsLowerLayer)
+                    shade *= lowerLayerTint;
 
                 Color targetTint = new Color(shade, shade, shade);
                 // the gear under the cursor is always solid, so hovering it pulls it out of the
