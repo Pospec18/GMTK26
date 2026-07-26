@@ -1435,10 +1435,6 @@ PrefabInstance:
       propertyPath: angularSpeed
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7625548418112026711, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -3358,10 +3354,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7410828580813733771, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: angularSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7625548418112026711, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
