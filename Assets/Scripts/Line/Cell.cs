@@ -61,6 +61,14 @@ namespace Pospec
             if (!gear)
                 return false;
 
+            // only plain cells hold gears - holes and obstacles never do
+            if (cellType != TmpCell.CellType.Placeable)
+            {
+                if (log)
+                    Debug.Log("Cell " + pos + " is a " + cellType + ", cannot place gear on top");
+                return false;
+            }
+
             // dropping a gear back where it already is would add it to this cell twice
             if (gear.cell == this)
             {
@@ -324,36 +332,43 @@ namespace Pospec
 
             if (CanPlaceGear(grid.SelectedGear))
             {
-                sr.color = Color.white * (isHovering ? 1.0f : 0.8f);
+                sr.color = Dim(Color.white, isHovering ? 1.0f : 0.8f);
                 if (isHovering)
                 {
-                    grid.SelectedGear.sr.color = Color.white * 0.8f;
+                    grid.SelectedGear.sr.color = Dim(Color.white, 0.8f);
                     grid.NotifyGearTinted();
                     grid.ShowGhost(this, grid.SelectedGear);
                 }
             }
             else
             {
-                sr.color = Color.red * (isHovering ? 0.8f : 0.4f);
+                sr.color = Dim(Color.red, isHovering ? 1.0f : 0.7f);
                 if (isHovering)
                 {
-                    // red and smaller alpha for grid.SelectedGear.sr.color
-                    grid.SelectedGear.sr.color = Color.red * 0.65f;
+                    grid.SelectedGear.sr.color = Dim(Color.red, 0.8f);
                     grid.NotifyGearTinted();
                 }
             }
         }
 
+        // multiplying a Color scales its alpha too, which turns a dim red into a washed out
+        // brown over the background instead of a darker red
+        private static Color Dim(Color color, float amount)
+        {
+            return new Color(color.r * amount, color.g * amount, color.b * amount, color.a);
+        }
+
+        // tracked even with nothing selected - gating this on the selection used to leave the
+        // flag stuck on a cell the pointer had already left, and that cell then claimed the
+        // next drop instead of the cell under the cursor
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (grid.SelectedGear != null)
-                isHovering = true;
+            isHovering = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (grid.SelectedGear != null)
-                isHovering = false;
+            isHovering = false;
         }
     }
 }

@@ -112,6 +112,17 @@ namespace Pospec
             }
         }
 
+        private void Update()
+        {
+            // the dragged gear has its collider disabled, so its own pointer up handler can be
+            // skipped - the release of the button is the authority on the drag being over
+            if (SelectedGear && Input.GetMouseButtonUp(0))
+            {
+                SelectedGear.EndDrag();
+                DeselectGear();
+            }
+        }
+
         private void LateUpdate()
         {
             // no cell claimed the gear this frame, so it is being dragged off the

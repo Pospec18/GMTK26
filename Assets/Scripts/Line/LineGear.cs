@@ -40,6 +40,10 @@ namespace Pospec
         private Grid dragGrid;
         private Vector3 baseScale = Vector3.one;
 
+        // where the gear started the level. gears that are not listed in any TmpCell never get a
+        // cell, so this is the only home they have to fall back to
+        private Vector3 homePosition;
+
         /// <summary>The cell this gear was picked up from, so it can be dropped back there. Null while not dragging.</summary>
         public Cell OriginCell => originCell;
 
@@ -55,6 +59,7 @@ namespace Pospec
         private void Awake()
         {
             baseScale = transform.localScale;
+            homePosition = transform.position;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -97,10 +102,24 @@ namespace Pospec
             if (!canMove)
                 return;
 
-            isDragging = false;
-            placedThisFrame = true;
             Grid grid = dragGrid ? dragGrid : (cell ? cell.grid : FindAnyObjectByType<Grid>());
             grid.DeselectGear();
+
+            EndDrag();
+        }
+
+        /// <summary>Ends the drag. Safe to call more than once, and from anywhere - the grid also
+        /// calls it on mouse up, because our collider is off while dragging and the pointer up
+        /// event is not guaranteed to reach us.</summary>
+        public void EndDrag()
+        {
+            if (!isDragging)
+                return;
+
+            isDragging = false;
+            // the actual drop is resolved in LateUpdate, after every cell had its chance to
+            // claim the gear this frame
+            placedThisFrame = true;
 
             transform.localScale = baseScale;
 
@@ -152,8 +171,11 @@ namespace Pospec
 
         private void ReturnToOriginCell()
         {
-            if (originCell.TryPlaceGearOnTop(this))
-                originCell.LinkGears(this);
+            // no rule checking - the gear was already sitting here, so it has to fit here.
+            // asking first would strand the gear outside the grid whenever the spot it came
+            // from does not satisfy the drop rules (authored layouts skip them)
+            originCell.PlaceGearOnTop(this);
+            originCell.LinkGears(this);
         }
 
         private void FollowPointer()
@@ -191,6 +213,13 @@ namespace Pospec
         {
             if (parent == null)
                 return;
+
+            // derived from the pair, not from the stored field: a gear that was relinked while
+            // nothing around it was spinning never got the field assigned (LinkGears only sets it
+            // when it finds a spinning driver), so it would keep the type from wherever it sat
+            // before - and PuzzleGrid re-propagates speed through these every frame
+            if (parent != this)
+                connectionToParent = ShareSameCell(parent) ? ConnectionType.Stick : ConnectionType.Teeth;
 
             switch (connectionToParent)
             {
@@ -248,25 +277,37 @@ namespace Pospec
             else
                 sr.sortingLayerID = SortingLayer.layers[normalSortingLayer].id;
 
-            if (placedThisFrame)
+            // the second condition is a safety net: a gear that is not being dragged and has no
+            // cell is stranded outside the grid, no matter which frame it happened on
+            if (placedThisFrame || (!isDragging && cell == null && originCell != null))
             {
                 placedThisFrame = false;
 
                 // the drop did not land on a cell, so the gear goes back where it came from
-                if (cell == null && originCell != null)
-                    ReturnToOriginCell();
+                if (cell == null)
+                {
+                    if (originCell != null)
+                        ReturnToOriginCell();
+                    else
+                        transform.position = homePosition;
+                }
 
                 originCell = null;
                 if (cell != null)
                     PlaceToCell(cell);
             }
 
-            bool idle = Mathf.Abs(angularSpeed) < 0.05f;
+            // while dragged, the hovered cell owns our tint (white when it fits, red when it
+            // does not), so the idle dimming must not overwrite it
+            if (!isDragging)
+            {
+                bool idle = Mathf.Abs(angularSpeed) < 0.05f;
 
-            Color targetTint = idle ? Color.white * 0.45f : Color.white;
-            targetTint.a = sr.color.a;
+                Color targetTint = idle ? new Color(0.45f, 0.45f, 0.45f) : Color.white;
+                targetTint.a = sr.color.a;
 
-            sr.color = targetTint;
+                sr.color = targetTint;
+            }
 
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
         }
