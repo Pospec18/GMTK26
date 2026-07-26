@@ -183,8 +183,55 @@ namespace Pospec
 
         public void CreateLine(List<LineGear> gears)
         {
+            // a gear belongs to one line at a time, so any line these gears were already on goes
+            // away before the new one is wired up - otherwise it is left with nothing pointing at it
+            foreach (var gear in gears)
+            {
+                if (gear.line)
+                    gear.line.Remove();
+            }
+
+            List<LineGear> spinningGears = new List<LineGear>();
+            foreach (var gear in gears)
+            {
+                if (gear.angularSpeed != 0.0f)
+                {
+                    spinningGears.Add(gear);
+                }
+            }
+
+            if (spinningGears.Count != 1)
+            {
+                return;
+            }
+            else if (spinningGears.Count == 1)
+            {
+                LineGear spinningGear = spinningGears[0];
+                foreach (var gear in gears)
+                {
+                    foreach (var otherGear in gears)
+                    {
+                        if (gear == otherGear)
+                        {
+                            continue;
+                        }
+
+                        gear.AddConnection(otherGear);
+                    }
+
+                    if (gear == spinningGear) continue;
+
+                    gear.connectionToParent = ConnectionType.Line;
+
+                    gear.UpdateParent(spinningGear);
+                }
+            }
+
             var line = Instantiate(linePrefab);
             line.gears = new List<LineGear>(gears);
+
+            foreach (var gear in gears)
+                gear.line = line;
         }
     }
 }
