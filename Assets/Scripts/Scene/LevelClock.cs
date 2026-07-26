@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // Required for the UI Image components
+using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +10,16 @@ namespace Pospec
     {
         [Header("Progress Map")]
         public Image[] levelIcons;
+        [Tooltip("Assign your Light2D GameObjects here. Must match the order of levelIcons.")]
+        public Light2D[] levelLights;
         public Color lockedColor = Color.gray;
         public Color unlockedColor = Color.white;
+
+        [Header("Light Animation Settings")]
+        public float targetLightIntensity = 1f;
+        public float lightFadeDuration = 0.08f;
+        [Tooltip("Delay in seconds before the light turns on and the spotlight sound plays.")]
+        public float lightTurnOnDelay = 0.5f;
 
         [Header("Clock Arms")]
         public Transform clockArm;
@@ -26,7 +35,8 @@ namespace Pospec
         public AudioSource audioSource;
         public AudioClip normalTickSound;
         public AudioClip finalLevelSound;
-        public AudioClip iconColoringSound;
+        [Tooltip("Sound that plays exactly when the level light turns on.")]
+        public AudioClip spotLightSound;
 
         [Header("Scene Transition Settings")]
         public float delayBeforeTransition = 0.5f;
@@ -35,7 +45,7 @@ namespace Pospec
 
         void Start()
         {
-            // Enable lowpass filter right when the clock cutscene starts
+            // enable lowpass filter right when the clock cutscene starts
             if (AmbientManager.Instance != null)
             {
                 AmbientManager.Instance.SetCutsceneMode(true);
@@ -54,22 +64,36 @@ namespace Pospec
             bool isGameCompleted = (levelToLoad > finalLevelNumber);
             int newlyCompletedIndex = levelToLoad - 2;
 
-            // 1. SETUP ICONS (Before animation starts)
+            // 1. SETUP ICONS & LIGHTS
             for (int i = 0; i < levelIcons.Length; i++)
             {
+                bool hasLight = (levelLights != null && i < levelLights.Length && levelLights[i] != null);
+
                 if (i < newlyCompletedIndex)
                 {
-                    // Previously completed levels are fully colored
                     levelIcons[i].color = unlockedColor;
+                    if (hasLight)
+                    {
+                        // wake up the game object first
+                        levelLights[i].gameObject.SetActive(true);
+                        levelLights[i].enabled = true;
+                        levelLights[i].intensity = targetLightIntensity;
+                    }
                 }
                 else
                 {
-                    // Uncompleted levels (including the one about to be colored) are gray
                     levelIcons[i].color = lockedColor;
+                    if (hasLight)
+                    {
+                        levelLights[i].intensity = 0f;
+                        levelLights[i].enabled = false;
+                        // put the game object to sleep
+                        levelLights[i].gameObject.SetActive(false);
+                    }
                 }
             }
 
-            // 2. TRIGGER AUDIO
+            // 2. TRIGGER BASE AUDIO
             if (audioSource != null)
             {
                 if (isGameCompleted)
@@ -80,34 +104,36 @@ namespace Pospec
                 {
                     audioSource.PlayOneShot(normalTickSound);
                 }
-                // NEW: Play the coloring sound if an icon is about to change color
-                if (iconColoringSound != null && newlyCompletedIndex >= 0 && newlyCompletedIndex < levelIcons.Length)
+            }
+
+            // 3. START FAST POP-ON LIGHT FOR NEWLY COMPLETED LEVEL (handles its own delay and sound)
+            if (levelLights != null && newlyCompletedIndex >= 0 && newlyCompletedIndex < levelLights.Length)
+            {
+                Light2D activeLight = levelLights[newlyCompletedIndex];
+                if (activeLight != null)
                 {
-                    audioSource.PlayOneShot(iconColoringSound);
+                    StartCoroutine(FadeInLightFast(activeLight));
                 }
             }
 
-            // 3. ANIMATE CLOCK AND COLOR SIMULTANEOUSLY
+            // 4. ANIMATE CLOCK AND COLOR
             float elapsedTime = 0f;
             Vector3 initialHourEuler = hourArm != null ? hourArm.eulerAngles : Vector3.zero;
 
             while (elapsedTime < animationDuration)
             {
                 float t = elapsedTime / animationDuration;
-                t = t * t * (3f - 2f * t); // Smoothstep
+                t = t * t * (3f - 2f * t);
 
-                // Spin the clock
                 float currentAngle = Mathf.Lerp(startAngle, targetAngle, t);
                 clockArm.eulerAngles = new Vector3(0, 0, -currentAngle);
 
-                // Spin the hour arm if it's the finale
                 if (isGameCompleted && hourArm != null)
                 {
                     float hourAngle = Mathf.Lerp(0f, 15f, t);
                     hourArm.eulerAngles = new Vector3(0, 0, initialHourEuler.z - hourAngle);
                 }
 
-                // Fade the newly completed icon's color
                 if (newlyCompletedIndex >= 0 && newlyCompletedIndex < levelIcons.Length)
                 {
                     levelIcons[newlyCompletedIndex].color = Color.Lerp(lockedColor, unlockedColor, t);
@@ -128,13 +154,42 @@ namespace Pospec
             }
             else
             {
-                // Fallback: disable cutscene mode manually if FadeManager is missing
                 if (AmbientManager.Instance != null)
                 {
                     AmbientManager.Instance.SetCutsceneMode(false);
                 }
                 SceneManager.LoadScene(nextSceneName);
             }
+        }
+
+        private IEnumerator FadeInLightFast(Light2D light)
+        {
+            // wait for the configured delay before doing anything
+            if (lightTurnOnDelay > 0f)
+            {
+                yield return new WaitForSeconds(lightTurnOnDelay);
+            }
+
+            // trigger the spotlight sound exactly as the light turns on
+            if (audioSource != null && spotLightSound != null)
+            {
+                audioSource.PlayOneShot(spotLightSound);
+            }
+
+            // explicitly wake up the object before changing component values
+            light.gameObject.SetActive(true);
+            light.enabled = true;
+            light.intensity = 0f;
+
+            float time = 0f;
+            while (time < lightFadeDuration)
+            {
+                time += Time.deltaTime;
+                light.intensity = Mathf.Lerp(0f, targetLightIntensity, time / lightFadeDuration);
+                yield return null;
+            }
+
+            light.intensity = targetLightIntensity;
         }
     }
 }
