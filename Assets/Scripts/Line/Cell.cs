@@ -30,13 +30,15 @@ namespace Pospec
 
         private Color targetColor;
 
+        private BoxCollider2D col;
+
         public void Setup(Vector2Int pos, Grid grid)
         {
             this.pos = pos;
             this.grid = grid;
             gameObject.name = $"Cell {pos.x} {pos.y}";
 
-            var col = GetComponent<BoxCollider2D>();
+            col = GetComponent<BoxCollider2D>();
             if (col)
             {
                 float pad = (1.0f + grid.hoverPadding) / transform.localScale.x;
@@ -264,7 +266,14 @@ namespace Pospec
             DetermineTargetColor();
             SmoothUpdateColor();
 
-            if (!grid.SelectedGear || grid.SelectedGear.cell) return;
+            if (!grid.SelectedGear || grid.SelectedGear.cell)
+            {
+                sr.color = Color.white * 0.0f;
+                col.enabled = false;
+                return;
+            }
+
+            col.enabled = true;
 
             if (Input.GetMouseButtonUp(0) && isHovering)
             {

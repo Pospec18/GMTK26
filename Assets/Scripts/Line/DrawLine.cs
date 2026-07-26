@@ -85,10 +85,14 @@ namespace Pospec
             if (gears.Count > 0 && lineGear == gears[0])
             {
                 FinalizeLine();
+                return;
             }
 
-            if (!gears.Contains(lineGear))
-                gears.Add(lineGear);
+            foreach (var gear in gears)
+                if (lineGear == gear || lineGear.cell == gear.cell)
+                    return;
+
+            gears.Add(lineGear);
         }
 
         public void FinalizeLine()
