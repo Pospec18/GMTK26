@@ -1944,7 +1944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Max (2880 x 1800)
+  m_text: Max (1920 x 1080)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3245,6 +3245,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443560267}
   m_CullTransparentMesh: 1
+--- !u!1001 &1447346161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 134.79495
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 236.09842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.2125232
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301864258381698662, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207995567443901812, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
+      propertyPath: m_Name
+      value: PersistentAudioPlayer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9bb478ce608629f48a84293c89fbbdd0, type: 3}
 --- !u!1 &1468075012
 GameObject:
   m_ObjectHideFlags: 0
@@ -5208,16 +5265,16 @@ MonoBehaviour:
   m_MultiSelect: 0
   m_Options:
     m_Options:
-    - m_Text: Max (2880 x 1800)
+    - m_Text: Max (1920 x 1080)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: High (2048 x 1280)
+    - m_Text: High (1600 x 900)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Middle (1280 x 800)
+    - m_Text: Middle (1366 x 768)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Low (840 x 525)
+    - m_Text: Low (1280 x 720)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
@@ -5659,3 +5716,4 @@ SceneRoots:
   - {fileID: 1468075015}
   - {fileID: 2701459324390954559}
   - {fileID: 1051301588}
+  - {fileID: 1447346161}
