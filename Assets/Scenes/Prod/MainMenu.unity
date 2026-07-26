@@ -3075,6 +3075,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: main menu button (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5009114068163979310, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3089,7 +3093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3097,7 +3101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3137,11 +3141,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -342.94403
       objectReference: {fileID: 0}
     - target: {fileID: 6370286659107370633, guid: 05a98f051d90343e29c68144e5ececbf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5542,13 +5546,13 @@ MonoBehaviour:
     - m_Text: Max (1920 x 1080)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: High (1600 x 900)
+    - m_Text: High (1760 x 990)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
     - m_Text: Middle (1366 x 768)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Low (1280 x 720)
+    - m_Text: Low (1128 x 634)
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
