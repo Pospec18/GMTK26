@@ -66,7 +66,8 @@ namespace Pospec
                 winConViz.angularSpeed = winAngularSpeed;
                 winConViz.GetComponent<Follower>().target = endGear.transform;
             }
-            lineCanvas.Setup(lines);
+            if (lineCanvas)
+                lineCanvas.Setup(lines);
         }
 
         public void OnDestroy()
