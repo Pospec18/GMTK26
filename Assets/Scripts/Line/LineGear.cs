@@ -257,10 +257,10 @@ namespace Pospec
         // grown by a fixed number of pixels of radius, not by a factor, so a small gear and a big
         // one stick out by the same amount
         private const float upperLayerGrowth = 28f / pixelsPerUnit;
-        private const float upperLayerTint = 1.4f;
-        private const float upperLayerAlpha = 0.9f;
+        private const float upperLayerTint = 1.5f;
+        private const float upperLayerAlpha = 1.0f;
 
-        private const float lowerLayerTint = 0.9f;
+        private const float lowerLayerTint = 0.8f;
 
         private bool IsUpperLayer => level >= 1;
 
@@ -409,7 +409,7 @@ namespace Pospec
             {
                 bool idle = Mathf.Abs(angularSpeed) < 0.05f;
 
-                float shade = idle ? 0.85f : 1.0f;
+                float shade = idle ? 0.77f : 1.0f;
                 if (IsUpperLayer)
                     shade = Mathf.Min(shade * upperLayerTint, 1.0f);
                 else if (IsLowerLayer)
