@@ -3787,6 +3787,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8547694248560815025}
+    - target: {fileID: 3803580803809486331, guid: eab03bfd7ccbc204db46ff12b7df26c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueToClockScene
+      objectReference: {fileID: 0}
     - target: {fileID: 6683081397331059035, guid: eab03bfd7ccbc204db46ff12b7df26c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
