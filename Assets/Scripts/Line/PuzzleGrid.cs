@@ -17,6 +17,8 @@ namespace Pospec
         public LevelFinisher levelFinisher;
         public LineCanvas lineCanvas;
         public List<float> lines;
+        [Tooltip("Optional - found automatically in the scene when left empty.")]
+        public WrongSpeedInfobox wrongSpeedInfobox;
 
         public static PuzzleGrid instance;
 
@@ -68,6 +70,8 @@ namespace Pospec
             }
             if (lineCanvas)
                 lineCanvas.Setup(lines);
+            if (!wrongSpeedInfobox)
+                wrongSpeedInfobox = FindFirstObjectByType<WrongSpeedInfobox>();
         }
 
         public void OnDestroy()
@@ -92,11 +96,32 @@ namespace Pospec
             if (endGear && Mathf.Abs(endGear.angularSpeed - winAngularSpeed) < winMarginOfError)
             {
                 Debug.Log("WIN");
+                if (wrongSpeedInfobox)
+                    wrongSpeedInfobox.Hide();
                 if (levelFinisher)
                 {
                     levelFinisher.FinishLevel();
                 }
             }
+            else if (endGear && endGear.angularSpeed != 0.0f)
+            {
+                if (wrongSpeedInfobox)
+                    wrongSpeedInfobox.Show(WrongSpeedMessage(endGear.angularSpeed));
+            }
+            else if (wrongSpeedInfobox)
+            {
+                wrongSpeedInfobox.Hide();
+            }
+        }
+
+        private string WrongSpeedMessage(float speed)
+        {
+            if (speed * winAngularSpeed < 0.0f)
+                return "The clock is turning in the wrong direction";
+
+            return Mathf.Abs(speed) > Mathf.Abs(winAngularSpeed)
+                ? "The clock is going too fast"
+                : "The clock is going too slow";
         }
 
         public List<LineGear> GetStartingGears()
