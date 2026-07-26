@@ -304,7 +304,13 @@ namespace Pospec
             // when it finds a spinning driver), so it would keep the type from wherever it sat
             // before - and PuzzleGrid re-propagates speed through these every frame
             if (parent != this)
-                connectionToParent = ShareSameCell(parent) ? ConnectionType.Stick : ConnectionType.Teeth;
+            {
+                if (connectionToParent != ConnectionType.Line)
+                {
+                    connectionToParent = ShareSameCell(parent) ? ConnectionType.Stick : ConnectionType.Teeth;
+                }
+            }
+
 
             switch (connectionToParent)
             {
@@ -339,7 +345,7 @@ namespace Pospec
             if (puzzle == null || Grid.Instance == null)
                 return;
 
-            if (puzzle.GetStartingGears().Contains(this) || puzzle.endGear == this)
+            if ((puzzle.GetStartingGears().Contains(this) || puzzle.endGear == this) && !Grid.Instance.lineDrawing)
             {
                 col.enabled = false;
             }

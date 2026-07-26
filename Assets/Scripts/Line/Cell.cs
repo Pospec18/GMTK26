@@ -280,7 +280,7 @@ namespace Pospec
                 {
                     addedGear.connectionToParent = ConnectionType.Stick;
                 }
-                else
+                else if (addedGear.connectionToParent != ConnectionType.Line)
                 {
                     addedGear.connectionToParent = ConnectionType.Teeth;
                 }
