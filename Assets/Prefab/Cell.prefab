@@ -60,7 +60,7 @@ MonoBehaviour:
   highlightSpinColor: {r: 0.13679248, g: 0.4882913, b: 1, a: 0.2627451}
   hoverValidColor: {r: 1, g: 1, b: 1, a: 0.3}
   hoverInvalidColor: {r: 0.45882353, g: 0, b: 0, a: 1}
-  hoverSpinColor: {r: 0.13725491, g: 0.49019608, b: 1, a: 0.654902}
+  hoverSpinColor: {r: 0.13725491, g: 0.49019608, b: 1, a: 0}
   colorTransitionSpeed: 15
 --- !u!61 &5420070789430190476
 BoxCollider2D:
