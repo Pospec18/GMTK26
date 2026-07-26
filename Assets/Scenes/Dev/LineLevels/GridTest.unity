@@ -1172,7 +1172,9 @@ MonoBehaviour:
   - {fileID: 1701043373}
   levelFinisher: {fileID: 0}
   lineCanvas: {fileID: 1907208675}
-  lines: []
+  lines:
+  - 10
+  - 5
 --- !u!1 &658695130
 GameObject:
   m_ObjectHideFlags: 0
