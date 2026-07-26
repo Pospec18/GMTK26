@@ -38,6 +38,8 @@ namespace Pospec
 
         public bool isDragging;
         private bool placedThisFrame;
+        // was the cursor over a cell when the gear was released?
+        private bool droppedOnGrid;
         private Vector3 grabOffset;
         private Camera dragCamera;
         private Cell originCell;
@@ -144,6 +146,11 @@ namespace Pospec
             // the actual drop is resolved in LateUpdate, after every cell had its chance to
             // claim the gear this frame
             placedThisFrame = true;
+
+            // released over a cell that refuses the gear means an invalid drop, and the gear
+            // goes home. released off the grid it just stays in our hand's last position
+            Grid grid = dragGrid ? dragGrid : Grid.Instance;
+            droppedOnGrid = grid && grid.HoveredCell;
 
             transform.localScale = baseScale;
 
@@ -367,8 +374,10 @@ namespace Pospec
                 FollowPointer();
 
                 // HoverHighlight tweens the scale in Update while we are dragging, so we have
-                // to claim it back every frame to stay small
-                transform.localScale = DragLocalScale;
+                // to claim it back every frame. only shrunk while over a cell, where the small
+                // gear keeps the cell below it visible - off the grid it shows its real size
+                Grid grid = dragGrid ? dragGrid : Grid.Instance;
+                transform.localScale = (grid && grid.HoveredCell) ? DragLocalScale : baseScale;
             }
             else
                 sr.sortingLayerID = SortingLayer.layers[normalSortingLayer].id;
@@ -379,8 +388,9 @@ namespace Pospec
             {
                 placedThisFrame = false;
 
-                // the drop did not land on a cell, so the gear goes back where it came from
-                if (cell == null)
+                // the drop landed on a cell that would not take the gear, so it goes back where
+                // it came from. dropped off the grid it stays where we let go of it
+                if (cell == null && droppedOnGrid)
                 {
                     if (originCell != null)
                         ReturnToOriginCell();
