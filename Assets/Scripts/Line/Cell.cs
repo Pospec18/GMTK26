@@ -307,7 +307,7 @@ namespace Pospec
 
             if (!grid.SelectedGear)
             {
-                sr.color = Color.white;
+                sr.color = Color.white * 0.0f;
                 return;
             }
 
@@ -326,13 +326,13 @@ namespace Pospec
 
             if (grid.SelectedGear.cell)
             {
-                sr.color = Color.white;
+                sr.color = Color.white * 0.0f;
                 return;
             }
 
             if (CanPlaceGear(grid.SelectedGear))
             {
-                sr.color = Dim(Color.white, isHovering ? 1.0f : 0.8f);
+                sr.color = Dim(Color.black * 0.1f, isHovering ? 1.0f : 0.8f);
                 if (isHovering)
                 {
                     grid.SelectedGear.sr.color = Dim(Color.white, 0.8f);
@@ -342,7 +342,7 @@ namespace Pospec
             }
             else
             {
-                sr.color = Dim(Color.red, isHovering ? 1.0f : 0.7f);
+                sr.color = Dim(Color.red * 0.2f, isHovering ? 1.0f : 0.7f);
                 if (isHovering)
                 {
                     grid.SelectedGear.sr.color = Dim(Color.red, 0.8f);
