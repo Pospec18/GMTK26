@@ -160,7 +160,7 @@ namespace Pospec
                     continue;
 
                 Cell target = this.cells[cell.pos.x, cell.pos.y];
-                target.cellType = cell.cellType;
+                target.SetCellType(cell.cellType);
 
                 foreach (var item in cell.gears)
                 {
