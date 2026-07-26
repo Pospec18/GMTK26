@@ -1442,6 +1442,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera System Story Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4145386987651310908, guid: 07a6463bed956f34daa17b749a72e6c8, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145386987651310908, guid: 07a6463bed956f34daa17b749a72e6c8, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145386987651310908, guid: 07a6463bed956f34daa17b749a72e6c8, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145386987651310908, guid: 07a6463bed956f34daa17b749a72e6c8, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5463985159456465895, guid: 07a6463bed956f34daa17b749a72e6c8, type: 3}
       propertyPath: m_Enabled
       value: 0
