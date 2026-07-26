@@ -216,6 +216,7 @@ MonoBehaviour:
   canMove: 1
   connectedTo: []
   connectionToParent: 0
+  line: {fileID: 0}
   cell: {fileID: 0}
   col: {fileID: 8414382599648086313}
   sr: {fileID: 7730459326529627802}
