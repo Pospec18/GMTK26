@@ -9,6 +9,9 @@ namespace Pospec
         public List<LineGear> gears;
         public LineCanvas lineCanvas;
 
+        public Gradient normalColor;
+        public Gradient errorColor;
+
         public void Start()
         {
             lr.positionCount = 2;
@@ -43,6 +46,8 @@ namespace Pospec
             for (int i = 1; i < lr.positionCount; i++)
                 length += Vector2.Distance(lr.GetPosition(i), lr.GetPosition(i - 1));
             lineCanvas.SetLineSize(length);
+
+            lr.colorGradient = length < lineCanvas.LineLength() ? normalColor : errorColor;
         }
 
         public static void DrawLineFromGears(List<LineGear> gears, LineRenderer lr)
@@ -104,13 +109,20 @@ namespace Pospec
             Grid.Instance.lineDrawing = false;
             lineCanvas.HideLine();
             lr.positionCount = 0;
-            if (gears.Count < 2)
+            float length = 0;
+            for (int i = 1; i < lr.positionCount; i++)
+                length += Vector2.Distance(lr.GetPosition(i), lr.GetPosition(i - 1));
+
+            if (gears.Count < 2 || length > lineCanvas.LineLength())
             {
                 Debug.Log("INVALID");
                 gears.Clear();
                 return;
             }
-            Grid.Instance.CreateLine(gears);
+            if (Grid.Instance.CreateLine(gears, lineCanvas.currId))
+            {
+                lineCanvas.UseRope();
+            }
             gears.Clear();
         }
 

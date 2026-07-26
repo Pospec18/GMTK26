@@ -88,3 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46886c6cc322eeb4580c029fa93cd2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteractible: 1
+  image: {fileID: 5772741350254629671}
+  normalCol: {r: 1, g: 1, b: 1, a: 1}
+  highlitedCol: {r: 0.78867924, g: 0.78867924, b: 0.78867924, a: 1}
+  disabledCol: {r: 1, g: 1, b: 1, a: 0.49019608}

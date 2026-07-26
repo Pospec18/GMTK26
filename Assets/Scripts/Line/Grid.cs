@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Pospec
@@ -184,7 +185,7 @@ namespace Pospec
             lineDrawer.AddToLine(lineGear);
         }
 
-        public void CreateLine(List<LineGear> gears)
+        public bool CreateLine(List<LineGear> gears, int id)
         {
             // a gear belongs to one line at a time, so any line these gears were already on goes
             // away before the new one is wired up - otherwise it is left with nothing pointing at it
@@ -205,7 +206,7 @@ namespace Pospec
 
             if (spinningGears.Count != 1)
             {
-                return;
+                return false;
             }
             else if (spinningGears.Count == 1)
             {
@@ -231,10 +232,12 @@ namespace Pospec
             }
 
             var line = Instantiate(linePrefab);
+            line.lineID = id;
             line.gears = new List<LineGear>(gears);
 
             foreach (var gear in gears)
                 gear.line = line;
+            return true;
         }
     }
 }

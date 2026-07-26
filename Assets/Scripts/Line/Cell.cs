@@ -123,13 +123,38 @@ namespace Pospec
                 }
             }
 
-            if (WouldFormLoop(GetGearsRotatingTogetherWith(gear, level), gear))
+            List<LineGear> rotatingGears = GetGearsRotatingTogetherWith(gear, level);
+            if (WouldFormLoop(rotatingGears, gear) || CountSpinningNeighborsOnLevel(gear, level) > 1)
             {
                 if (log) Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
                 return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// How many spinning gears on the same level would the added gear touch?
+        /// Gears stacked in this cell are on other levels, so they are skipped.
+        /// </summary>
+        private int CountSpinningNeighborsOnLevel(LineGear addedGear, int addedLevel)
+        {
+            int count = 0;
+
+            foreach (var cell in grid.cells)
+            {
+                if (cell == this) continue;
+
+                foreach (var gear in cell.gears)
+                {
+                    if (gear.angularSpeed == 0.0f) continue;
+
+                    if (AreGearsRotatingTogether(gear, addedGear, this, addedLevel))
+                        count++;
+                }
+            }
+
+            return count;
         }
 
         /// <summary>

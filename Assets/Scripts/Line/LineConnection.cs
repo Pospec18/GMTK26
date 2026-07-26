@@ -7,6 +7,7 @@ namespace Pospec
     {
         public List<LineGear> gears;
         public LineRenderer lr;
+        public int lineID;
 
         private void Update()
         {
@@ -24,6 +25,7 @@ namespace Pospec
 
             gears = new List<LineGear>();
             Destroy(gameObject);
+            FindAnyObjectByType<LineCanvas>().RemoveLine(lineID);
         }
     }
 }
