@@ -16,7 +16,7 @@ namespace Pospec
         public float hoverPadding = 0.05f;
         public bool lineDrawing;
         public DrawLine lineDrawer;
-
+        public LineConnection linePrefab;
 
         [Header("Drop preview")]
         public Color ghostColor = new Color(1.0f, 1.0f, 1.0f, 0.4f);
@@ -179,6 +179,12 @@ namespace Pospec
         public void AddToLine(LineGear lineGear)
         {
             lineDrawer.AddToLine(lineGear);
+        }
+
+        public void CreateLine(List<LineGear> gears)
+        {
+            var line = Instantiate(linePrefab);
+            line.gears = new List<LineGear>(gears);
         }
     }
 }
