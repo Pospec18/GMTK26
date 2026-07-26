@@ -1642,6 +1642,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1237195219602482098, guid: 430fb2f3f6febc34aa1e53786393f297, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.028
+      objectReference: {fileID: 0}
     - target: {fileID: 1488434535639107928, guid: 430fb2f3f6febc34aa1e53786393f297, type: 3}
       propertyPath: m_Name
       value: WinConVis
