@@ -33,6 +33,9 @@ namespace Pospec
         private Color targetColor;
 
         private BoxCollider2D col;
+        // the cell art is split over several child renderers (tile, shadow, overlay),
+        // so hiding a cell means hiding all of them - not just sr
+        private SpriteRenderer[] visuals;
 
         public void Setup(Vector2Int pos, Grid grid)
         {
@@ -40,6 +43,7 @@ namespace Pospec
             this.grid = grid;
             gameObject.name = $"Cell {pos.x} {pos.y}";
 
+            visuals = GetComponentsInChildren<SpriteRenderer>(true);
             col = GetComponent<BoxCollider2D>();
             if (col)
             {
@@ -49,6 +53,19 @@ namespace Pospec
 
             targetColor = normalColor;
             if (sr) sr.color = normalColor;
+        }
+
+        public void SetCellType(TmpCell.CellType type)
+        {
+            cellType = type;
+
+            bool isHole = type == TmpCell.CellType.Hole;
+            if (visuals != null)
+            {
+                foreach (var visual in visuals)
+                    if (visual) visual.enabled = !isHole;
+            }
+            if (isHole && col) col.enabled = false;
         }
 
         public bool TryPlaceGearOnTop(LineGear gear)
@@ -283,6 +300,10 @@ namespace Pospec
 
         private void Update()
         {
+            // a hole has no art and no collider, so there is nothing to tint or hover
+            if (cellType == TmpCell.CellType.Hole)
+                return;
+
             DetermineTargetColor();
             SmoothUpdateColor();
 
@@ -308,13 +329,6 @@ namespace Pospec
 
         private void DetermineTargetColor()
         {
-            // 1. If it's a hole, it just stays black
-            if (cellType == TmpCell.CellType.Hole)
-            {
-                targetColor = holeColor;
-                return;
-            }
-
             // 2. If nothing is selected or the gear is already placed somewhere, hide cells
             if (!grid.SelectedGear || grid.SelectedGear.cell)
             {
