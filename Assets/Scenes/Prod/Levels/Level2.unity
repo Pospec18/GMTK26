@@ -1575,15 +1575,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3599858337517446527, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.6718001
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 3599858337517446527, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.6718001
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 3599858337517446527, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8906
+      value: 0.37666664
       objectReference: {fileID: 0}
     - target: {fileID: 3599858337517446527, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1625,10 +1625,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3599858337517446527, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8723371880840415568, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
       propertyPath: m_Name
       value: BigGear Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 9102512079579225981, guid: 617ba6f1c433f2a42a0f0b6c9b71daf1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7633041947930587877, guid: 46c428aa6224d4a64b9830495f780bb8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3936,10 +3944,14 @@ PrefabInstance:
     - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6765942143673990850, guid: bf751569f089d49cbb494b1d9d171213, type: 3}
+      objectReference: {fileID: 5851168722297609296, guid: 46c428aa6224d4a64b9830495f780bb8, type: 3}
     - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730459326529627802, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788168304597479607, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_Name
