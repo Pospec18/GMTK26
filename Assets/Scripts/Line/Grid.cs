@@ -24,6 +24,21 @@ namespace Pospec
         private SpriteRenderer ghost;
         private bool ghostShownThisFrame;
 
+        /// <summary>The cell under the cursor, or null when the cursor is off the grid.
+        /// Maintained by the cells' pointer enter/exit.</summary>
+        public Cell HoveredCell { get; private set; }
+
+        public void SetHoveredCell(Cell cell)
+        {
+            HoveredCell = cell;
+        }
+
+        public void ClearHoveredCell(Cell cell)
+        {
+            if (HoveredCell == cell)
+                HoveredCell = null;
+        }
+
         /// <summary>Called by the hovered cell when it tints the selected gear this frame.</summary>
         public void NotifyGearTinted()
         {

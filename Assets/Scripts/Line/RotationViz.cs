@@ -8,7 +8,9 @@ namespace Pospec
 
         public void Update()
         {
-            transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
+            // spin smoothly instead of in DiscreteTime's per-cycle pulses
+            var dt = DiscreteTime.instance;
+            transform.Rotate(Vector3.forward * angularSpeed * Time.deltaTime * dt.timeSpeed * dt.timeStep);
         }
     }
 }
