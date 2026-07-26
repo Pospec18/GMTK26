@@ -46,8 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: -9045465360976403679, guid: a5b0eea86de2d8f44a92abf349351e0d, type: 2}
   ambientTracks:
-  - {fileID: 8300000, guid: efcbd2306ce30924589687cf5348f1c0, type: 3}
-  - {fileID: 8300000, guid: 1cf7d0d5acf1a744a8ada92b92ab040f, type: 3}
   - {fileID: 8300000, guid: b5ee89705cd4b40418c04bc925bf2586, type: 3}
   - {fileID: 8300000, guid: af58a04b08a3ff34982dc0e189b2d114, type: 3}
   crossfadeDuration: 3
