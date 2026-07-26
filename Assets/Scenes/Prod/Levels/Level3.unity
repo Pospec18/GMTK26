@@ -2687,6 +2687,18 @@ PrefabInstance:
       value: WinGear (4) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7478539438709393659, guid: 83520475cfd2ac94d913abce51b0b300, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478539438709393659, guid: 83520475cfd2ac94d913abce51b0b300, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478539438709393659, guid: 83520475cfd2ac94d913abce51b0b300, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478539438709393659, guid: 83520475cfd2ac94d913abce51b0b300, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
