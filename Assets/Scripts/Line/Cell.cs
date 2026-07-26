@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,6 +14,22 @@ namespace Pospec
 
         public TmpCell.CellType cellType;
 
+        [Header("Visual Settings")]
+        public Color normalColor = new Color(1f, 1f, 1f, 0f); // Default invisible
+        public Color holeColor = Color.black;
+
+        [Header("Global Highlight (When Dragging)")]
+        public Color highlightValidColor = new Color(1f, 1f, 1f, 0.1f); // Subtle highlight for all valid drop zones
+        public Color highlightInvalidColor = new Color(1f, 0f, 0f, 0.05f); // Subtle red for all invalid drop zones
+
+        [Header("Hover Highlight (Under Cursor)")]
+        public Color hoverValidColor = new Color(1f, 1f, 1f, 0.3f);
+        public Color hoverInvalidColor = new Color(1f, 0f, 0f, 0.5f);
+
+        public float colorTransitionSpeed = 15f;
+
+        private Color targetColor;
+
         public void Setup(Vector2Int pos, Grid grid)
         {
             this.pos = pos;
@@ -27,6 +42,9 @@ namespace Pospec
                 float pad = (1.0f + grid.hoverPadding) / transform.localScale.x;
                 col.size = new Vector2(pad, pad);
             }
+
+            targetColor = normalColor;
+            if (sr) sr.color = normalColor;
         }
 
         public bool TryPlaceGearOnTop(LineGear gear)
@@ -34,14 +52,10 @@ namespace Pospec
             if (!CanPlaceGear(gear, true))
                 return false;
 
-            // okay lets place it then bro
             PlaceGearOnTop(gear);
-
             return true;
         }
 
-        // no rule checking - the level author already decided this gear belongs here, and
-        // the drag-time checks would run against a half-built grid during setup
         public void PlaceGearOnTop(LineGear gear)
         {
             gear.SetLevel(gears.Count);
@@ -49,8 +63,6 @@ namespace Pospec
             gear.SetCell(this);
         }
 
-        // read only, does not touch the gear in any way, so it is safe to call for
-        // things like highlighting cells while dragging
         public bool CanPlaceGear(LineGear gear)
         {
             return CanPlaceGear(gear, false);
@@ -58,46 +70,33 @@ namespace Pospec
 
         private bool CanPlaceGear(LineGear gear, bool log)
         {
-            if (!gear)
-                return false;
+            if (!gear) return false;
 
-            // only plain cells hold gears - holes and obstacles never do
             if (cellType != TmpCell.CellType.Placeable)
             {
-                if (log)
-                    Debug.Log("Cell " + pos + " is a " + cellType + ", cannot place gear on top");
+                if (log) Debug.Log("Cell " + pos + " is a " + cellType + ", cannot place gear on top");
                 return false;
             }
 
-            // dropping a gear back where it already is would add it to this cell twice
-            if (gear.cell == this)
-            {
-                return false;
-            }
+            if (gear.cell == this) return false;
 
-            // this cell can only have maxLayers gears
             if (gears.Count >= grid.maxLayers)
             {
-                if (log)
-                    Debug.Log("Cell " + pos + " is full, cannot place gear on top");
+                if (log) Debug.Log("Cell " + pos + " is full, cannot place gear on top");
                 return false;
             }
 
-            // the level the gear would end up on if we placed it here
             int level = gears.Count;
 
-            // we need to check with every already placed gear in the grid if it is not colliding
             foreach (var cell in grid.cells)
             {
-                if (cell == this)
-                    continue;
+                if (cell == this) continue;
 
                 foreach (var g in cell.gears)
                 {
                     if (AreGearsColliding(gear, level, g, this))
                     {
-                        if (log)
-                            Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
+                        if (log) Debug.Log("Gear is colliding with another gear in cell " + cell.pos + ", cannot place gear on top");
                         return false;
                     }
                 }
@@ -105,8 +104,7 @@ namespace Pospec
 
             if (WouldFormLoop(GetGearsRotatingTogetherWith(gear, level), gear))
             {
-                if (log)
-                    Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
+                if (log) Debug.Log("Gear would close a loop in cell " + pos + ", cannot place gear on top");
                 return false;
             }
 
@@ -122,8 +120,7 @@ namespace Pospec
         {
             foreach (var gear in gears)
             {
-                if (!gear)
-                    continue;
+                if (!gear) continue;
 
                 if (Application.isPlaying)
                 {
@@ -134,58 +131,34 @@ namespace Pospec
                     DestroyImmediate(gear.gameObject);
                 }
             }
-
             gears.Clear();
         }
 
-        // thisLevel is the level thisGear sits on (or would sit on, when we are still
-        // deciding whether it can be placed)
         private bool AreGearsColliding(LineGear thisGear, int thisLevel, LineGear otherGear, Cell thisCell)
         {
-            if (!thisGear || !otherGear)
-                return false;
-
-            if (thisGear == otherGear)
-                return false;
-
-            if (thisLevel != otherGear.GetLevel())
-                return false;
+            if (!thisGear || !otherGear) return false;
+            if (thisGear == otherGear) return false;
+            if (thisLevel != otherGear.GetLevel()) return false;
 
             float distance = Vector3.Distance(thisCell.transform.position, otherGear.cell.transform.position);
-
-            // gears may overlap slightly before we call it a collision
             if (distance < thisGear.radius + otherGear.radius - grid.graceCollisionOffset)
                 return true;
 
             return false;
         }
 
-        // otherCell / otherLevel is where otherGear sits (or is about to sit, when we are
-        // still deciding whether it can be placed there)
         private bool AreGearsRotatingTogether(LineGear thisGear, LineGear otherGear, Cell otherCell, int otherLevel)
         {
-            if (!thisGear || !otherGear)
-                return false;
+            if (!thisGear || !otherGear) return false;
+            if (thisGear == otherGear) return false;
+            if (!thisGear.cell || !otherCell) return false;
 
-            if (thisGear == otherGear)
-                return false;
-
-            if (!thisGear.cell || !otherCell)
-                return false;
-
-            // gears stacked in the same cell sit on a shared axle, so they always turn
-            // together
-            if (thisGear.cell == otherCell)
-                return true;
-
-            if (thisGear.GetLevel() != otherLevel)
-                return false;
+            if (thisGear.cell == otherCell) return true;
+            if (thisGear.GetLevel() != otherLevel) return false;
 
             float distance = Vector3.Distance(thisGear.cell.transform.position, otherCell.transform.position);
             float touchDistance = thisGear.radius + otherGear.radius;
 
-            // gears drive each other only when their teeth meet. too far apart and they
-            // never touch, too close and they are overlapping
             return distance <= touchDistance + grid.graceCollisionOffset
                 && distance >= touchDistance - grid.graceCollisionOffset;
         }
@@ -215,8 +188,7 @@ namespace Pospec
 
         private bool WouldFormLoop(List<LineGear> touchingGears, LineGear addedGear)
         {
-            if (touchingGears.Count < 2)
-                return false;
+            if (touchingGears.Count < 2) return false;
 
             HashSet<LineGear> reached = new HashSet<LineGear>();
             Stack<LineGear> toVisit = new Stack<LineGear>();
@@ -228,8 +200,7 @@ namespace Pospec
                 LineGear gear = toVisit.Pop();
                 foreach (var connection in gear.connectedTo)
                 {
-                    if (!connection || connection == addedGear)
-                        continue;
+                    if (!connection || connection == addedGear) continue;
 
                     if (reached.Add(connection))
                         toVisit.Push(connection);
@@ -247,13 +218,9 @@ namespace Pospec
 
         public void LinkGears(LineGear addedGear)
         {
-            // we need to check if the gear is touching any other gear in the grid and link them if they are
-
-            // first we find if we can find a touching gear that is already spinning
             List<LineGear> touchingGears = GetGearsRotatingTogetherWith(addedGear);
-
-            // check which ones are already rotating
             List<LineGear> spinningGears = new List<LineGear>();
+
             foreach (var touchingGear in touchingGears)
             {
                 touchingGear.AddConnection(addedGear);
@@ -265,10 +232,7 @@ namespace Pospec
                 }
             }
 
-            if (spinningGears.Count > 1)
-            {
-                return;
-            }
+            if (spinningGears.Count > 1) return;
 
             if (spinningGears.Count == 1)
             {
@@ -285,7 +249,6 @@ namespace Pospec
             }
             else if (addedGear.angularSpeed != 0.0f)
             {
-                // nothing drives the new gear, but it is spinning, so it drives what it touches
                 foreach (var touchingGear in touchingGears)
                 {
                     touchingGear.connectionToParent = touchingGear.ShareSameCell(addedGear)
@@ -296,43 +259,48 @@ namespace Pospec
             }
         }
 
-
         private void Update()
         {
-            if (cellType == TmpCell.CellType.Hole)
-            {
-                sr.color = Color.black;
-                return;
-            }
+            DetermineTargetColor();
+            SmoothUpdateColor();
 
-            if (!grid.SelectedGear)
-            {
-                sr.color = Color.white * 0.0f;
-                return;
-            }
+            if (!grid.SelectedGear || grid.SelectedGear.cell) return;
 
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
                 isHovering = false;
-                // the gear already left its old cell and its connections when it was
-                // picked up, so we only have to add it here
                 if (TryPlaceGearOnTop(grid.SelectedGear))
                 {
                     LinkGears(grid.SelectedGear);
-
                     grid.SelectedGear.PlaceToCell(this);
                 }
             }
+        }
 
-            if (grid.SelectedGear.cell)
+        private void DetermineTargetColor()
+        {
+            // 1. If it's a hole, it just stays black
+            if (cellType == TmpCell.CellType.Hole)
             {
-                sr.color = Color.white * 0.0f;
+                targetColor = holeColor;
                 return;
             }
 
-            if (CanPlaceGear(grid.SelectedGear))
+            // 2. If nothing is selected or the gear is already placed somewhere, hide cells
+            if (!grid.SelectedGear || grid.SelectedGear.cell)
             {
-                sr.color = Dim(Color.black * 0.1f, isHovering ? 1.0f : 0.8f);
+                targetColor = normalColor;
+                return;
+            }
+
+            // 3. Evaluate if the currently held gear can be placed here
+            bool canPlace = CanPlaceGear(grid.SelectedGear);
+
+            if (canPlace)
+            {
+                // Globally show valid color. If hovered, show stronger valid color.
+                targetColor = isHovering ? hoverValidColor : highlightValidColor;
+
                 if (isHovering)
                 {
                     grid.SelectedGear.sr.color = Dim(Color.white, 0.8f);
@@ -342,7 +310,9 @@ namespace Pospec
             }
             else
             {
-                sr.color = Dim(Color.red * 0.2f, isHovering ? 1.0f : 0.7f);
+                // Globally show invalid color. If hovered, show stronger invalid color.
+                targetColor = isHovering ? hoverInvalidColor : highlightInvalidColor;
+
                 if (isHovering)
                 {
                     grid.SelectedGear.sr.color = Dim(Color.red, 0.8f);
@@ -351,16 +321,19 @@ namespace Pospec
             }
         }
 
-        // multiplying a Color scales its alpha too, which turns a dim red into a washed out
-        // brown over the background instead of a darker red
+        private void SmoothUpdateColor()
+        {
+            if (sr.color != targetColor)
+            {
+                sr.color = Color.Lerp(sr.color, targetColor, Time.deltaTime * colorTransitionSpeed);
+            }
+        }
+
         private static Color Dim(Color color, float amount)
         {
             return new Color(color.r * amount, color.g * amount, color.b * amount, color.a);
         }
 
-        // tracked even with nothing selected - gating this on the selection used to leave the
-        // flag stuck on a cell the pointer had already left, and that cell then claimed the
-        // next drop instead of the cell under the cursor
         public void OnPointerEnter(PointerEventData eventData)
         {
             isHovering = true;
