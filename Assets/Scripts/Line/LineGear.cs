@@ -258,7 +258,7 @@ namespace Pospec
         // one stick out by the same amount
         private const float upperLayerGrowth = 28f / pixelsPerUnit;
         private const float upperLayerTint = 1.5f;
-        private const float upperLayerAlpha = 1.0f;
+        private const float upperLayerAlpha = 0.65f;
 
         private const float lowerLayerTint = 0.8f;
 
