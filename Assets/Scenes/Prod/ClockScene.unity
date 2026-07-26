@@ -1184,9 +1184,9 @@ MonoBehaviour:
   levelLights:
   - {fileID: 571504658}
   - {fileID: 571557083}
-  - {fileID: 1664627165}
   - {fileID: 1543624812}
   - {fileID: 433520772}
+  - {fileID: 1664627165}
   lockedColor: {r: 0.18867922, g: 0.106672265, b: 0.07386969, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   targetLightIntensity: 0.8
@@ -1520,6 +1520,10 @@ PrefabInstance:
     - target: {fileID: 8509686755332364326, guid: c4495754d8ee9854a8fb0d9e69768301, type: 3}
       propertyPath: m_Name
       value: ProgressLight (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509686755332364326, guid: c4495754d8ee9854a8fb0d9e69768301, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1988,9 +1992,9 @@ Transform:
   - {fileID: 253720844}
   - {fileID: 571504659}
   - {fileID: 571557084}
-  - {fileID: 1664627166}
   - {fileID: 1543624813}
   - {fileID: 433520773}
+  - {fileID: 1664627166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2122350993

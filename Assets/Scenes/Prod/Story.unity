@@ -818,16 +818,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyTextDisplay: {fileID: 2082760436}
   storyLines:
-  - It should have been totally ordinary play...
-  - But when setting up the scene, we ran into bunch of complications...
-  - Curtain got stucked, lights malfunctioning, broken puppets...
-  - And on top of that, we recieved information...
+  - We do not have much time, the clock strikes <color=red>twelve</color> in a bit!
+  - But we still have plenty of work to finish before the <color=red>play starts</color>...
+  - And on top of that, we recieved <color=red>information</color>...
   - That in the front row sits the <color=red> Count </color> himself!
-  - We need to ensure that this play is perfect otherwise he will chop our heads
-    off!
-  fadeInDuration: 1.7
+  - We need to ensure that this play is perfect otherwise he will <color=red>chop
+    our heads off</color>!
+  fadeInDuration: 1.5
   displayDuration: 1
-  fadeOutDuration: 2.2
+  fadeOutDuration: 2
   nextSceneName: Level1
   doubleTapThreshold: 0.5
   lowPassFilter: {fileID: 0}

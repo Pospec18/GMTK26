@@ -15,6 +15,8 @@ namespace Pospec
         public RotationViz winConViz;
         [SerializeField, HideInInspector] private List<TmpCell> cells;
         public LevelFinisher levelFinisher;
+        public LineCanvas lineCanvas;
+        public List<float> lines;
 
         public static PuzzleGrid instance;
 
@@ -64,6 +66,8 @@ namespace Pospec
                 winConViz.angularSpeed = winAngularSpeed;
                 winConViz.GetComponent<Follower>().target = endGear.transform;
             }
+            if (lineCanvas)
+                lineCanvas.Setup(lines);
         }
 
         public void OnDestroy()

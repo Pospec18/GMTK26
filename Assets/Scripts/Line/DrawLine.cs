@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Pospec
 {
@@ -9,6 +7,7 @@ namespace Pospec
     {
         public LineRenderer lr;
         public List<LineGear> gears;
+        public LineCanvas lineCanvas;
 
         public void Start()
         {
@@ -39,6 +38,11 @@ namespace Pospec
                 lr.SetPosition(lastId, GetMouseWorldPos());
                 FinalizeLine();
             }
+
+            float length = 0;
+            for (int i = 1; i < lr.positionCount; i++)
+                length += Vector2.Distance(lr.GetPosition(i), lr.GetPosition(i - 1));
+            lineCanvas.SetLineSize(length);
         }
 
         public static void DrawLineFromGears(List<LineGear> gears, LineRenderer lr)
@@ -98,6 +102,7 @@ namespace Pospec
         public void FinalizeLine()
         {
             Grid.Instance.lineDrawing = false;
+            lineCanvas.HideLine();
             lr.positionCount = 0;
             if (gears.Count < 2)
             {
