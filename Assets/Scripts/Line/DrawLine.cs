@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Pospec
         public Gradient normalColor;
         public Gradient errorColor;
 
+        private bool ending = false;
+
         public void Start()
         {
             lr.positionCount = 2;
@@ -19,7 +22,7 @@ namespace Pospec
 
         public void Update()
         {
-            if (!Grid.Instance.lineDrawing)
+            if (!Grid.Instance.lineDrawing || ending)
                 return;
 
             DrawLineFromGears(gears, lr);
@@ -106,24 +109,39 @@ namespace Pospec
 
         public void FinalizeLine()
         {
-            Grid.Instance.lineDrawing = false;
-            lineCanvas.HideLine();
-            lr.positionCount = 0;
             float length = 0;
             for (int i = 1; i < lr.positionCount; i++)
                 length += Vector2.Distance(lr.GetPosition(i), lr.GetPosition(i - 1));
+            Grid.Instance.lineDrawing = false;
+            lineCanvas.HideLine();
 
             if (gears.Count < 2 || length > lineCanvas.LineLength())
             {
                 Debug.Log("INVALID");
                 gears.Clear();
+                lr.colorGradient = errorColor;
+                StartCoroutine(ResetCoroutine());
                 return;
             }
             if (Grid.Instance.CreateLine(gears, lineCanvas.currId))
             {
                 lineCanvas.UseRope();
             }
+            else
+            {
+                lr.colorGradient = errorColor;
+                StartCoroutine(ResetCoroutine());
+            }
+            lr.positionCount = 0;
             gears.Clear();
+        }
+
+        private IEnumerator ResetCoroutine()
+        {
+            ending = true;
+            yield return new WaitForSeconds(0.5f);
+            ending = false;
+            lr.positionCount = 0;
         }
 
         private Vector3 GetMouseWorldPos() => Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;

@@ -8,7 +8,19 @@ namespace Pospec
     public class LineButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public Action action;
-        public bool isInteractible = true;
+        private bool isInteractible = true;
+        public bool IsInteractible
+        {
+            get
+            {
+                return isInteractible;
+            }
+            set
+            {
+                isInteractible = value;
+                image.color = isInteractible ? normalCol : disabledCol;
+            }
+        }
         public Image image;
         public Color normalCol;
         public Color highlitedCol;
@@ -21,13 +33,13 @@ namespace Pospec
 
         private void Update()
         {
-            if (!isInteractible)
+            if (!IsInteractible)
                 image.color = disabledCol;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (!isInteractible)
+            if (!IsInteractible)
                 return;
             action?.Invoke();
             image.color = normalCol;
@@ -35,14 +47,14 @@ namespace Pospec
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (!isInteractible)
+            if (!IsInteractible)
                 return;
             image.color = highlitedCol;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (!isInteractible)
+            if (!IsInteractible)
                 return;
             image.color = normalCol;
         }
