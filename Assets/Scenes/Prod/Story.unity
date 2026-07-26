@@ -788,11 +788,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyTextDisplay: {fileID: 2082760436}
   storyLines:
-  - We do not have much time, the clock strikes <color=red>twelve</color> in a bit!
+  - We don't have much time, the clock will strike <color=red>twelve</color> soon!
   - But we still have plenty of work to finish before the <color=red>play starts</color>...
-  - And on top of that, we recieved <color=red>information</color>...
-  - That in the front row sits the <color=red> Count </color> himself!
-  - We need to ensure that this play is perfect otherwise he will <color=red>chop
+  - And on top of that, we received <color=red>information</color>...
+  - ...that the <color=red>Count</color> himself is sitting in the front row!
+  - We need to ensure that this play is perfect, otherwise he will <color=red>chop
     our heads off</color>!
   fadeInDuration: 1.5
   displayDuration: 1
