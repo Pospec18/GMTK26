@@ -3973,9 +3973,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3069834653782616112, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
+      propertyPath: m_text
+      value: The play
+      objectReference: {fileID: 0}
     - target: {fileID: 8510595196487180035, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: m_text
-      value: The lights are on!
+      value: The curtain is opening, get ready!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510595196487180035, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
+      propertyPath: m_margin.z
+      value: -25.125229
       objectReference: {fileID: 0}
     - target: {fileID: 8655187305060702619, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: m_Name

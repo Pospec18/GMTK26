@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 6553997760897599883}
   - component: {fileID: 5700300683213790348}
   - component: {fileID: 1201892773124939435}
+  - component: {fileID: 158704651874309360}
   m_Layer: 5
   m_Name: Playbutton Variant
   m_TagString: Untagged
@@ -285,9 +286,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Pospec.InteractiveLight, Assembly-CSharp
-        m_MethodName: TurnOnLight
+      - m_Target: {fileID: 158704651874309360}
+        m_TargetAssemblyTypeName: Pospec.LevelRestarter, Assembly-CSharp
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -331,6 +332,18 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   switchSound: {fileID: 8300000, guid: 4800b0c9cfec9df46a716b164e2d2f15, type: 3}
   shakeSeverity: 0
+--- !u!114 &158704651874309360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122779524955225125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68813d999b75a22448bf4a4520dba96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4683465975140882989
 GameObject:
   m_ObjectHideFlags: 0
