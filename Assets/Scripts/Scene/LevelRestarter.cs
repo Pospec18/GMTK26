@@ -5,8 +5,18 @@ namespace Pospec
 {
     public class LevelRestarter : MonoBehaviour
     {
+        [Header("Audio Settings")]
+        public AudioSource audioSource;
+        public AudioClip clickSound;
+
         public void RestartLevel()
         {
+            // play click sound if assigned
+            if (audioSource != null && clickSound != null)
+            {
+                audioSource.PlayOneShot(clickSound);
+            }
+
             // get the name of the currently active scene
             string currentSceneName = SceneManager.GetActiveScene().name;
 
