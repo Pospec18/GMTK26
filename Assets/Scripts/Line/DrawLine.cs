@@ -17,12 +17,33 @@ namespace Pospec
 
         public void Update()
         {
-            lr.positionCount = gears.Count > 0 ? gears.Count * 2 : 2;
+            if (!Grid.Instance.lineDrawing)
+                return;
+
+            DrawLineFromGears(gears, lr);
 
             if (Input.GetMouseButtonDown(0))
             {
                 lr.SetPosition(0, GetMouseWorldPos());
             }
+
+            int lastId = gears.Count > 0 ? gears.Count * 2 - 1 : 1;
+
+            if (Input.GetMouseButton(0))
+            {
+                lr.SetPosition(lastId, GetMouseWorldPos());
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                lr.SetPosition(lastId, GetMouseWorldPos());
+                FinalizeLine();
+            }
+        }
+
+        public static void DrawLineFromGears(List<LineGear> gears, LineRenderer lr)
+        {
+            lr.positionCount = gears.Count > 0 ? gears.Count * 2 : 2;
 
             for (int i = 0; i < gears.Count; i++)
             {
@@ -57,24 +78,31 @@ namespace Pospec
                 lr.SetPosition(2 * i, g1P + perpStart * g1.radius);
                 lr.SetPosition(2 * i + 1, g2P + perpEnd * g2.radius);
             }
-
-            int lastId = gears.Count > 0 ? gears.Count * 2 - 1 : 1;
-
-            if (Input.GetMouseButton(0))
-            {
-                lr.SetPosition(lastId, GetMouseWorldPos());
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                lr.SetPosition(lastId, GetMouseWorldPos());
-            }
         }
 
         public void AddToLine(LineGear lineGear)
         {
+            if (gears.Count > 0 && lineGear == gears[0])
+            {
+                FinalizeLine();
+            }
+
             if (!gears.Contains(lineGear))
                 gears.Add(lineGear);
+        }
+
+        public void FinalizeLine()
+        {
+            Grid.Instance.lineDrawing = false;
+            lr.positionCount = 0;
+            if (gears.Count < 2)
+            {
+                Debug.Log("INVALID");
+                gears.Clear();
+                return;
+            }
+            Grid.Instance.CreateLine(gears);
+            gears.Clear();
         }
 
         private Vector3 GetMouseWorldPos() => Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;

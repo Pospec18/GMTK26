@@ -2492,7 +2492,7 @@ MonoBehaviour:
   - {fileID: 1334845571}
   - {fileID: 866993133}
   - {fileID: 585676095}
-  levelFinisher: {fileID: 0}
+  levelFinisher: {fileID: 8547694248560815025}
 --- !u!1 &2330054302365913532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,7 +2924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winScreenUI: {fileID: 1232516279}
   clockSceneName: ClockScene
-  nextLevelNumber: 3
+  nextLevelNumber: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

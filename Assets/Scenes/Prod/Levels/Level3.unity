@@ -1636,7 +1636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b2bda148a445441b79801715f594dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gears: []
+  gears:
+  - {fileID: 1766289500}
   pos: {x: 4, y: 3}
   cellType: 0
 --- !u!212 &856575418
@@ -3007,11 +3008,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2661558502158654616, guid: af3bda5b3fe635c4b935f4a491582730, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3195,10 +3196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b2bda148a445441b79801715f594dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gears:
-  - {fileID: 1766289500}
+  gears: []
   pos: {x: 0, y: 1}
-  cellType: 0
+  cellType: 1
 --- !u!212 &2139758770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3244,7 +3244,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

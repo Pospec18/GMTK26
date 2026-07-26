@@ -16,7 +16,7 @@ namespace Pospec
         public float hoverPadding = 0.05f;
         public bool lineDrawing;
         public DrawLine lineDrawer;
-
+        public LineConnection linePrefab;
 
         [Header("Drop preview")]
         public Color ghostColor = new Color(1.0f, 1.0f, 1.0f, 0.4f);
@@ -112,6 +112,17 @@ namespace Pospec
             }
         }
 
+        private void Update()
+        {
+            // the dragged gear has its collider disabled, so its own pointer up handler can be
+            // skipped - the release of the button is the authority on the drag being over
+            if (SelectedGear && Input.GetMouseButtonUp(0))
+            {
+                SelectedGear.EndDrag();
+                DeselectGear();
+            }
+        }
+
         private void LateUpdate()
         {
             // no cell claimed the gear this frame, so it is being dragged off the
@@ -168,6 +179,12 @@ namespace Pospec
         public void AddToLine(LineGear lineGear)
         {
             lineDrawer.AddToLine(lineGear);
+        }
+
+        public void CreateLine(List<LineGear> gears)
+        {
+            var line = Instantiate(linePrefab);
+            line.gears = new List<LineGear>(gears);
         }
     }
 }

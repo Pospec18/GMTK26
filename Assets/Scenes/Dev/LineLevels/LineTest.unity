@@ -281,8 +281,9 @@ MonoBehaviour:
   size: {x: 5, y: 5}
   cellPrefab: {fileID: 3548109361600989089, guid: 746c75c9b536a634f881d16cd054add7, type: 3}
   hoverPadding: 0.05
-  lineDrawing: 1
+  lineDrawing: 0
   lineDrawer: {fileID: 1511192070}
+  linePrefab: {fileID: 4626878253544474734, guid: 90e615ba26ea5fe499c73c8df3e452fb, type: 3}
   ghostColor: {r: 1, g: 1, b: 1, a: 0.4}
   graceCollisionOffset: 0
 --- !u!1 &130819826
