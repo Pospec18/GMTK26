@@ -10,11 +10,45 @@ namespace Pospec
         [Header("Optional Settings")]
         public float customFadeDuration = -1f;
 
-        // This method will be called by the UI Button
+        [Header("UI Panels")]
+        public GameObject settingsMenuPanel;
+        public GameObject mainMenuPanel;
+
+        private void Start()
+        {
+            // Forces the correct menus to show/hide the moment the game runs
+            if (settingsMenuPanel != null) settingsMenuPanel.SetActive(false);
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        }
+
         public void OnButtonPress()
         {
-            // Call the Singleton FadeManager with the specified scene and duration
-            FadeManager.instance.LoadScene(sceneToLoad, customFadeDuration);
+            if (FadeManager.instance != null)
+            {
+                Debug.Log("Works play");
+                FadeManager.instance.LoadScene(sceneToLoad, customFadeDuration);
+            }
+        }
+
+        public void OpenSettingsMenu()
+        {
+            if (settingsMenuPanel != null) settingsMenuPanel.SetActive(true);
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+        }
+
+        public void CloseSettingsMenu()
+        {
+            if (settingsMenuPanel != null) settingsMenuPanel.SetActive(false);
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        }
+
+        public void QuitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }
