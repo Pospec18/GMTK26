@@ -274,7 +274,7 @@ MonoBehaviour:
   lineDrawer: {fileID: 0}
   linePrefab: {fileID: 0}
   ghostColor: {r: 1, g: 1, b: 1, a: 0.4}
-  graceCollisionOffset: 0
+  graceCollisionOffset: 0.11
 --- !u!1 &130819826
 GameObject:
   m_ObjectHideFlags: 0
