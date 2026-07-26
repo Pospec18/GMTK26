@@ -14,7 +14,11 @@ namespace Pospec
 
         public List<LineGear> connectedTo = new List<LineGear>();
 
-        public ConnectionType connectionToParent;
+        public ConnectionType connectionToParent = ConnectionType.None;
+
+        /// <summary>The line this gear is a part of, if any. Set by Grid.CreateLine.</summary>
+        public LineConnection line;
+
         public Cell cell;
         public CircleCollider2D col;
         private LineGear parent = null;
@@ -71,6 +75,11 @@ namespace Pospec
 
             if (!canMove)
                 return;
+
+            // the line stops describing reality the moment any of its gears moves, so it goes
+            // away along with everything it was driving
+            if (line)
+                line.Remove();
 
             isDragging = true;
             dragGrid = cell ? cell.grid : FindAnyObjectByType<Grid>();
@@ -150,6 +159,34 @@ namespace Pospec
             {
                 if (other)
                     other.StopDrivenBy(this);
+            }
+        }
+
+        /// <summary>Drops everything this gear got from a line that is being removed: the
+        /// connections to the other gears on it, and the rotation it took from it.</summary>
+        public void RemoveLine(LineConnection removedLine, List<LineGear> lineGears)
+        {
+            if (line == removedLine)
+                line = null;
+
+            foreach (var other in lineGears)
+            {
+                if (other && other != this)
+                    connectedTo.Remove(other);
+            }
+
+            // only gears the line was driving stop - the one that drove it keeps its own speed
+            if (connectionToParent != ConnectionType.Line)
+                return;
+
+            parent = null;
+            angularSpeed = 0.0f;
+            connectionToParent = ConnectionType.None;
+
+            foreach (var connection in new List<LineGear>(connectedTo))
+            {
+                if (connection)
+                    connection.StopDrivenBy(this);
             }
         }
 
@@ -343,7 +380,7 @@ namespace Pospec
             this.parent = parent;
 
 
-            UpdateAngularSpeed(parent);
+            // UpdateAngularSpeed(parent);
 
             // recursively update all siblings
             foreach (var connection in connectedTo)
@@ -387,5 +424,5 @@ namespace Pospec
         }
     }
 
-    public enum ConnectionType { Stick, Line, Teeth };
+    public enum ConnectionType { Stick, Line, Teeth, None };
 }
