@@ -11,7 +11,7 @@ namespace Pospec
         public Slider slider;
         public LineButton ropePrefab;
         public Transform buttonsPanel;
-        private List<LineButton> ropeButtons;
+        private List<LineButton> ropeButtons = new List<LineButton>();
 
         List<float> lines;
 
