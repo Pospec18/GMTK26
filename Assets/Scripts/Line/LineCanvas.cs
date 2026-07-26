@@ -60,12 +60,12 @@ namespace Pospec
 
         public void UseRope()
         {
-            ropeButtons[currId].isInteractible = false;
+            ropeButtons[currId].IsInteractible = false;
         }
 
         public void RemoveLine(int lineID)
         {
-            ropeButtons[currId].isInteractible = true;
+            ropeButtons[currId].IsInteractible = true;
         }
     }
 }
