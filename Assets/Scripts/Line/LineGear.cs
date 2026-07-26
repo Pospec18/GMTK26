@@ -216,6 +216,7 @@ namespace Pospec
             }
         }
 
+
         private void LateUpdate()
         {
             // the puzzle is gone while the scene is being torn down, but gears keep ticking
@@ -259,6 +260,13 @@ namespace Pospec
                 if (cell != null)
                     PlaceToCell(cell);
             }
+
+            bool idle = Mathf.Abs(angularSpeed) < 0.05f;
+
+            Color targetTint = idle ? Color.white * 0.45f : Color.white;
+            targetTint.a = sr.color.a;
+
+            sr.color = targetTint;
 
             transform.Rotate(Vector3.forward * angularSpeed * DiscreteTime.instance.DeltaTime);
         }
