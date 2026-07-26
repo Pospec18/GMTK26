@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 362, y: -266}
+  m_AnchoredPosition: {x: 355, y: -268}
   m_SizeDelta: {x: 32.6815, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65467884
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.82641935, b: 0.4198113, a: 0.6745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2030,8 +2030,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.4727, y: -346.9407}
-  m_SizeDelta: {x: 716.8167, y: 172.4496}
+  m_AnchoredPosition: {x: -0.000017166, y: -336.0419}
+  m_SizeDelta: {x: 772.8677, y: 194.2472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386359501
 MonoBehaviour:
@@ -2626,7 +2626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204, y: -374}
+  m_AnchoredPosition: {x: -191.4, y: -339.5}
   m_SizeDelta: {x: 56.4993, y: 56.4993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1853422780
@@ -2667,6 +2667,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853422778}
   m_CullTransparentMesh: 1
+--- !u!1001 &1950530185
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771898204490503598, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
+      propertyPath: m_Name
+      value: AmbientAudioController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
 --- !u!1 &2073461807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: -346.94}
+  m_AnchoredPosition: {x: -0.000030517, y: -336.04}
   m_SizeDelta: {x: 619.3327, y: 86.6839}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073461809
@@ -2724,7 +2781,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move the Gears to match the Clock speed.      .   works as a start engine.
+  m_text: Move the Gears to match the Clock speed.      .   works as a start engine.             
+    Clock and Engine can't be moved.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c3b664430e08754aa3ef4be06b3d053, type: 2}
   m_sharedMaterial: {fileID: 4565894857264425534, guid: 1c3b664430e08754aa3ef4be06b3d053, type: 2}
@@ -2803,63 +2861,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073461807}
   m_CullTransparentMesh: 1
---- !u!1001 &1950530185
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714869304547684660, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1771898204490503598, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
-      propertyPath: m_Name
-      value: AmbientAudioController
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1c27f2467c96c2642a47935c47ebe364, type: 3}
 --- !u!1 &2085062814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,6 +3428,8 @@ MonoBehaviour:
   - {fileID: 866993133}
   - {fileID: 585676095}
   levelFinisher: {fileID: 296649648}
+  lineCanvas: {fileID: 0}
+  lines: []
 --- !u!1 &2330054302365913532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3728,9 +3731,9 @@ SceneRoots:
   - {fileID: 1518104582}
   - {fileID: 2096125398}
   - {fileID: 7229894062453203329}
+  - {fileID: 1405710874}
   - {fileID: 1412780373}
   - {fileID: 2104382762}
   - {fileID: 1596226747}
   - {fileID: 5763486663550932348}
-  - {fileID: 1405710874}
   - {fileID: 960695171}
