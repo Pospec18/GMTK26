@@ -2556,7 +2556,7 @@ PrefabInstance:
     - target: {fileID: 768854257975675252, guid: 70700e7873f85294fb06a131a26a0681, type: 3}
       propertyPath: sceneMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 85f02d98f4c38f64cada8fa27c9928e3, type: 3}
+      objectReference: {fileID: 8300000, guid: c4777c36f58dd73479b43317795f8e74, type: 3}
     - target: {fileID: 6881798476159479934, guid: 70700e7873f85294fb06a131a26a0681, type: 3}
       propertyPath: m_Name
       value: MusicController
