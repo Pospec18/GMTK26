@@ -1081,7 +1081,7 @@ MonoBehaviour:
   startingGears:
   - {fileID: 1338896083}
   endGear: {fileID: 700003531}
-  winAngularSpeed: 10
+  winAngularSpeed: 30
   winMarginOfError: 1
   grid: {fileID: 46538978}
   gridSize: {x: 5, y: 5}
