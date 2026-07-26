@@ -9,11 +9,17 @@ namespace Pospec
     public class LineCanvas : MonoBehaviour
     {
         public Slider slider;
+        public Image image;
         public LineButton ropePrefab;
         public Transform buttonsPanel;
         private List<LineButton> ropeButtons = new List<LineButton>();
 
+        public Color normalLineCol = Color.white;
+        public Color errorLineCol = Color.red;
         List<float> lines;
+
+        public int currId;
+        public float LineLength() => slider.maxValue;
 
         public void Start()
         {
@@ -35,6 +41,7 @@ namespace Pospec
         public void SetLineSize(float length)
         {
             slider.value = length;
+            image.color = length < slider.maxValue ? normalLineCol : errorLineCol;
         }
 
         public void HideLine()
@@ -45,10 +52,21 @@ namespace Pospec
 
         private void StartLineDraw(int i)
         {
+            currId = i;
             buttonsPanel.gameObject.SetActive(false);
             slider.gameObject.SetActive(true);
             slider.maxValue = lines[i];
             Grid.Instance.lineDrawing = true;
+        }
+
+        public void UseRope()
+        {
+            ropeButtons[currId].isInteractible = false;
+        }
+
+        public void RemoveLine(int lineID)
+        {
+            ropeButtons[currId].isInteractible = true;
         }
     }
 }
