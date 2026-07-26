@@ -336,6 +336,9 @@ namespace Pospec
             {
                 sr.color = Color.white * 0.0f;
                 col.enabled = false;
+                // the collider going off under the cursor never produces an exit event
+                isHovering = false;
+                grid.ClearHoveredCell(this);
                 return;
             }
 
@@ -409,11 +412,13 @@ namespace Pospec
         public void OnPointerEnter(PointerEventData eventData)
         {
             isHovering = true;
+            grid.SetHoveredCell(this);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             isHovering = false;
+            grid.ClearHoveredCell(this);
         }
     }
 }
