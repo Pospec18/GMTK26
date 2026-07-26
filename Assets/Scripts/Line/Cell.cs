@@ -273,6 +273,8 @@ namespace Pospec
                 return;
             }
 
+            col.enabled = true;
+
             if (Input.GetMouseButtonUp(0) && isHovering)
             {
                 isHovering = false;
