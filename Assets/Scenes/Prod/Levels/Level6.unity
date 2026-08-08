@@ -2821,7 +2821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227609259599300349, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: customSceneName
-      value: FinalCutscene
+      value: JustCredits
       objectReference: {fileID: 0}
     - target: {fileID: 8510595196487180035, guid: a72e0c517b4c042b081495d54fc958fb, type: 3}
       propertyPath: m_text

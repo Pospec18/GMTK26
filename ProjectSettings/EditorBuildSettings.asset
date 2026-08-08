@@ -32,9 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prod/Levels/Level6.unity
     guid: b80f6018de7b99c4786ea2e1809efb2c
-  - enabled: 0
-    path: Assets/Scenes/Prod/Credits.unity
-    guid: 4bb99215042bd0844aa76ea680b4ed78
+  - enabled: 1
+    path: Assets/Scenes/Prod/Levels/Level7.unity
+    guid: e64496485b46ba54fb50e869066fa1b0
+  - enabled: 1
+    path: Assets/Scenes/Prod/JustCredits.unity
+    guid: c0540ff73c66d4b4887f3903b8188f07
   - enabled: 1
     path: Assets/Scenes/Prod/ClockScene.unity
     guid: 9aad5c41ac4ad4d66b0e4b6e6e642983
